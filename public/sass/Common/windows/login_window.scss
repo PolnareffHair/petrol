@@ -1,0 +1,135 @@
+:root {
+  --call-window-width: 420px;
+  --first-color: 14px;
+}
+
+@media screen and (max-width: 500px) {
+  :root {
+    --call-window-width: 100%;
+    --first-color: 8px;
+  }
+
+  body header #login_window {
+    body header #login_window form {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+body header #login_window {
+  $call-close-size: 25px;
+  z-index: 103;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+
+  display: none;
+
+  width: 100%;
+
+  form {
+    transform: translate(-50%, -35%);
+    animation: slideDown 0.3s;
+    width: var(--call-window-width);
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    top: 150px;
+
+    height: 300px;
+
+    background: rgba(255, 255, 255);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.27);
+
+    z-index: 100;
+    @media screen and (max-width: 640px) {
+      margin: 0;
+    }
+    #login_black_top {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // background-color: white;
+      color: var(--text_gray);
+      height: 40px;
+      padding: 0 var(--first-color);
+
+      p {
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+
+    fieldset {
+      width: 100%;
+      border: none;
+      margin-top: 0px;
+      padding: 0 var(--first-color);
+
+      label {
+        color: var(--text_gray);
+        font-weight: 500;
+
+        #call_light {
+          font-weight: 300;
+        }
+      }
+
+      input,
+      #call_question {
+        resize: none;
+        margin-top: 10px;
+        border: solid var(--border_gray) 1px;
+        padding-top: 0.2em;
+        padding-bottom: 0.1em;
+        padding-left: 0.5em;
+        width: calc(calc(100% - 0.5em) - 2px);
+        font-size: 16px;
+        display: block;
+      }
+
+      #call_question {
+        height: 119px;
+        //
+      }
+
+      input {
+        height: 24px;
+      }
+
+      textarea:focus,
+      input:focus {
+        outline: none;
+        border-color: #535353;
+      }
+    }
+
+    #login_links {
+      padding: 0 var(--first-color);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        color: #000000;
+        display: block;
+      }
+    }
+
+    #login_in_button {
+      border: none;
+
+      width: 320px;
+      max-width: 90%;
+      height: 35px;
+      font-size: 16px;
+      font-weight: 700;
+      background-color: var(--main_blue);
+      color: white;
+    }
+  }
+}

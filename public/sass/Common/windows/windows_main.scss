@@ -1,0 +1,44 @@
+@use "basket_window.scss";
+@use "compare_win.scss";
+@use "login_window";
+@use "contacts_window";
+@use "catalog_window";
+@use "call_window";
+@use "order_window";
+@use "menu";
+
+.close_button {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  height: 25px;
+  width: 25px;
+}
+.close_window {
+  height: 25px;
+  width: 25px;
+  svg {
+    height: 25px;
+    width: 25px;
+
+    PATH {
+      fill: var(--main_gray);
+    }
+  }
+}
+@media screen AND (min-width:700px){
+  .close_window:hover PATH {
+    fill: var(--active_gray);
+  }
+}
+
+#about{
+  max-width: 90%;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  ul{
+    margin-left: 1em;
+  }
+}

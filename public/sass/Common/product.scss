@@ -1,0 +1,62 @@
+.p_card {
+    .bread_crumps {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    padding-top: 140px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .p_slider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10px;
+        width: 40%;
+        height: 650px;
+        border: 1px solid #c7c7c7;
+    }
+
+    .p_basic {
+        margin-top: 10px;
+        width: calc(60% - 4px);
+
+        .p_buyer {
+            border: 1px solid #c7c7c7;
+            height: 360px;
+            width: 100%;
+            .p_header {
+                border-bottom: 1px solid #c7c7c7;
+                h1 {
+                    font-weight: 500;
+                    margin: 17px;
+                    color: #373737;
+                }
+            }
+            .p_ratting_reviews {
+                margin-top: 5px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                font-size: 16px;
+                .p_rating {
+                    margin-right: 10px;
+                    margin-left: 10px;
+                    height: 19px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    flex-grow: 0;
+
+                    svg {
+                        width: auto;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

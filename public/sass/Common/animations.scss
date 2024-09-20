@@ -1,0 +1,106 @@
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: #2727276b;
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -40%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, -35%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownmobileBasket  {
+  from {
+    transform: translate(-70%, 0%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDownmobileMenu  {
+  from {
+    transform: translate(-10%, 0%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes border_color {
+  from {
+    background-color: #ffffff00;
+    border-color: #557ee3;
+  }
+
+  to {
+    background-color: #ffffff38;
+    border-color: transparent;
+  }
+}
+
+@keyframes link {
+  from {
+    color: #ffffffd3;
+  }
+
+  to {
+    color: #ffffff;
+  }
+}
+@keyframes catalog_slide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes main_cat_items {
+  from {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+
+@keyframes fade_in_load {
+  from {
+
+    opacity: 0;
+  }
+  to {
+
+    opacity: 1;
+  }
+}
+@keyframes fade_out_load {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

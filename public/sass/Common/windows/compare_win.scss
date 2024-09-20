@@ -1,0 +1,121 @@
+
+#compare_window{
+
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 300px;
+
+    background-color: white;
+    max-width: 100vw;
+    max-height: 75vh;
+    .empty_compare{
+        text-align: center;
+        margin-top: 20px;
+        width: 90%;
+        height: 200px;
+        font-size: 20px;
+
+    }
+    #clear_compare{
+        margin-top: 50px;
+        width: 100px;
+        background-color: #ffffff;
+    }
+    .first_col{      
+              border-bottom: 1px solid #ffffff;
+        background-color: #557ee3;
+        color: white;
+    }
+    .normal_col{
+
+        border-bottom: 1px solid  #202020;
+
+        background-color: rgb(250, 250, 250);
+    }
+    .black_top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text_gray);
+            padding: 0 1em;
+            height: 40px;
+    }
+    #compare_close{    
+            font-weight: 500;
+            font-size: 18px;
+    }
+    #compare_basis{    
+
+        overflow: scroll;   
+            max-height: 75vh;
+        width: 100%;
+        font-size: 14px;
+        height: calc(100% - 40px) ;
+        display: flex;
+        align-items: stretch;
+        @media screen and ( max-width:600px) {
+            font-size: 12px;
+        }
+        .comp_tags{
+            height: fit-content;
+            width: 160px;
+            border: 1px solid #afafaf;
+
+
+            #comp_img{
+                height: 180px;
+                background-color: #272727;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                flex-grow: 0;
+                .delete{
+                    margin-bottom: -45px;   
+                    height: 30px;
+                    width: 30px;
+                    margin-top: 10px;
+                    margin-left: 100px;
+                    cursor: pointer;
+                }
+            
+                img{
+                    border-radius: 10px;
+                    margin-top: 20px;
+                    width: 70px;
+                    height:70px;
+                }
+                p{
+                    color: white;
+                    font-size: 13px;
+                    margin-bottom: 20px;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+
+            }
+
+            p{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                height: auto;
+  
+                height: 2.2em;
+                padding: 0.5em 0.5em;
+   
+          
+            }
+
+        }
+
+
+
+    }
+  
+}

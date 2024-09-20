@@ -1,0 +1,545 @@
+#notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 600px) {
+  #notification-container {
+    font-size: 0.8em;
+  }
+}
+
+.notification {
+  background-color: #4caf50;
+  color: white;
+  padding: 1em;
+  margin-bottom: 1em;
+  opacity: 1;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification.hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.notification.on {
+  background-color: var(--green-color);
+}
+
+.notification_off {
+  background-color: var(--red-color);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  --main-color: #1D3557;
+  --green-color: #61be55;
+  --green-color-hover: #a8dcc6;
+  --button-color: #a8dcc6;
+  --button-color-neutral:#457B9D;
+  --red-color:#f87b7b;
+  color: #1f1f1f;
+  font-weight: 500;
+}
+* img {
+  height: 1em;
+  width: auto;
+}
+* input {
+  height: 2em;
+  border: 1px solid #a5a5a5;
+  padding-left: 0.5em;
+}
+
+/********/
+/**service classes*/
+.on_loading {
+  opacity: 0;
+}
+
+.loaded {
+  opacity: 1;
+}
+
+html button {
+  color: white;
+}
+
+/*** service classes end ****/
+#report_status {
+  transition: all 0.5s ease;
+  position: absolute;
+  opacity: 0;
+  font-size: 0.5em;
+  z-index: 100;
+  color: white;
+  padding: 0.5em 10em;
+}
+
+h1 {
+  font-size: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+body {
+  width: 100%;
+  --menu_width: 280px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: #ffffff;
+}
+body .overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+}
+body .active {
+  display: block;
+}
+
+.drop_down {
+  transition: transform 0.1s ease-in-out;
+  height: 0.4em;
+  width: auto;
+}
+
+button {
+  border: none;
+}
+button:hover {
+  outline: 1px grey;
+  border: none;
+}
+button:focus {
+  outline: 1px grey;
+  border: none;
+}
+
+#main_menu {
+  background-color: var(--main-color);
+  width: 21em;
+  padding-top: 1em;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#main_menu #close_menu_button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 1.6em;
+  height: 1.6em;
+}
+#main_menu #close_menu_button svg {
+  width: inherit;
+  height: inherit;
+}
+#main_menu h2 {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5em;
+  margin-bottom: 1.2em;
+  width: 7em;
+}
+#main_menu h2 .logo {
+  width: 1.5em;
+  height: auto;
+}
+#main_menu button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 15em;
+  padding: 0.4em;
+  padding-left: 1em;
+  margin: 0.3em 0;
+  background-color: transparent;
+  font-size: 1em;
+  border: none;
+  border-left: solid 6px #565161;
+  transition: border 0.2s ease-in-out;
+  font-weight: 600;
+}
+#main_menu button span {
+  color: #ececec;
+  width: 80%;
+}
+#main_menu button:hover {
+  border: none;
+  border-left: solid 6px #516bff;
+  cursor: pointer;
+}
+#main_menu button:hover .svg_arrow {
+  transform: translateX(10px);
+}
+#main_menu button .svg_arrow {
+  width: 1.2em;
+  height: auto;
+  margin-right: 0.5em;
+  transition: transform 0.2s ease-in-out;
+}
+@media screen and (max-width: 600px) {
+  #main_menu {
+    width: 100%;
+    z-index: 2000;
+    position: absolute;
+  }
+  #main_menu button {
+    width: 30em;
+    max-width: 80%;
+  }
+}
+
+#expand_menu {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  height: 100%;
+  margin-left: -2em;
+  background-color: var(--main-color);
+}
+#expand_menu svg {
+  width: 2em;
+  height: auto;
+}
+#expand_menu:hover {
+  opacity: 0.9;
+}
+
+.fixed_buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 0;
+  border-radius: 0;
+  box-shadow: -5px 8px 8px -11px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -5px 8px 8px -11px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -5px 8px 8px -11px rgba(0, 0, 0, 0.75);
+  max-width: 100%;
+  border-radius: 0 0 1em 0;
+  overflow: hidden;
+  padding: 0 2em;
+  position: fixed;
+  width: 100%;
+  height: 3em;
+  background-color: #f7f8ff;
+  box-sizing: border-box;
+  z-index: 1260;
+}
+.fixed_buttons button {
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: transparent;
+  padding: 0 1em;
+  height: 100%;
+  font-size: 0.8em;
+  transition: opacity 0.2s ease-in-out;
+}
+.fixed_buttons button svg {
+  margin-right: 0.5em;
+  height: 1.5em;
+  width: auto;
+}
+@media screen and (max-width: 500px) {
+  .fixed_buttons button {
+    color: transparent;
+    width: 3.5em;
+  }
+  .fixed_buttons button svg {
+    position: absolute;
+  }
+}
+.fixed_buttons .save_button {
+  background-color: var(--green-color);
+}
+.fixed_buttons .neutral_button {
+  background-color: var(--button-color-neutral);
+}
+.fixed_buttons .delete_button {
+  background-color: var(--red-color);
+}
+.fixed_buttons button:hover {
+  opacity: 0.8;
+}
+
+.main_plate {
+  height: 100vh;
+  padding-bottom: 5em;
+  overflow-y: scroll;
+  -webkit-box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
+  width: 100vw;
+  background-color: #ffffff;
+}
+.main_plate h1 {
+  margin-top: 2em;
+  font-size: 2em;
+}
+.main_plate .card-header {
+  position: relative !important;
+}
+.main_plate .basik_uppdate_field {
+  margin-top: 0.5em;
+  border: 1px solid rgb(223, 223, 223);
+  padding: 1em;
+}
+.main_plate .basik_uppdate_field .note-editor {
+  font-size: 1em;
+}
+.main_plate .basik_uppdate_field .note-editor .note-editable {
+  font-size: 0.6em;
+}
+.main_plate .basik_uppdate_field h2 {
+  font-size: 1em;
+}
+.main_plate .basik_uppdate_field .note-editing-area {
+  font-size: 2em;
+}
+.main_plate .result_sucess {
+  background-color: rgb(151, 206, 144);
+  color: rgba(11, 95, 0, 0.685);
+}
+.main_plate .result_fail {
+  background-color: rgba(233, 82, 82, 0.685);
+  color: rgba(233, 82, 82, 0.685);
+}
+.main_plate .input_fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.main_plate .input_fields label {
+  display: flex;
+  flex-direction: column;
+  color: rgb(160, 160, 160);
+}
+.main_plate .card-block {
+  font-size: 0.5em;
+}
+.main_plate .auto_gen {
+  font-size: 0.8em;
+  margin: 1em;
+  margin-bottom: 0;
+  border-radius: 0.5em;
+  padding: 0.3em 0.8em;
+  background-color: var(--button-color-neutral);
+  transition: opacity 0.15s ease-in-out;
+}
+.main_plate .auto_gen:hover {
+  opacity: 0.8;
+}
+.main_plate .product_operation {
+  margin: 1em;
+}
+.main_plate .product_operation .note-editor {
+  font-size: 1em;
+}
+.main_plate .product_operation .note-editor .note-editable {
+  font-size: 1em;
+}
+.main_plate .product_operation .sort_editor {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #a5a5a5;
+  font-size: 0.8em;
+}
+@media screen and (max-width: 600px) {
+  .main_plate .product_operation .sort_editor {
+    padding: 0.1em;
+  }
+}
+.main_plate .product_operation .sort_editor .top_buttons {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5em;
+}
+.main_plate .product_operation .sort_editor .top_buttons .add_item,
+.main_plate .product_operation .sort_editor .top_buttons .refresh_sort {
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: transparent;
+  padding: 0 1em;
+  height: 3em;
+  font-size: 1em;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+.main_plate .product_operation .sort_editor .top_buttons .add_item svg,
+.main_plate .product_operation .sort_editor .top_buttons .refresh_sort svg {
+  margin-right: 0.5em;
+  height: 1.5em;
+  width: auto;
+}
+.main_plate .product_operation .sort_editor .top_buttons .add_item:hover,
+.main_plate .product_operation .sort_editor .top_buttons .refresh_sort:hover {
+  opacity: 0.8;
+}
+@media screen and (max-width: 600px) {
+  .main_plate .product_operation .sort_editor .top_buttons .add_item,
+  .main_plate .product_operation .sort_editor .top_buttons .refresh_sort {
+    font-size: 0.9em;
+    margin-left: 0;
+  }
+}
+.main_plate .product_operation .sort_editor .top_buttons .add_item {
+  background-color: var(--green-color);
+}
+.main_plate .product_operation .sort_editor .top_buttons .refresh_sort {
+  background-color: var(--button-color-neutral);
+}
+.main_plate .product_operation .sort_editor .top_buttons .refresh_sort svg {
+  width: 1.5em;
+  height: auto;
+}
+.main_plate .product_operation .sort_editor .img_sorter {
+  height: auto;
+  max-height: 40em;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-size: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  transition: opacity 0.15s ease-in-out;
+}
+.main_plate .product_operation .sort_editor .img_sorter #sortable-list {
+  width: 15em;
+  transition: opacity 0.15s ease-in;
+}
+.main_plate .product_operation .sort_editor .img_sorter .del {
+  background-color: var(--red-color);
+}
+.main_plate .product_operation .sort_editor .img_sorter .download_img {
+  background-color: var(--button-color-neutral);
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  margin-right: 1em;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  cursor: move;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  transition: background-color 0.15s ease-in-out;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item:hover {
+  background-color: #b1cdff;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item button {
+  border-radius: 0.2em;
+  border: transparent;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item img {
+  height: 8em;
+  width: auto;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item .img_editro_product {
+  border: 1px solid #000000;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item .buttons {
+  padding: 0;
+  border: none;
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+.main_plate .product_operation .sort_editor .img_sorter .sortable-item .buttons img {
+  padding: 0.2em;
+  height: 2em;
+  width: auto;
+}
+.main_plate .product_operation .product_option {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.main_plate .product_operation .product_option label {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width: 100%;
+  width: 40em;
+  margin-bottom: 0.2em;
+}
+.main_plate .product_operation .product_option input {
+  width: 100%;
+  max-width: 100%;
+}
+.main_plate .product_operation .product_option input[type=checkbox] {
+  max-width: 100%;
+  /* Add if not using autoprefixer */
+  margin-left: 1em;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  height: 1.3em;
+  width: 1.3em;
+}
+.main_plate .product_operation .product_option .note-editor {
+  width: 100%;
+  max-width: 100%;
+}
+.main_plate .product_operation #tags_selector {
+  display: flex;
+}
+.main_plate .product_operation #tags_selector li {
+  display: flex;
+  width: 4em;
+}
+.main_plate .product_operation #tags_selector .remove_tag svg {
+  width: 1em;
+  height: 1em;
+}
+.main_plate .product_operation #tag_list {
+  display: flex;
+}
+@media screen and (max-width: 500px) {
+  .main_plate .product_operation {
+    margin: 0.2em;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

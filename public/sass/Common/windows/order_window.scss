@@ -1,0 +1,175 @@
+header #order_window {
+
+    $order-close-size: 25px;
+    $order-window-width: 650px;
+    z-index: 102;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    display: blo;
+    animation: slideDown 0.3s;
+    width: 100%;
+    max-width: 400px;
+
+    form {
+        transition: height 0.2s ease-in-out;
+        width: $order-window-width;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        top: 150px;
+
+        height: 355px;
+        background-color: white;
+        margin: 0;
+        z-index: 100;
+        #order_window_response{
+            padding: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            button{
+                margin-top: 2em;
+                border: 1px solid grey;
+                width: 80%;
+                height: 2em;
+            }
+        }
+        .basket_product{
+               display: flex;
+               justify-content:center;
+        }
+        .basket_product_content {
+            width: -webkit-fill-available;
+            margin: 9px 9px 9px 0;
+            display: flex;
+            justify-content:center;
+            max-width: 90%;
+
+            .basket_text_buttos {
+                width: -webkit-fill-available;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .basket_text {
+                    max-width: 100%;
+                    font-size: 16px;
+                    color: var(--limk_color);
+                    max-width: 80%;
+                    height: 65px;
+ 
+                    overflow: hidden;
+                    /* Скрывать переполняющий текст */
+                    text-overflow: ellipsis;
+                    /* Добавлять многоточие */
+                }
+
+                .basket_button_price {
+                    max-width: 50%;
+                    height: 22px;
+                    width: auto;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    font-size: 18px;
+                    @media screen AND (min-width:700px){
+                        .basket_remove_button:hover {
+                            color: #ff7979;
+                            svg g path {
+                                fill: #ff7979;
+                            }
+                        }
+                    }
+                 
+                }
+
+            }
+
+            img {
+                margin-right: 35px;
+                height: 90px;
+                width: auto;
+            }
+        }
+        .order_window_top {
+       
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            color: var(--main_gray);
+            height: 40px;
+            padding: 0 14px;
+
+            h1 {
+                color: var(--text_gray);
+                font-weight: 500;
+                font-size: 18px;
+            }
+        }
+
+        fieldset {
+            width: 100%;
+            border: none;
+            margin-top: 10px;
+            padding: 0 14px;
+
+            label {
+                color: var(--text_gray);
+                font-weight: 500;
+
+                #order_light {
+                    font-weight: 300;
+                }
+            }
+
+            input,
+            #order_question {
+                resize: none;
+                margin-top: 10px;
+                border: solid var(--border_gray) 1px;
+                padding-top: 0.2em;
+                padding-bottom: 0.1em;
+                padding-left: 0.5em;
+                width: calc(calc(100% - 0.5em) - 2px);
+                font-size: 16px;
+                display: block;
+            }
+
+            #order_question {
+                height: 119px;
+                //
+            }
+
+            input {
+                height: 24px;
+            }
+
+            textarea:focus,
+            input:focus {
+                outline: none;
+                border-color: #535353;
+            }
+        }
+
+        #send_order_button {
+            border: none;
+            margin: 15px 0;
+
+            width: 320px;
+            max-width: 90%;
+            height: 35px;
+            font-size: 16px;
+            font-weight: 700;
+            background-color: var(--main_blue);
+            color: white;
+        }
+    }
+}

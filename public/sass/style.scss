@@ -1,0 +1,47 @@
+// @use "product_card.scss";
+@use "Common/animations";
+@use "Common/product_card";
+@use "Common/windows/windows_main";
+
+@use "Common/style";
+@use "Common/footer";
+@use "Common/product";
+// @use "blog";
+@use "user_page";
+:root {
+    --limk_color: #4296cd;
+    --main_gray: #272727;
+    --main_blue: #4e72ce;
+    --border_gray: #c7c7c7;
+    --active_gray: #999999;
+    --text_gray: #525252;
+}
+a{
+    text-decoration: none;
+}
+body {
+    overflow-x: hidden;
+}
+main {
+    margin-top: 123px;
+
+    @media screen and (max-width: 850px) {
+        margin-top: 75px;
+    }
+}
+#background_header_top {
+    position: fixed;
+    z-index: 110;
+    top: 0;
+}
+#background_header_bottom {
+    position: fixed;
+    z-index: 119;
+    top: 0;
+}
+header {
+    z-index: 120;
+    position: fixed;
+    top: 0;
+    width: calc(100% - var(--sidde-padding) * 2);
+}

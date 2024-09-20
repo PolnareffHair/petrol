@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="ua">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- font load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <linkf
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/fiera.css">
+
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+</head>
+<div id="background_header_top">
+
+</div>
+<div id="background_header_bottom">
+
+</div>
+
+<body>
+
+    <header>
+        <nav id="H_info_links">
+            <div id="link_container">
+                <a href="#">Новини та статті</a>
+                <div>
+                    <a href="#">Контакти та адреса</a>
+                    <button id="show_contacts_button">Показати...
+                    </button>
+                </div>
+                <a href="#">Youtube канал</a>
+                <a href="#">Доставка та оплата</a>
+                <a href="#">Про нас</a>
+                <a href="#">Повернення та обмін</a>
+            </div>
+        </nav>
+        <div id="Head_buttons">
+            <button id="burger"><img src alt></button>
+
+            <a href="#">
+                <div id="logo"></div>
+            </a>
+
+            <button href="#" id="catalog_button"> <img src="svg/catalog_button.svg" alt="catalog_button">Каталог
+            </button>
+
+            <div id="search_field">
+                <img id="search_img" src="svg/search_ico.svg" alt="search icon">
+                <input id="search_input" type="text" placeholder="Я шукаю">
+                <button id="search_button">Знайти</button>
+            </div>
+
+            <button id="call"><span>Зателефонуйте
+                    мені!</span></button>
+
+            <button id="user_basket">
+                <span>Кошик</span>
+
+            </button>
+            <button id="user_log">
+
+                <span>Увійти</span>
+
+            </button>
+            <div id="lang">
+                <a href id="ua">UA</a><span>|</span><a href id="ru">RU</a>
+
+            </div>
+        </div>
+        <div id="fade">
+        </div>
+
+        <div id="basket_window">
+
+            <div id="basket_black_top">
+                <h1>
+                    <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.33891 1.67368C0.941089 1.67368 0.600098 1.35753 0.600098 0.971124C0.600098 0.602283 0.941089 0.286133 1.33891 0.286133H3.2712C3.29014 0.286133 3.32803 0.286133 3.34697 0.286133C4.02896 0.303697 4.63516 0.426644 5.14665 0.72523C5.71497 1.05894 6.13174 1.5683 6.35907 2.32354C6.35907 2.34111 6.35907 2.35867 6.37801 2.37623L6.56745 3.07879H23.1434C23.5602 3.07879 23.8822 3.39494 23.8822 3.76378C23.8822 3.83403 23.8633 3.90429 23.8444 3.97455L21.9121 11.1933C21.8363 11.5094 21.5332 11.7202 21.1922 11.7202H9.06806C9.33327 12.6335 9.59849 13.1253 9.95842 13.3537C10.3941 13.6171 11.1519 13.6347 12.4211 13.6171H12.4401H21.0028C21.4195 13.6171 21.7416 13.9333 21.7416 14.3021C21.7416 14.6885 21.4006 14.9871 21.0028 14.9871H12.4401C10.8677 15.0047 9.90159 14.9695 9.12489 14.4953C8.32924 14.0035 7.91247 13.1604 7.49571 11.6324L4.95721 2.72751C4.95721 2.70995 4.95721 2.70995 4.93827 2.69238C4.8246 2.30598 4.63516 2.04252 4.36995 1.90201C4.10473 1.74393 3.7448 1.67368 3.32803 1.67368C3.30909 1.67368 3.29014 1.67368 3.2712 1.67368H1.33891ZM18.7863 15.795C19.7903 15.795 20.6049 16.5503 20.6049 17.4812C20.6049 18.412 19.7903 19.1673 18.7863 19.1673C17.7823 19.1673 16.9677 18.412 16.9677 17.4812C16.9677 16.5503 17.7823 15.795 18.7863 15.795ZM10.8109 15.795C11.8149 15.795 12.6295 16.5503 12.6295 17.4812C12.6295 18.412 11.8149 19.1673 10.8109 19.1673C9.80687 19.1673 8.99228 18.412 8.99228 17.4812C8.99228 16.5503 9.80687 15.795 10.8109 15.795ZM6.98422 4.44877L8.67023 10.3327H20.6239L22.1962 4.44877H6.98422Z"
+                            fill="white" />
+                    </svg>
+                    Кошик
+                </h1>
+                <button id="close_basket_btton" class="close_button" type="button">
+                    <svg id="close_basket_window" class="close_window" width="800px" height="800px" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                            fill="#b4b4b4" /></svg>
+                </button>
+            </div>
+            <div id="basket_list">
+
+                <div class="basket_product">
+                    <div class="basket_product_content">
+                        <img src="img/Product.png" alt>
+                        <div class="basket_text_buttos">
+                            <span class="basket_text">Електронний
+                                лічильник MGE
+                                400 для
+                                дизельного палива, масла, 15-400 л /
+                                хв</span>
+                            <div class="basket_button_price">
+                                <button class="basket_remove_button" type="button"><svg width="18" height="18"
+                                        viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_725_9426)">
+                                            <path
+                                                d="M16.0436 2.34784H11.9349V0.586969C11.9349 0.262828 11.6721 0 11.3479 0H6.65224C6.3281 0 6.06527 0.262793 6.06527 0.586969V2.34784H1.9566C1.63246 2.34784 1.36963 2.61063 1.36963 2.93481V5.28265C1.36963 5.60679 1.63242 5.86962 1.9566 5.86962H2.54357V17.4131C2.54357 17.7372 2.80636 18.0001 3.13054 18.0001H14.8697C15.1938 18.0001 15.4566 17.7373 15.4566 17.4131V5.86958H16.0436C16.3677 5.86958 16.6306 5.60679 16.6306 5.28261V2.93477C16.6305 2.61063 16.3677 2.34784 16.0436 2.34784ZM7.23921 1.1739H10.761V2.3478H7.23921V1.1739ZM14.2827 16.8261H3.71747V5.86958H14.2827V16.8261ZM15.4566 4.69565C14.0842 4.69565 3.89089 4.69565 2.54357 4.69565V3.52174C2.81585 3.52174 15.1845 3.52174 15.4566 3.52174V4.69565Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M9.00005 7.04346C8.67591 7.04346 8.41309 7.30625 8.41309 7.63043V15.0652C8.41309 15.3893 8.67588 15.6522 9.00005 15.6522C9.3242 15.6522 9.58702 15.3894 9.58702 15.0652V7.63039C9.58702 7.30625 9.32423 7.04346 9.00005 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M5.47857 7.04346C5.15443 7.04346 4.8916 7.30625 4.8916 7.63043V15.0652C4.8916 15.3893 5.15439 15.6522 5.47857 15.6522C5.80271 15.6522 6.06554 15.3894 6.06554 15.0652V7.63039C6.0655 7.30625 5.80271 7.04346 5.47857 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M12.522 7.04346C12.1979 7.04346 11.9351 7.30625 11.9351 7.63043V15.0652C11.9351 15.3893 12.1979 15.6522 12.522 15.6522C12.8462 15.6522 13.109 15.3894 13.109 15.0652V7.63039C13.109 7.30625 12.8462 7.04346 12.522 7.04346Z"
+                                                fill="#272727" />
+                                        </g>
+                                        <defs>
+                                            <clippath id="clip0_725_9426">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clippath>
+                                        </defs>
+                                    </svg><span>Видалити</span></button>
+                                <span class="basket_product_price">10000
+                                    ₴</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="basket_product_quantity">
+                        <button type="button" class="basket_plus">+</button> <input class="basket_product_number"
+                            type="number" value="10"></input>
+
+                        <button type="button" class="basket_minus">-</button>
+                    </div>
+                </div>
+                <div class="basket_product">
+                    <div class="basket_product_content">
+                        <img src="img/Product.png" alt>
+                        <div class="basket_text_buttos">
+                            <span class="basket_text">Електронний
+                                лічильник MGE
+                                400 для
+                                дизельного палива, масла, 15-400 л /
+                                хв</span>
+                            <div class="basket_button_price">
+                                <button class="basket_remove_button" type="button"><svg width="18" height="18"
+                                        viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_725_9426)">
+                                            <path
+                                                d="M16.0436 2.34784H11.9349V0.586969C11.9349 0.262828 11.6721 0 11.3479 0H6.65224C6.3281 0 6.06527 0.262793 6.06527 0.586969V2.34784H1.9566C1.63246 2.34784 1.36963 2.61063 1.36963 2.93481V5.28265C1.36963 5.60679 1.63242 5.86962 1.9566 5.86962H2.54357V17.4131C2.54357 17.7372 2.80636 18.0001 3.13054 18.0001H14.8697C15.1938 18.0001 15.4566 17.7373 15.4566 17.4131V5.86958H16.0436C16.3677 5.86958 16.6306 5.60679 16.6306 5.28261V2.93477C16.6305 2.61063 16.3677 2.34784 16.0436 2.34784ZM7.23921 1.1739H10.761V2.3478H7.23921V1.1739ZM14.2827 16.8261H3.71747V5.86958H14.2827V16.8261ZM15.4566 4.69565C14.0842 4.69565 3.89089 4.69565 2.54357 4.69565V3.52174C2.81585 3.52174 15.1845 3.52174 15.4566 3.52174V4.69565Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M9.00005 7.04346C8.67591 7.04346 8.41309 7.30625 8.41309 7.63043V15.0652C8.41309 15.3893 8.67588 15.6522 9.00005 15.6522C9.3242 15.6522 9.58702 15.3894 9.58702 15.0652V7.63039C9.58702 7.30625 9.32423 7.04346 9.00005 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M5.47857 7.04346C5.15443 7.04346 4.8916 7.30625 4.8916 7.63043V15.0652C4.8916 15.3893 5.15439 15.6522 5.47857 15.6522C5.80271 15.6522 6.06554 15.3894 6.06554 15.0652V7.63039C6.0655 7.30625 5.80271 7.04346 5.47857 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M12.522 7.04346C12.1979 7.04346 11.9351 7.30625 11.9351 7.63043V15.0652C11.9351 15.3893 12.1979 15.6522 12.522 15.6522C12.8462 15.6522 13.109 15.3894 13.109 15.0652V7.63039C13.109 7.30625 12.8462 7.04346 12.522 7.04346Z"
+                                                fill="#272727" />
+                                        </g>
+                                        <defs>
+                                            <clippath id="clip0_725_9426">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clippath>
+                                        </defs>
+                                    </svg><span>Видалити</span></button>
+                                <span class="basket_product_price">10000
+                                    ₴</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="basket_product_quantity">
+                        <button type="button" class="basket_plus">+</button> <input class="basket_product_number"
+                            type="number" value="10"></input>
+
+                        <button type="button" class="basket_minus">-</button>
+                    </div>
+                </div>
+                <div class="basket_product">
+                    <div class="basket_product_content">
+                        <img src="img/Product.png" alt>
+                        <div class="basket_text_buttos">
+                            <span class="basket_text">Електронний
+                                лічильник MGE
+                                400 для
+                                дизельного палива, масла, 15-400 л /
+                                хв</span>
+                            <div class="basket_button_price">
+                                <button class="basket_remove_button" type="button"><svg width="18" height="18"
+                                        viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_725_9426)">
+                                            <path
+                                                d="M16.0436 2.34784H11.9349V0.586969C11.9349 0.262828 11.6721 0 11.3479 0H6.65224C6.3281 0 6.06527 0.262793 6.06527 0.586969V2.34784H1.9566C1.63246 2.34784 1.36963 2.61063 1.36963 2.93481V5.28265C1.36963 5.60679 1.63242 5.86962 1.9566 5.86962H2.54357V17.4131C2.54357 17.7372 2.80636 18.0001 3.13054 18.0001H14.8697C15.1938 18.0001 15.4566 17.7373 15.4566 17.4131V5.86958H16.0436C16.3677 5.86958 16.6306 5.60679 16.6306 5.28261V2.93477C16.6305 2.61063 16.3677 2.34784 16.0436 2.34784ZM7.23921 1.1739H10.761V2.3478H7.23921V1.1739ZM14.2827 16.8261H3.71747V5.86958H14.2827V16.8261ZM15.4566 4.69565C14.0842 4.69565 3.89089 4.69565 2.54357 4.69565V3.52174C2.81585 3.52174 15.1845 3.52174 15.4566 3.52174V4.69565Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M9.00005 7.04346C8.67591 7.04346 8.41309 7.30625 8.41309 7.63043V15.0652C8.41309 15.3893 8.67588 15.6522 9.00005 15.6522C9.3242 15.6522 9.58702 15.3894 9.58702 15.0652V7.63039C9.58702 7.30625 9.32423 7.04346 9.00005 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M5.47857 7.04346C5.15443 7.04346 4.8916 7.30625 4.8916 7.63043V15.0652C4.8916 15.3893 5.15439 15.6522 5.47857 15.6522C5.80271 15.6522 6.06554 15.3894 6.06554 15.0652V7.63039C6.0655 7.30625 5.80271 7.04346 5.47857 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M12.522 7.04346C12.1979 7.04346 11.9351 7.30625 11.9351 7.63043V15.0652C11.9351 15.3893 12.1979 15.6522 12.522 15.6522C12.8462 15.6522 13.109 15.3894 13.109 15.0652V7.63039C13.109 7.30625 12.8462 7.04346 12.522 7.04346Z"
+                                                fill="#272727" />
+                                        </g>
+                                        <defs>
+                                            <clippath id="clip0_725_9426">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clippath>
+                                        </defs>
+                                    </svg><span>Видалити</span></button>
+                                <span class="basket_product_price">10000 ₴</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="basket_product_quantity">
+                        <button type="button" class="basket_plus">+</button> <input class="basket_product_number"
+                            type="number" value="10"></input>
+                        <button type="button" class="basket_minus">-</button>
+                    </div>
+                </div>
+                <div class="basket_product">
+                    <div class="basket_product_content">
+                        <img src="img/Product.png" alt>
+                        <div class="basket_text_buttos">
+                            <span class="basket_text">Електронний лічильник MGE 400 для дизельного палива, масла, 15-400
+                                л/хв</span>
+                            <div class="basket_button_price">
+                                <button class="basket_remove_button" type="button"><svg width="18" height="18"
+                                        viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_725_9426)">
+                                            <path
+                                                d="M16.0436 2.34784H11.9349V0.586969C11.9349 0.262828 11.6721 0 11.3479 0H6.65224C6.3281 0 6.06527 0.262793 6.06527 0.586969V2.34784H1.9566C1.63246 2.34784 1.36963 2.61063 1.36963 2.93481V5.28265C1.36963 5.60679 1.63242 5.86962 1.9566 5.86962H2.54357V17.4131C2.54357 17.7372 2.80636 18.0001 3.13054 18.0001H14.8697C15.1938 18.0001 15.4566 17.7373 15.4566 17.4131V5.86958H16.0436C16.3677 5.86958 16.6306 5.60679 16.6306 5.28261V2.93477C16.6305 2.61063 16.3677 2.34784 16.0436 2.34784ZM7.23921 1.1739H10.761V2.3478H7.23921V1.1739ZM14.2827 16.8261H3.71747V5.86958H14.2827V16.8261ZM15.4566 4.69565C14.0842 4.69565 3.89089 4.69565 2.54357 4.69565V3.52174C2.81585 3.52174 15.1845 3.52174 15.4566 3.52174V4.69565Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M9.00005 7.04346C8.67591 7.04346 8.41309 7.30625 8.41309 7.63043V15.0652C8.41309 15.3893 8.67588 15.6522 9.00005 15.6522C9.3242 15.6522 9.58702 15.3894 9.58702 15.0652V7.63039C9.58702 7.30625 9.32423 7.04346 9.00005 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M5.47857 7.04346C5.15443 7.04346 4.8916 7.30625 4.8916 7.63043V15.0652C4.8916 15.3893 5.15439 15.6522 5.47857 15.6522C5.80271 15.6522 6.06554 15.3894 6.06554 15.0652V7.63039C6.0655 7.30625 5.80271 7.04346 5.47857 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M12.522 7.04346C12.1979 7.04346 11.9351 7.30625 11.9351 7.63043V15.0652C11.9351 15.3893 12.1979 15.6522 12.522 15.6522C12.8462 15.6522 13.109 15.3894 13.109 15.0652V7.63039C13.109 7.30625 12.8462 7.04346 12.522 7.04346Z"
+                                                fill="#272727" />
+                                        </g>
+                                        <defs>
+                                            <clippath id="clip0_725_9426">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clippath>
+                                        </defs>
+                                    </svg><span>Видалити</span></button>
+                                <span class="basket_product_price">10000
+                                    ₴</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="basket_product_quantity">
+                        <button type="button" class="basket_plus">+</button> <input class="basket_product_number"
+                            type="number" value="10"></input>
+                        <button type="button" class="basket_minus">-</button>
+                    </div>
+                </div>
+                <div class="basket_product">
+                    <div class="basket_product_content">
+                        <img src="img/Product.png" alt>
+                        <div class="basket_text_buttos">
+                            <span class="basket_text">Електронний
+                                лічильник MGE
+                                400 для
+                                дизельного палива, масла, 15-400 л /
+                                хв</span>
+                            <div class="basket_button_price">
+                                <button class="basket_remove_button" type="button"><svg width="18" height="18"
+                                        viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_725_9426)">
+                                            <path
+                                                d="M16.0436 2.34784H11.9349V0.586969C11.9349 0.262828 11.6721 0 11.3479 0H6.65224C6.3281 0 6.06527 0.262793 6.06527 0.586969V2.34784H1.9566C1.63246 2.34784 1.36963 2.61063 1.36963 2.93481V5.28265C1.36963 5.60679 1.63242 5.86962 1.9566 5.86962H2.54357V17.4131C2.54357 17.7372 2.80636 18.0001 3.13054 18.0001H14.8697C15.1938 18.0001 15.4566 17.7373 15.4566 17.4131V5.86958H16.0436C16.3677 5.86958 16.6306 5.60679 16.6306 5.28261V2.93477C16.6305 2.61063 16.3677 2.34784 16.0436 2.34784ZM7.23921 1.1739H10.761V2.3478H7.23921V1.1739ZM14.2827 16.8261H3.71747V5.86958H14.2827V16.8261ZM15.4566 4.69565C14.0842 4.69565 3.89089 4.69565 2.54357 4.69565V3.52174C2.81585 3.52174 15.1845 3.52174 15.4566 3.52174V4.69565Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M9.00005 7.04346C8.67591 7.04346 8.41309 7.30625 8.41309 7.63043V15.0652C8.41309 15.3893 8.67588 15.6522 9.00005 15.6522C9.3242 15.6522 9.58702 15.3894 9.58702 15.0652V7.63039C9.58702 7.30625 9.32423 7.04346 9.00005 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M5.47857 7.04346C5.15443 7.04346 4.8916 7.30625 4.8916 7.63043V15.0652C4.8916 15.3893 5.15439 15.6522 5.47857 15.6522C5.80271 15.6522 6.06554 15.3894 6.06554 15.0652V7.63039C6.0655 7.30625 5.80271 7.04346 5.47857 7.04346Z"
+                                                fill="#272727" />
+                                            <path
+                                                d="M12.522 7.04346C12.1979 7.04346 11.9351 7.30625 11.9351 7.63043V15.0652C11.9351 15.3893 12.1979 15.6522 12.522 15.6522C12.8462 15.6522 13.109 15.3894 13.109 15.0652V7.63039C13.109 7.30625 12.8462 7.04346 12.522 7.04346Z"
+                                                fill="#272727" />
+                                        </g>
+                                        <defs>
+                                            <clippath id="clip0_725_9426">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clippath>
+                                        </defs>
+                                    </svg><span>Видалити</span></button>
+                                <span class="basket_product_price">10000
+                                    ₴</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="basket_product_quantity">
+                        <button type="button" class="basket_plus">+</button> <input class="basket_product_number"
+                            type="number" value="10"></input>
+
+                        <button type="button" class="basket_minus">-</button>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="basket_order_buttons">
+                <div class="basket_summ_price">До сплати: 20 000 ₴</div>
+                <div id="basket_button_bottom">
+                    <button class="basket_send" id="basket_back"> ← Повернутись до покупок</button>
+                    <button class="basket_send">Оформити замовлення</button>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="call_window">
+            <form action>
+
+                <div class="call_window_top">
+                    <h4>
+
+                        <svg style="transform: translateY(2px);" width="15" height="15" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.8411 6.52185L17.0486 2.13826L17.805 2.89856L13.5811 7.06941L12.7753 7.86508L13.9062 7.9245L15.0598 7.98512L15.0608 7.98517C15.276 7.99602 15.4467 8.1818 15.4356 8.40428C15.4245 8.62645 15.2367 8.79382 15.0217 8.7831L15.0215 8.78309L11.8115 8.61991L11.8108 8.61987C11.6201 8.61043 11.4629 8.46184 11.4395 8.27291L11.4394 8.27208L11.0111 4.8624C11.0111 4.86236 11.0111 4.86232 11.0111 4.86227C11.0111 4.86224 11.0111 4.86221 11.0111 4.86218C10.9831 4.6379 11.1385 4.44009 11.3546 4.41179C11.5713 4.38475 11.7701 4.53635 11.7988 4.75897C11.7988 4.75913 11.7989 4.75929 11.7989 4.75945L11.9843 6.23784L12.1148 7.27858L12.8411 6.52185Z"
+                                fill="white" stroke="white" />
+                            <path
+                                d="M5.475 8.31096C6.11364 9.46883 6.84971 10.5801 7.8069 11.5934C8.76409 12.6145 9.95633 13.5424 11.5011 14.3319C11.614 14.3894 11.7238 14.3894 11.8197 14.349C11.9681 14.2915 12.115 14.1718 12.265 14.0226C12.3779 13.9092 12.5217 13.7242 12.6702 13.5253C13.2624 12.7404 13.9985 11.7659 15.0361 12.2524C15.0593 12.2633 15.0763 12.2757 15.0995 12.2866L18.5571 14.2868C18.568 14.293 18.5803 14.3039 18.5912 14.3101C19.0473 14.6241 19.236 15.1106 19.2422 15.6623C19.2422 16.2234 19.0365 16.8544 18.735 17.3874C18.336 18.0915 17.7484 18.5562 17.0711 18.8655C16.4263 19.1623 15.7088 19.324 15.0191 19.4265C13.9366 19.5866 12.9222 19.4841 11.8831 19.1623C10.8671 18.8484 9.84654 18.3246 8.73007 17.633L8.64966 17.5802C8.13782 17.26 7.58268 16.915 7.04145 16.5078C5.05285 15.0018 3.03022 12.8243 1.71273 10.4293C0.607085 8.41664 0.00246161 6.24543 0.331835 4.1768C0.514304 3.04224 0.999859 2.01026 1.84262 1.32952C2.57714 0.734264 3.5699 0.407883 4.85337 0.521339C5.00182 0.532218 5.13326 0.619253 5.2013 0.745143L7.42031 4.51562C7.74504 4.93991 7.78525 5.35799 7.60897 5.77762C7.46052 6.1211 7.16362 6.4366 6.75847 6.735C6.6394 6.83758 6.49559 6.94171 6.34714 7.04895C5.85231 7.40952 5.28635 7.8276 5.47964 8.32184L5.475 8.31096Z"
+                                fill="#272727  " />
+                        </svg>
+
+                        Замовити зворотній дзвінок
+                    </h4>
+                    <button id="close_call_btton" class="close_button" type="button">
+                        <svg id="close_call_window" class="close_window" width="800px" height="800px"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                fill="#b4b4b4" /></svg>
+                    </button>
+
+                </div>
+                <fieldset>
+                    <label for="firstName">Номер телефону
+                        <span id="call_light">(обов’язково) </span>
+                    </label>
+                    <input id="pnum_input" require type="tel" pattern="[0-9+\(\)\-,]{17}" value="+380">
+
+                </fieldset>
+                <fieldset>
+                    <label for="firstName">Питання</label>
+                    <textarea id="call_question" type="text"></textarea>
+                </fieldset>
+
+                <button id="send_call_button">Надіслати</button>
+            </form>
+        </div>
+
+        <div id="login_window">
+            <form action>
+
+                <div id="login_black_top">
+                    <h1>
+                        Вхід
+                    </h1>
+                    <button id="close_login_btton" class="close_button" type="button">
+                        <svg id="close_call_window" class="close_window" width="800px" height="800px"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                fill="#b4b4b4" /></svg>
+
+                </div>
+                <fieldset>
+                    <label for="firstName">Номер телефону
+
+                    </label>
+                    <input id="pnum_input_login" require type="tel" pattern="[0-9+\(\)\-,]{17}" value="+380">
+
+                </fieldset>
+                <fieldset>
+                    <label for="firstName">Пароль
+
+                    </label>
+                    <input id="password_input" require type="password">
+
+                </fieldset>
+                <div id="login_links">
+
+                    <div><a href="#">Забули пароь?</a></div>
+
+                    <div> <a href="#">Зареєструватися</a> </div>
+                </div>
+                <button type="button" id="login_in_button">Увійти</button>
+            </form>
+        </div>
+        <div id="catalog_window">
+            <div id="catalog_window_flex">
+                <div id="main_categories_main_contaner">
+                    <div id="main_categories_header">
+                        <h3> Каталог </h3>
+                        <button id="close_catalog_btton" class="close_button" type="button">
+                            <svg id="close_basket_window" class="close_window" width="800px" height="800px"
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                    fill="#b4b4b4" /></svg>
+                        </button>
+                    </div>
+
+                    <div id="main_categories_list">
+
+                        <div class="main_categories_item" id="category_1">
+                            <img src="img/item_cat.png" alt="">
+                            <h4>
+                                Міні азс
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_2">
+                            <img src="img/akb.png" alt="">
+                            <h4>
+                                Акумулятори 12 в AGM
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_3">
+                            <img src="img/pump.png" alt="">
+                            <h4>
+                                Насоси
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_4">
+                            <img src="img/counter.png" alt="">
+                            <h4>
+                                Лічильники
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_5">
+                            <img src="img/item_cat.png" alt="">
+                            <h4>
+                                Міні ТРК
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_6">
+                            <img src="img/item_cat.png" alt="">
+                            <h4>
+                                Фільтри для пального
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_7">
+                            <img src="img/pistol.png" alt="">
+                            <h4>
+                                Заправні пістолети
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_8">
+                            <img src="img/can.png" alt="">
+                            <h4>
+                                Єврокуб і резервуари
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+                        <div class="main_categories_item" id="category_9">
+                            <img src="img/connector.png" alt="">
+                            <h4>
+                                З'єднання і аксесуари
+                            </h4>
+                            <div class="arrow_cat">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="sub_categores_list">
+                    <button id="close_catalog_btton_subcategory" class="close_button" type="button">
+                        <svg class="close_window" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                fill="#808080" /></svg>
+                    </button>
+                    <ul id="sub_category_1">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>МініАзс</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Насоси для дизельного палива</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul id="sub_category_2">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Акумулятори 12в в AGM</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Акумулятори 12в</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Акумулятори 12в
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Акумулятори 12в
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Акумулятори 12в
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Акумулятори 12в
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_3">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Насоси</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Насоси для дизельного палива</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_4">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Лічильники</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Лічильники 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_5">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Лічильники</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Лічильники 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Лічильники 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_6">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Лічильники</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_7">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Насоси для дизельного палива</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_8">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Насоси для дизельного палива</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul id="sub_category_9">
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h3>Лічильники</h3>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="sub_category_link">
+                                <h4>Насоси для дизельного палива</h4>
+                            </a>
+                        </li>
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h4>
+                                    Насоси для дизельного палива 220В
+                                </h4>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24В
+                                </h5>
+                            </a>
+                        </li>
+
+                        <li> <a href="#" class="sub_category_link">
+                                <h5>
+                                    Насоси для дизельного палива 12/24/220В
+                                </h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <button id="sub_category_back" type="button"> &lt; &lt; &#32; До головних категорій </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="contacts_window">
+            <div id="contacts_window-container">
+
+                <div id="contacts_black_top">
+                    <h1>
+                        Контакти
+                    </h1>
+                    <button id="close_contact_btton" class="close_button" type="button">
+                        <svg id="close_contact_window" class="close_window" width="800px" height="800px"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+                                fill="#b4b4b4" />
+                        </svg>
+                </div>
+
+                <div class="contact_link">
+                    <a href="#" type="tel"><img src="svg/Teleph.svg" class="ico" alt="">+380 800-357-299</a>
+
+                </div>
+                <div class="contact_link">
+                    <a href="#" type="tel"><img src="svg/Teleph.svg" class="ico" alt="">+380 093-515-77-15</a>
+
+                </div>
+                <div class="contact_link">
+                    <a href="#" type="tel"><img src="svg/Teleph.svg" class="ico" alt="">+380 066-029-16-96</a>
+
+                </div>
+                <div class="contact_link">
+                    <a href="mailto: info@ogm.com.ua" type="mail"><img src="svg/email.svg"
+                            style="margin-right: 0.4em;height: 1.4em; width: auto;transform: translateY(0.5em);" alt="">
+                        info@ogm.com.ua</a>
+                </div>
+                <div class="contact_link">
+                    <a href="https://maps.app.goo.gl/ohaLYqLGoQGRNu7h8" target="_blank"><img src="svg/map.svg"
+                            class="ico" alt=""> вул. Павлівська, 29Б, Київ, 01135</a>
+                </div>
+                <div id="map_plate">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.460824531619!2d30.4859516!3d50.451142899999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce89b3c1f5d1%3A0x40708230b2e04324!2z0LLRg9C70LjRhtGPINCf0LDQstC70ZbQstGB0YzQutCwLCAyOdCRLCDQmtC40ZfQsiwgMDExMzU!5e0!3m2!1suk!2sua!4v1717003504016!5m2!1suk!2sua"
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="contact_link">
+
+                    <p><label>Ми в соц. мережах</labels>
+                    </p>
+                    <a href="#"><img src="svg/telegram.svg" id="tg" class="ico" alt=""></a>
+                    <a href="#"><img src="svg/viber.svg" id="vb" class="ico" alt=""></a>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .swiper {
+                width: var(--width-main);
+                height: calc(var(--width-main) / 4.7 + 30px);
+
+                margin-left: var(--sidde-padding_baner);
+            }
+
+            @media screen and (max-width:700px) {
+                .swiper {
+                    height: calc(var(--width-main) / 4.7 + 25px);
+
+                }
+            }
+
+            .swiper-slide {
+
+                text-align: center;
+                font-size: 18px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .swiper-slide img {
+                display: block;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+            }
+
+            .swiper-wrapper {
+                height: auto;
+            }
+
+            .swiper-horizontal>.swiper-pagination-bullets,
+            .swiper-pagination-bullets.swiper-pagination-horizontal,
+            .swiper-pagination-custom,
+            .swiper-pagination-fraction {
+
+                top: auto;
+
+            }
+        </style>
+    </header>
+
+    <main id=user_page_orders>
+        <section id="user_page_buttons">
+            <h1>Сторінка користувача</h1>
+
+            <a class="user_page_button">
+                <div class="user_page_svg_container">
+                    <svg id="person_button_svg_icon" width="150" height="150" viewBox="0 0 150 150" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M55.4305 90.0233C55.8577 86.261 45.2989 71.8454 43.3703 64.9414C39.2322 57.9857 37.7674 46.9186 42.2717 39.5621C44.0661 36.6402 43.297 34.1062 43.297 30.0595C43.297 -10.0198 109.543 -10.0198 109.543 30.0595C109.543 35.1276 108.456 36.317 111.032 40.312C115.365 46.9703 113.144 58.7873 109.482 64.9672C107.126 72.2203 96.0543 85.9378 96.8233 90.0491C97.5191 110.606 55.3206 109.921 55.4305 90.0491V90.0233ZM79.5753 125.577H81.9067C82.9137 125.574 83.8787 125.15 84.5919 124.397C85.3051 123.644 85.7088 122.623 85.7152 121.557V115.002C85.7152 114.472 85.6167 113.947 85.4253 113.458C85.2339 112.969 84.9534 112.524 84.5997 112.149C84.2461 111.775 83.8262 111.478 83.3642 111.275C82.9021 111.072 82.4069 110.968 81.9067 110.968H68.101C67.0919 110.971 66.1251 111.397 65.4115 112.153C64.698 112.909 64.2957 113.933 64.2925 115.002V121.557C64.2989 122.624 64.7022 123.646 65.4151 124.401C66.1279 125.156 67.0929 125.584 68.101 125.59H70.4691L65.916 150H83.933L79.5753 125.577ZM0 150C1.79438 125.435 -2.75871 126.431 16.6621 118.738C26.2044 114.865 35.3463 109.965 43.944 104.116L60.5451 150H0ZM106.857 102.034C114.678 107.579 123.131 112.049 132.015 115.338C150.142 121.725 150.142 122.617 149.971 150H89.658L106.857 102.034Z"
+                            fill="#272727" />
+                    </svg>
+
+                </div>
+                <span>Особисті данні</span>
+            </a>
+            <a class="user_page_button">
+                <div class="user_page_svg_container">
+                    <svg id="orders_button_svg_icon" width="150" height="160" viewBox="0 0 150 160" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M48.2943 49.1175H101.235M48.2943 84.4118H101.235M48.2943 119.706H83.5884M30.6471 5H118.882C128.629 5 136.529 12.9009 136.529 22.6471V137.353C136.529 147.099 128.629 155 118.882 155H30.6471C20.9009 155 13 147.099 13 137.353V22.6471C13 12.9009 20.9009 5 30.6471 5Z"
+                            stroke="#222222" stroke-width="10" stroke-linecap="round" />
+                    </svg>
+
+                </div>
+                <span>Мої замовлення</span>
+            </a>
+            <a class="user_page_button">
+                <div class="user_page_svg_container">
+                    <svg id="wishes_button_svg_icon" width="28" height="28" viewBox="0 0 28 28" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M14.9166 6.70353C14.7616 6.87391 14.6067 7.04664 14.4153 7.25251L13.8889 7.82278L13.342 7.27144C13.1802 7.10817 13.0161 6.94016 12.8566 6.77689C11.1658 5.04951 9.89197 3.74806 7.26915 3.71256C7.16661 3.7102 7.05723 3.71256 6.9433 3.7173C5.47579 3.77172 4.12223 4.33253 3.13326 5.29087C2.15796 6.23738 1.53587 7.57905 1.51536 9.21178C1.51308 9.31353 1.51536 9.42002 1.51991 9.53596C1.67715 14.0958 5.87913 18.0735 9.36331 21.3697C10.0355 22.0062 10.6804 22.6167 11.298 23.2343L13.8638 25.8017L17.0882 22.4795C17.6078 21.9447 18.1957 21.3602 18.8246 20.7355C19.8933 19.6707 21.0828 18.4899 22.1903 17.2997C22.9856 16.4455 23.7398 15.5865 24.3801 14.7607C25.0091 13.9514 25.5241 13.1824 25.8545 12.4962C26.3968 11.3698 26.5677 10.2435 26.4515 9.19049C26.3376 8.15169 25.9434 7.18152 25.3532 6.35333C24.7539 5.5133 23.9563 4.81761 23.0425 4.34199C21.9898 3.79775 20.7843 3.53983 19.5515 3.68653C17.4255 3.94209 16.2929 5.18912 14.9166 6.70353ZM13.8479 5.58665C15.4202 3.85691 16.7259 2.43951 19.3783 2.12479C20.9096 1.94259 22.409 2.25967 23.7148 2.94116C24.8427 3.52799 25.8271 4.38459 26.5655 5.41865C27.3106 6.46454 27.8096 7.69264 27.9555 9.01302C28.1036 10.3523 27.8894 11.7792 27.2035 13.199C26.8161 14.0011 26.2419 14.8624 25.556 15.7451C24.8837 16.6111 24.0999 17.5056 23.2772 18.3882C22.1493 19.6021 20.9507 20.7947 19.8705 21.869C19.2393 22.496 18.6491 23.0829 18.1524 23.594L14.4016 27.4581L13.8752 28L13.342 27.4676L10.2429 24.3678C9.67549 23.8022 9.01922 23.1799 8.33788 22.5339C4.64406 19.0342 0.184577 14.8151 0.00455746 9.59039C0 9.46261 0 9.3301 0 9.19285C0.0273448 7.09634 0.834016 5.36422 2.09871 4.13849C3.35201 2.92459 5.05423 2.21471 6.88633 2.14609C7.01166 2.14136 7.14382 2.13899 7.28283 2.14136C10.4822 2.18632 11.9451 3.64158 13.8479 5.58665Z"
+                            fill="black" />
+                    </svg>
+                </div>
+                <span>Список бажань</span>
+            </a>
+            <a class="user_page_button">
+                <div class="user_page_svg_container">
+                    <svg id="rewiews_button_svg_icon" width="150" height="150" viewBox="0 0 150 150" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M70.2089 8.37125C70.4027 6.76348 70.9946 5.23022 71.9303 3.91176C72.8661 2.5933 74.1158 1.53172 75.5653 0.824154C77.8781 -0.148126 80.4591 -0.264016 82.849 0.497113C85.3855 1.22073 87.7575 2.4341 89.8323 4.06941C93.5717 7.09718 96.6409 10.8764 98.8433 15.165C101.046 19.4537 102.333 24.1573 102.623 28.9748C102.845 32.6548 102.795 36.3463 102.472 40.0188C102.247 42.5345 101.922 45.3017 101.471 48.1445H128.003C132.159 48.2698 136.236 49.3179 139.942 51.2136C142.911 52.7025 145.446 54.9385 147.301 57.7041C149.217 60.6483 150.155 64.1275 149.979 67.6411C149.771 70.8325 148.919 73.9479 147.476 76.7983C148.42 80.4074 148.666 84.165 148.202 87.8674C147.853 90.7269 146.557 93.3853 144.523 95.4145C144.733 99.6868 144.112 103.959 142.695 107.993C141.391 111.474 139.379 114.644 136.788 117.301C136.59 119.539 136.188 121.754 135.587 123.917C134.934 126.394 133.868 128.742 132.433 130.861C127.928 137.225 124.324 137.1 118.617 136.848H63.9264C59.9162 137.017 55.9243 136.215 52.2875 134.508C48.696 132.546 45.5772 129.815 43.1515 126.509L42.4007 124.295V63.6412L45.0538 62.9368C51.7368 61.1255 56.9681 55.3897 61.0479 48.547C64.9142 41.6028 67.9474 34.2221 70.0837 26.5598V8.27063L70.2089 8.37125ZM5.30634 57.3268H31.0621C32.4608 57.3334 33.8003 57.8948 34.7893 58.8888C35.7783 59.8828 36.3368 61.2291 36.3434 62.6349V133.376C36.3434 134.787 35.7878 136.139 34.7981 137.139C33.8084 138.138 32.4651 138.703 31.0621 138.71H5.30634C3.89901 138.71 2.54932 138.148 1.55419 137.148C0.559059 136.147 0 134.791 0 133.376V62.6349C0.00661794 61.2248 0.568597 59.8747 1.56301 58.88C2.55743 57.8852 3.90334 57.3268 5.30634 57.3268ZM78.4938 7.33982C78.1391 7.56616 77.8385 7.86842 77.6135 8.22501C77.3886 8.58161 77.2447 8.98374 77.1922 9.40269V27.0126L77.042 28.044C74.6833 36.4537 71.3216 44.5459 67.0301 52.1444C62.6248 59.5657 56.893 65.9305 49.5091 68.8738V122.987C51.1381 125.059 53.1745 126.772 55.4913 128.018C58.158 129.204 61.0638 129.747 63.9764 129.603H115.638C116.564 129.603 117.766 129.603 118.892 129.603C122.271 129.754 124.399 129.829 126.701 126.584C127.725 125.048 128.479 123.346 128.929 121.553C129.489 119.412 129.841 117.221 129.98 115.012L131.057 112.672C133.286 110.582 135 107.997 136.063 105.125C137.361 101.536 137.906 97.7161 137.664 93.905L137.539 91.7919L139.316 90.685C139.938 90.2197 140.453 89.6268 140.828 88.9458C141.204 88.2648 141.431 87.5113 141.494 86.7353C141.837 83.5701 141.531 80.3678 140.593 77.3266L140.868 74.8109C142.134 72.5472 142.886 70.0301 143.071 67.4399C143.191 65.3966 142.656 63.3685 141.544 61.6538C140.341 59.8978 138.713 58.478 136.813 57.528C134.073 56.1454 131.068 55.3731 128.003 55.2639H93.0111L93.787 51.0627C94.5225 47.2183 95.0655 43.3392 95.414 39.4401C95.7155 36.0944 95.7657 32.7306 95.5642 29.3773C95.3546 25.5666 94.3558 21.8418 92.6318 18.4412C90.9078 15.0407 88.4965 12.0393 85.5522 9.6291C84.2249 8.55707 82.7034 7.75399 81.0718 7.26435C80.2611 6.98257 79.3796 6.98257 78.5689 7.26435L78.4938 7.33982Z"
+                            fill="black" />
+                    </svg>
+                </div>
+                <span>Мої відгуки</span>
+            </a>
+            <a class="user_page_button">
+                <div id="questions_button_svg_icon" class="user_page_svg_container">
+                    <svg width="97" height="150" viewBox="0 0 97 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M58.9672 150H31.0074C29.1234 150 27.4074 149.219 26.1714 147.961C24.9354 146.704 24.1674 144.959 24.1674 143.042V120.203C24.1674 118.286 24.9354 116.541 26.1714 115.283C27.4074 114.026 29.1234 113.245 31.0074 113.245H58.9672C60.8512 113.245 62.5672 114.026 63.8032 115.283C65.0392 116.541 65.8072 118.286 65.8072 120.203V143.042C65.8072 144.959 65.0392 146.704 63.8032 147.961C62.5672 149.219 60.8512 150 58.9672 150ZM24.1194 96.1304C24.1434 94.0186 24.2634 92.041 24.4674 90.2344C24.6714 88.3423 24.9834 86.5234 25.3914 84.79C25.8474 82.8735 26.3994 81.1157 27.0714 79.541C27.7674 77.8809 28.5834 76.3794 29.5194 75.0366L29.5794 74.9512L29.7354 74.7437L29.7834 74.6826C30.6114 73.5229 31.5474 72.3511 32.6154 71.1792C33.7194 69.9707 34.9434 68.7378 36.2874 67.5049C37.5594 66.333 39.0474 65.0757 40.7393 63.7329C42.3233 62.4634 44.0873 61.145 46.0073 59.7778C46.0913 59.7046 46.1753 59.6313 46.2713 59.5703C46.3673 59.4971 46.4753 59.436 46.5833 59.3872C47.2073 58.9722 47.8193 58.5327 48.4193 58.0688C49.0313 57.5806 49.6193 57.0557 50.1833 56.5064C50.7233 55.9692 51.2273 55.3955 51.6953 54.8096C52.1513 54.2358 52.5473 53.6621 52.9073 53.0884C52.9313 53.0396 52.9553 53.0029 52.9913 52.9541C53.3513 52.3682 53.6633 51.7822 53.9153 51.1719C54.1673 50.5859 54.3833 49.9268 54.5753 49.1943C54.7553 48.5107 54.8993 47.7783 54.9833 46.9971C55.0793 46.2158 55.1272 45.398 55.1272 44.5313C55.1272 43.6646 55.0793 42.8955 54.9833 42.1997C54.8873 41.5039 54.7433 40.8936 54.5633 40.3442C54.3953 39.8438 54.2033 39.3799 53.9633 38.9648C53.7353 38.5498 53.4593 38.1714 53.1473 37.8174L53.0873 37.7564L53.0033 37.6587C52.7633 37.4146 52.5113 37.207 52.2473 37.0361C51.9473 36.8408 51.5993 36.6577 51.1913 36.499L51.0713 36.4502C50.6033 36.2793 50.0993 36.145 49.5713 36.0596C49.0073 35.9741 48.3473 35.9253 47.5673 35.9253C46.9793 35.9253 46.4633 35.9619 46.0313 36.0352C45.5993 36.1084 45.1793 36.2183 44.7953 36.3647C44.4473 36.499 44.1113 36.6577 43.7873 36.8652C43.4633 37.0605 43.1513 37.3047 42.8513 37.5855C42.6233 37.8052 42.4193 38.0371 42.2513 38.2935C42.0593 38.5742 41.9033 38.9038 41.7593 39.2578C41.5913 39.6973 41.4593 40.2222 41.3513 40.8325C41.2313 41.5039 41.1713 42.1997 41.1473 42.9199V42.9565C41.0873 44.8242 40.3193 46.5088 39.0954 47.7173C37.9434 48.8525 36.4194 49.585 34.7274 49.6826C34.5954 49.6948 34.4754 49.707 34.3434 49.707H6.99555C5.45956 49.707 4.03156 49.1821 2.87957 48.3032C1.72758 47.4121 0.851585 46.1548 0.431587 44.6899L0.383587 44.5557C0.227589 44.1162 0.119589 43.6646 0.0595894 43.2373C-0.00041008 42.7734 -0.0124111 42.334 0.0115891 41.8823C-0.0124111 38.5742 0.227587 35.4736 0.731585 32.5928C1.25958 29.6021 2.06358 26.7822 3.16757 24.1333C4.31956 21.3623 5.77155 18.8232 7.52354 16.5283C9.27554 14.2212 11.3275 12.146 13.6675 10.3149C15.9115 8.55713 18.3115 7.03125 20.8555 5.7373C23.3754 4.45557 26.0994 3.38135 29.0034 2.51465C31.8114 1.68457 34.7754 1.0498 37.8714 0.634766C41.0153 0.20752 44.2433 0 47.5553 0C51.1673 0 54.6233 0.244141 57.9352 0.720215C61.2352 1.19629 64.3672 1.92871 67.3432 2.89307C70.3672 3.88184 73.1991 5.12695 75.8391 6.62842C78.3951 8.08105 80.7711 9.77783 82.9671 11.7188C83.0991 11.8164 83.2191 11.9263 83.3391 12.0361L83.3751 12.0728C85.5951 14.0747 87.5271 16.2354 89.195 18.5669C90.899 20.9595 92.339 23.5474 93.491 26.3428C94.631 29.0894 95.483 31.9824 96.035 35.0098C96.599 38.0493 96.875 41.2231 96.875 44.519C96.875 46.582 96.719 48.6572 96.395 50.7446C96.083 52.8076 95.615 54.8096 94.991 56.7749C94.367 58.7524 93.587 60.6689 92.651 62.5244C91.727 64.3799 90.647 66.1865 89.423 67.9321C89.375 68.0054 89.315 68.0908 89.243 68.1763C88.1151 69.7876 86.855 71.3623 85.4871 72.9126C84.1551 74.4141 82.7511 75.8179 81.2991 77.1118C79.7751 78.4668 78.1911 79.7119 76.5591 80.8472C74.9991 81.9336 73.3551 82.9468 71.6031 83.8867C70.9672 84.3262 70.3912 84.7412 69.8992 85.1563C69.3952 85.5713 68.9392 85.9985 68.5432 86.4136C68.4952 86.4624 68.4592 86.499 68.4112 86.5479C68.1472 86.8408 67.9072 87.146 67.6672 87.4878C67.4512 87.8052 67.2712 88.1226 67.1272 88.4277L67.0672 88.5498C67.0432 88.5864 67.0312 88.6353 67.0072 88.6719C66.8632 89.0259 66.7192 89.4165 66.5992 89.856C66.4672 90.3442 66.3352 90.918 66.2272 91.5894C66.1072 92.2974 66.0112 93.0786 65.9512 93.9087C65.8912 94.7388 65.8552 95.6665 65.8552 96.7041C65.8552 98.6206 65.0872 100.366 63.8512 101.624C62.6152 102.881 60.8992 103.662 59.0152 103.662H30.9234C29.0394 103.662 27.3234 102.881 26.0874 101.624C26.0154 101.55 25.9434 101.477 25.8834 101.392C24.7674 100.159 24.0834 98.5107 24.0834 96.7041C24.0834 96.6919 24.0834 96.6064 24.0954 96.3745C24.1074 96.2891 24.1194 96.2158 24.1194 96.1304ZM30.5754 90.918C30.3834 92.627 30.2874 94.397 30.2514 96.228C30.2514 96.3623 30.2514 96.4966 30.2394 96.6309V96.6553C30.2394 96.7651 30.2514 96.5576 30.2514 96.6919C30.2514 96.8506 30.2994 96.9971 30.3834 97.1191L30.4434 97.1802C30.5634 97.3023 30.7314 97.3755 30.9234 97.3755H59.0512C59.2432 97.3755 59.4112 97.3023 59.5312 97.1802C59.6512 97.0581 59.7232 96.8872 59.7232 96.6919C59.7232 95.5811 59.7592 94.5068 59.8432 93.457C59.9152 92.4072 60.0352 91.4307 60.1912 90.5274C60.3352 89.7095 60.5152 88.9038 60.7312 88.1104C60.9352 87.4024 61.1632 86.7432 61.4272 86.1328C61.4512 86.0718 61.4752 85.9985 61.5112 85.9375L61.5352 85.9009L61.5472 85.8643C61.8472 85.1929 62.2192 84.5459 62.6632 83.8989C63.0232 83.3862 63.4552 82.8369 63.9712 82.2876C64.0192 82.2266 64.0792 82.1533 64.1392 82.0923C64.7032 81.4941 65.3392 80.9082 66.0472 80.3223C66.7432 79.7363 67.4992 79.1748 68.3032 78.6377C68.3872 78.5767 68.4832 78.5278 68.5792 78.479C70.1152 77.6611 71.6272 76.7334 73.1151 75.6958C74.5791 74.6704 75.9711 73.584 77.2791 72.4243C78.5871 71.2647 79.8111 70.0317 80.9631 68.7378C82.0911 67.4805 83.1831 66.0767 84.2631 64.5508C84.2991 64.5142 84.3231 64.4653 84.3591 64.4287L84.3711 64.4165C84.3711 64.4165 84.3711 64.4165 84.3951 64.3799L84.4191 64.3555C85.4751 62.854 86.3991 61.3037 87.1911 59.729C87.983 58.1421 88.6431 56.5186 89.159 54.8828C89.687 53.2104 90.083 51.5137 90.347 49.8047C90.599 48.1323 90.731 46.3745 90.731 44.5313C90.731 41.5772 90.491 38.7817 90.011 36.1694C89.531 33.5449 88.799 31.0791 87.8511 28.772C86.8911 26.4648 85.6911 24.2798 84.2271 22.2412C82.7751 20.2148 81.0951 18.3472 79.1871 16.6382L79.1391 16.5894C77.2311 14.8682 75.1311 13.3667 72.8631 12.085C70.5832 10.791 68.1112 9.70459 65.4712 8.8501C62.8552 7.99561 60.0592 7.34863 57.0712 6.92139C54.0953 6.49414 50.9273 6.27441 47.5673 6.27441C44.4113 6.27441 41.4473 6.45752 38.6874 6.83594C35.8794 7.20215 33.2274 7.76367 30.7194 8.5083C28.2234 9.25293 25.8474 10.1929 23.6034 11.3403C21.3715 12.4756 19.3195 13.7817 17.4235 15.2588C15.4915 16.7725 13.8115 18.4692 12.3835 20.3491C10.9435 22.2412 9.76753 24.3042 8.81953 26.5625C7.91954 28.7354 7.23554 31.1035 6.79155 33.6792C6.33555 36.2549 6.11955 38.9771 6.14355 41.8457C6.15555 41.9678 6.15555 42.0898 6.14355 42.2119C6.14355 42.2485 6.14355 42.2974 6.15555 42.3462C6.16755 42.4072 6.17955 42.4561 6.19155 42.4927L6.22755 42.6147C6.26355 42.7246 6.29955 42.8223 6.33555 42.9443C6.37155 43.0908 6.46755 43.2129 6.57555 43.2983C6.68355 43.3838 6.82755 43.4326 6.98355 43.4326H34.0314C34.1274 43.4204 34.2234 43.4204 34.3194 43.4204C34.5114 43.4204 34.6794 43.3472 34.7874 43.2251C34.9074 43.103 34.9794 42.9565 34.9914 42.7856V42.7612C35.0154 41.6504 35.1114 40.6372 35.2674 39.7461C35.4354 38.7817 35.6874 37.8662 36.0114 36.9995C36.3114 36.2061 36.6834 35.4736 37.1274 34.8145C37.5834 34.1187 38.1114 33.4961 38.6994 32.959C39.2873 32.4219 39.9113 31.9458 40.5713 31.5308C41.2313 31.1157 41.9393 30.7739 42.6833 30.4932C43.4153 30.2246 44.2073 30.0171 45.0473 29.8706C45.8873 29.7363 46.7153 29.6631 47.5553 29.6631C48.5513 29.6631 49.5353 29.7363 50.5073 29.895C51.5033 30.0537 52.4033 30.2856 53.2193 30.5908C53.2553 30.603 53.3033 30.6274 53.3393 30.6397L53.4593 30.6885C54.2033 30.9814 54.9232 31.3721 55.5952 31.8237C56.2552 32.2632 56.8672 32.7637 57.3952 33.3252C57.4672 33.3984 57.5392 33.4717 57.6112 33.5571L57.7552 33.728C58.3312 34.3872 58.8352 35.0952 59.2672 35.8643C59.7112 36.6577 60.0832 37.4878 60.3712 38.3667C60.6832 39.2944 60.9112 40.2832 61.0552 41.3208C61.1992 42.3584 61.2712 43.4204 61.2712 44.5313C61.2712 45.6299 61.2112 46.7041 61.0792 47.7539C60.9472 48.7915 60.7552 49.8169 60.5032 50.8057C60.2512 51.7456 59.9272 52.6855 59.5312 53.6377C59.1352 54.5654 58.6912 55.4321 58.1872 56.25L58.1752 56.2744C57.6472 57.1411 57.0832 57.959 56.4832 58.7158C55.8712 59.4849 55.2113 60.2417 54.4913 60.9497C53.7953 61.6455 53.0273 62.3291 52.1993 62.9883C51.4913 63.5498 50.7353 64.0991 49.9073 64.624C49.8353 64.6851 49.7633 64.7339 49.6913 64.7827L49.5233 64.8926C47.7233 66.1865 46.0433 67.4316 44.5193 68.6524C43.0433 69.8242 41.6753 70.9961 40.4033 72.1558C39.1793 73.2788 38.0874 74.3652 37.1394 75.415C36.2274 76.4282 35.4354 77.3926 34.7754 78.3325C34.7394 78.3936 34.6914 78.4546 34.6434 78.5156L34.4994 78.7109C33.8274 79.6875 33.2394 80.7861 32.7234 81.9946C32.1714 83.3008 31.7154 84.729 31.3554 86.2427C31.0314 87.6465 30.7674 89.209 30.5754 90.918ZM31.0074 143.738H58.9672C59.1592 143.738 59.3272 143.665 59.4472 143.542C59.5672 143.42 59.6392 143.25 59.6392 143.054V120.203C59.6392 120.007 59.5672 119.836 59.4472 119.714C59.3272 119.592 59.1592 119.519 58.9672 119.519H31.0074C30.8154 119.519 30.6474 119.592 30.5274 119.714C30.4074 119.836 30.3354 120.007 30.3354 120.203V143.042C30.3354 143.237 30.4074 143.408 30.5274 143.53C30.6594 143.652 30.8274 143.738 31.0074 143.738Z"
+                            fill="#272727" />
+                    </svg>
+                </div>
+                <span>Мої питання</span>
+            </a>
+
+            <style>
+                #questions_button_svg_icon svg {
+                    fill: blue;
+                    stroke: blue;
+                    color: blue;
+                }
+
+                #questions_button_svg_icon+span {
+                    color: blue;
+                }
+            </style>
+
+        </section>
+
+        <section class="user_page_fields">
+            <h2>
+                Мої замовлення
+            </h2>
+
+       
+            <div class="user_page_field_container">
+              
+
+                <div class="user_page_field_container_flex_order">
+                    <div class="field_container_order_info">
+                        <h3 class="order_info_date">
+                            Замволення №4245 від 23.05.2024
+                        </h3>
+                        <h3 class="order_info_state canceled">
+                            Замовлення скасовано
+                        </h3>
+
+                        <h3 class="order_info_novapostid">
+                           <img src="img/icon/novapost.png" alt=""> 20450835580014
+                        </h3>
+                        <h3 class="order_info_price">
+                            100000 ₴
+                        </h3>
+                    </div>
+                    <div class="user_page_field_container_flex_products">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                        <img src="img/Product.png" alt="">
+                    </div>
+                    <div class="user_page_buttons">
+                        <button type="button">
+                            Видалити    
+                        </button>
+                        <button type="button">
+                            Питання по замовленню
+                        </button>
+                    </div>
+              
+                </div>
+             
+               
+              
+             
+            </div>
+       
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div id="footer_block">
+            <div id="social_media">
+                <a href="viber">
+                    <img src="svg/viber_F.svg" alt="">
+                </a>
+                <a href="telegram">
+                    <img src="svg/telegram_f.svg" alt="">
+                </a>
+                <a href="facebook">
+                    <img src="svg/facebook_f.svg" alt="">
+                </a>
+            </div>
+
+            <div class="footer_category">
+                <span class="footer_header">Клієнтам</span>
+                <a href="">
+                    Новини та статті
+                </a>
+                <a href="">
+                    Контакти та Адреса
+                </a>
+                <a href="">
+                    Доставка та оплата
+                </a>
+                <a href="">
+                    Про нас
+                </a>
+                <a href="">
+                    Повернення та обмін
+                </a>
+            </div>
+            <div class="footer_category">
+
+                <span class="footer_header">Адреса та контактні данні</span>
+
+                <a href="">
+                    Вул. Павловська, 29Б, Київ, 01135
+                    8:00-17:00
+                </a>
+                <a href="">
+                    +38(066)0291696
+                </a>
+                <a href="">
+                    +38(098)654-62-72
+                </a>
+                <a href="">
+                    info@ogm.com.ua
+                </a>
+
+            </div>
+            <div class="footer_category">
+
+                <span class="footer_header">Каталог</span>
+                <div class="footer_category_container">
+                    <a href="">
+                        Лічильники
+                    </a>
+                    <a href="">
+                        Міні ТРК
+                    </a>
+                    <a href="">
+                        Заправні пістолети
+                    </a>
+                    <a href="">
+                        Акумулятори 12в AGM
+                    </a>
+                    <a href="">
+                        Єврокуб резервуари
+                    </a>
+                    <a href="">
+                        Заправні пістолети, з’єднувачі шланги
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+<script src="open_window.js">
+
+</script>
+<script src="catalog.js"></script>
+<script src="imask.js"></script>
+
+<script>
+    var maskOptions = {
+        mask: '+3(800)000-00-000',
+        lazy: false
+    }
+    var element1 = document.getElementById('pnum_input');
+    var mask1 = new IMask(element1, maskOptions);
+    var element2 = document.getElementById('pnum_input_login');
+    var mask2 = new IMask(element2, maskOptions);
+</script>
+
+<!-- Swiper JS -->
+<script src="swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+        },
+    });
+</script>
+
+</html>
