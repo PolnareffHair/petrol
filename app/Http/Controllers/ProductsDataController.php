@@ -325,13 +325,11 @@ class ProductsDataController extends Controller
         $compare = array_keys($compare);
         return $compare;
     }
-    static public function getProducts( $quantity = 10,  $discount = 0 , $states = [2], $skip  = 0)
-    {
-    }   
+
     static public function getProductOrder( ){
 
 
-        
+
     }
 
 
