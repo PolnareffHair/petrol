@@ -27,27 +27,20 @@ body {
 
 
 .loading{
-       animation:  fade_in_load 0.5s ;
+
+
+       animation:  fzde_in_load 0.5s ;
 }
 /* HTML: <div class="loader"></div> */
-.loading:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(207, 207, 207, 0.247);
 
-    transition: opacity 0.25s ease-in-out;
-}
-.loading::after {
+
+.loading::before{   
+
     z-index: 1500;
     position: absolute;
     inset: 0;
-    margin: auto;
 
+    margin: auto;
     content: '';
 
     aspect-ratio: 1;
@@ -55,14 +48,59 @@ body {
 
 
     border-radius: 50%;
-    border: 8px solid;
-    border-color:   #557ee3 #0000;
+    border: #557ee3 solid 10px ;
+
+    border-bottom-color: white;    
     
-    animation: l1 1s infinite;
+    animation: anim 3s ease infinite; 
     transition: opacity 0.25s ease-in-out;
 
-  }
-  @keyframes l1 {to{transform: rotate(.5turn)}}
+}
+.loading::after {  
+    
+
+    z-index: 1500;
+    position: absolute;
+    inset: 0;
+
+    margin: auto;
+    content: '';
+
+    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #d8d8d85e ;
+
+
+
+    transition: opacity 0.25s ease-in-out;
+
+}
+
+
+
+
+@keyframes anim {
+    0% {
+            transform:  rotate(0deg)    ; 
+    }
+    25% {
+            transform: rotate(90deg)    ;  
+    }
+    50% {
+            transform:  rotate(300deg)  ;
+    }
+    75% {
+            transform: rotate(-75deg)   ;  
+    }
+    100% {
+            transform:  rotate(0deg)    ; 
+    }
+}
+
+
+
+
 
 
     .unloading{

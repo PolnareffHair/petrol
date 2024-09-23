@@ -116,9 +116,24 @@ removeFavorite.forEach(function (button) {
 });
 
 
-//send call / question
-$('#send_call_button').on('click', function() {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//send call / question
+$('#send_call_button').on('click', function(event) {
+    event.preventDefault(); // предотвращает отправку формы
     $('#call_report').css({
         "color": "white",
         "opacity": "1"
@@ -138,14 +153,9 @@ $('#send_call_button').on('click', function() {
 
         return; // Прекращаем выполнение, если номер неполный
     }
-
     StartLoading('#send_call_button');
-
-
     $('#pnum_input').removeClass( "input_error");
-
     $('#call_question').addClass( "input_sccsess");
-
     $('#pnum_input').addClass( "input_sccsess");
     // Выполнение AJAX-запроса
     $.ajax({
@@ -180,3 +190,105 @@ $('#send_call_button').on('click', function() {
     });
 });
 
+
+
+
+
+
+$(".product_order").click( function (e) { 
+    
+    $("#order_product_open").click();
+    $(".remover_order").show();
+    $("#order_window_main").css("height", "355px");
+            
+    $("#order_window_response").css("display", "none");
+    $('#pnum_input_order').removeClass( "input_sccsess");
+    $('#pnum_input_order').val("+3(80_)___-__-___");
+    id =  $(this).data("variable");
+    StartLoading("#order_window");
+    $.ajax({
+        url: '/get_product_order',
+        type: 'POST',
+        data: {
+            lang:lang,
+            _token: csrf_token,
+            id: id
+        },
+        success: function (response) { 
+
+            $("#order_product_response").html(response);
+            StopLoading("#order_window")
+        },
+        error: function (xhr, status, error) {
+            console.log('Произошла ошибка:', error);
+        }
+    });
+});
+
+//sewnd order product 
+$('#send_order_button').on('click', function(  event) {
+
+    event.preventDefault(); // предотвращает отправку формы
+    // Проверка на неполный номер телефона
+    if ($('#pnum_input_order').val().includes('_')) {  
+
+        if($('#pnum_input_order').hasClass("input_error")){
+
+            $('#pnum_input_order').removeClass( "input_error");
+
+            setTimeout(function(){  $('#pnum_input_order').addClass( "input_error");},200)
+        }
+        else $('#pnum_input_order').addClass( "input_error");
+             
+        return; // Прекращаем выполнение, если номер неполный
+    }
+
+    StartLoading('#order_window');
+
+    $('#pnum_input_order').removeClass( "input_error");
+    $(".remover_order").hide();
+    $('#pnum_input_order').addClass( "input_sccsess");
+
+    // Выполнение AJAX-запроса
+    $.ajax({
+        url: '/order_product', // Укажите URL для обработки запроса на сервере
+        type: 'POST', // Метод запроса (POST, GET и т.д.)
+        data: {
+            _token: csrf_token,
+
+            pn: $('#pnum_input_order').val(), // Данные, отправляемые на сервер
+
+            id: $('#get_product_order_id').data("id"),
+
+        },
+        success: function(response) {
+            $("#order_window_main").css("height", "200px");
+            
+            $("#order_window_response").css("display", "flex");
+        },
+        error: function(xhr, status, error) {
+  
+            console.log(error)
+        } ,
+        complete: function(){       StopLoading('#order_window');
+            
+        }
+
+    });
+});
+
+
+
+//scroll up
+$(window).on("scroll", function() {
+    if ($(this).scrollTop() > 100) {  // When the scroll is greater than 100px
+        $("#up_button").fadeIn();  // Show the button
+    } else {
+        $("#up_button").fadeOut(); // Hide the button
+    }
+});
+
+// Optional: Scroll to top when the button is clicked
+$("#up_button").on("click", function() {
+    $("html, body").animate({ scrollTop: 0 }, 300);
+});

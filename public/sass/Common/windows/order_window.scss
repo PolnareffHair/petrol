@@ -1,5 +1,20 @@
-header #order_window {
+#order_product_response{
+        outline: solid 1px #bfbfbf;
+        width: 93%;
+        transition: height 0.15s ease-in-out;
+        height: 130px;
 
+}
+
+
+#order_window_main img { height: 1em ; width: auto;}
+
+
+
+
+
+header #order_window {
+    display: none;
     $order-close-size: 25px;
     $order-window-width: 650px;
     z-index: 102;
@@ -59,7 +74,7 @@ header #order_window {
                     max-width: 100%;
                     font-size: 16px;
                     color: var(--limk_color);
-                    max-width: 80%;
+
                     height: 65px;
  
                     overflow: hidden;

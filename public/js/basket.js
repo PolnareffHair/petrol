@@ -394,4 +394,4 @@ function set_counter_basket() {
      
     });
 }
-set_counter_basket();
+

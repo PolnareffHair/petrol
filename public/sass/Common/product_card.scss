@@ -1,4 +1,4 @@
-#products {
+.products {
     width: 100%;
     height: auto;
     display: flex;
@@ -6,15 +6,15 @@
     align-items: start;
     align-content: flex-start;
     justify-content: center;
+
     @media screen AND (min-width:700px){
         .product_item:hover .product_item_inside_block {
-            a .product_img1 {
+            a .product_img1  {
                 display: none;
             }
             a .product_img2 {
                 display: block;
             }
-
             .product_item_name {
                 color: #557ee3;
                 text-decoration: underline;
@@ -44,15 +44,14 @@
         // margin: 3px;
         overflow: show;
         .product_item_inside_block {
+            width: 100%;
             a .product_img2 {
                 display: none;
             }
-            width: 100%;
             .product_atributes {
                 display: none       ;
                 color: #6e6e6e;
                 font-size: 14px;
-                    
             }
 
             .product_item_butons_discount {
@@ -158,6 +157,10 @@
                     background-image: url("../img/icon/Youtube.png");
                     background-repeat: no-repeat;
                     // background-size: auto, 36px;
+                    @media screen and (max-width: 500px) {
+                        left: 30px;
+                        margin-left: 0px;
+                    }
                     @media screen and (max-width: 400px) {
                         left: 30px;
                         height: 24px;
@@ -268,22 +271,14 @@
 
         height: auto;
 
-        .product_item_link .product_img {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-        }
-        .product_item_link .product_img1 {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
+        .product_item_link{ 
+            .product_img,.product_img1,.product_img2 {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
         }
 
-        .product_item_link .product_img2 {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-        }
 
         .product_price_rating_container {
             display: flex;
@@ -324,8 +319,6 @@
                         display: none;
                     }
                 }
-                    
-
             }
         }
         .product_item_link {
@@ -371,8 +364,6 @@
         }
   
         .product_delivery_status_ready {
-            //color: #557ee3;
-            //color: #ff5d5d;
             margin-top: 5px;
             font-weight: 400;
             font-size: 14px;
@@ -418,13 +409,12 @@
     }
 }
 @media screen and (max-width: 800px) {
-    main section #products {
+    main section .products {
         align-items: stretch;
         .product_item .product_item_inside_block {
             width: 100%;
             height: 100%;
             display: flex;
-
             flex-direction: column;
             align-items: flex-start;
             .product_item_link {
@@ -433,28 +423,21 @@
                     font-size: 16px;
                 }
             }
-            .product_price_rating_container .product_price {
+            .product_price_rating_container .product_price ,.product_delivery_status_ready{
                 font-size: 16px;
             }
             .product_price_rating_container {
                 .product_rating {
                     margin: 0;
                     margin-top: 5px;
-                    // height: 16px;
                 }
-            }
-            .product_delivery_status_ready {
-                // img {
-                //     display: none;
-                // }
-                font-size: 14px;
             }
         }
     }
 }
 
 @media screen and (max-width: 690px) {
-    main section #products {
+    main section .products {
         align-items: stretch;
         .product_item {
             width: 50%;
@@ -462,14 +445,13 @@
     }
 }
 @media screen and (max-width: 400px) {
-    main section #products {
+    main section .products {
         // align-items: stretch;
         .product_item .product_item_inside_block {
             .product_add_basket , .product_order {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
                 margin: 0;
                 padding: 0;
                 font-family: "Fira Sans", sans-serif;
@@ -483,36 +465,23 @@
     }
 }
 @media screen and (max-width: 360px) {
-    main section #products {
+    main section .products {
         .product_item {
             .product_item_inside_block {
                 .product_item_link {
                     .product_item_name {
                         font-size: 12px;
                     }
-                    .product_img {
-                        height: 120px;
-                    }
-                    .product_img1 {
-                        height: 120px;
-                    }
-                    .product_img2 {
+                    .product_img,.product_img1,   .product_img2  {
                         height: 120px;
                     }
                 }
-                .product_price_rating_container .product_price {
-                    font-size: 16px;
-                }
-
                 .product_price_rating_container {
                     .product_rating {
                         margin-bottom: 2px;
                         height: 14px;
                     }
-                    .product_discount_previous_price {
-                        font-size: 16px;
-                    }
-                    .product_discount_currrent_price {
+                    .product_discount_previous_price,.product_discount_currrent_price,.product_price {
                         font-size: 16px;
                     }
                 }
@@ -522,5 +491,42 @@
                 }
             }
         }
+    }
+}
+
+
+
+
+
+.product_discount_previous_price {
+    font-size: 16px;
+}
+
+.product_discount_currrent_price {
+    font-size: 18px;
+}
+@media screen and (min-width: 600px) {
+    .close_window:hover PATH {
+      fill: var(--active_gray);
+    }
+  } 
+@media screen and (min-width: 700px) {
+
+    .close_window:hover PATH {
+        fill: var(--active_gray);
+      }
+      
+    .close_window:hover PATH {
+        fill: var(--active_gray);
+      }
+
+    header #Head_buttons #lang .ru:hover,
+    header #Head_buttons #lang .ua:hover {
+      animation: lang_color 0.3s;
+      color: rgb(175, 175, 175);
+    }
+    header #Head_buttons #search_button:hover,
+    header #Head_buttons #catalog_button:hover {
+      background-color: #4267c2;
     }
 }

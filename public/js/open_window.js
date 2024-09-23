@@ -78,6 +78,12 @@ set_window("fade", "compare_window", "user_compare", "compare_close");
 
 set_window("fade", "menu_burger", "burger", "close_burger");
 
+set_window("fade", "order_window", "order_product_open", "close_order_button");
+
+
+
+
+
 //Получение счетчиков корзины и сравнения, при открытии мобильного меню
 $('#burger').on("click",function(){  
     $("#basket_counter_dup").html( $("#basket_counter").html());
@@ -96,3 +102,4 @@ relaph('#menu_profile','#user_log');
 relaph('#menu_call','#call');
 relaph('#menu_basket','#user_basket');
 relaph('#menu_compare','#user_compare');
+relaph('#call_button','#call');

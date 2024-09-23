@@ -69,27 +69,31 @@ const lang_map = {
 };
 
 function set_number_limit(id, min, max) {
+
     document.getElementById(id).addEventListener('input', function () {
         var value = this.value;
+        console.log(value);
+        if (value == '') {
+            this.value = 0;
+        }
         if (value < min) this.value = min; // Если значение меньше минимального, установи минимальное значение
         if (value > max) this.value = max; // Если значение больше максимального, установи максимальное значение
     });
 }
-function set_copy_text_ru_ua(id, name) {
+
+function set_copy_text_ru_ua(id,copy, name) {
     document.getElementById(name).addEventListener('click', function () {
 
-        $('input[id=\"' + id + '_ru\"]').val($('input[id=\"IDproduct_name_ru\"]').val());
-        $('input[id=\"' + id + '_ua\"]').val($('input[id=\"IDproduct_name_ua\"]').val());
+        $(('input[id=\"' + id + '_ru\"]')).val($('input[id=\"'+copy+'_ru\"]').val());
+        $(('input[id=\"' + id + '_ua\"]')).val($('input[id=\"'+copy+'_ua\"]').val());
     });
 }
 
-function set_copy_text_trans_ru_ua(id, name) {
-
+function set_copy_text_trans_ru_ua(id,copy, name) {
     document.getElementById(name).addEventListener('click', function () {
         // Используем правильный селектор для jQuery
-        var ru_url = $('#IDproduct_name_ru').val();
-        var ua_url = $('#IDproduct_name_ua').val();
-
+        var ru_url = $(('#'+copy+'_ru')).val();
+        var ua_url = $(('#'+copy+'_ua')).val();
         // Заменяем каждую букву согласно карте для русского
         $('#' + id + '_ru').val(ru_url.split('').map(function (char) {
             return lang_map[char] || char; // Используем карту для замены символов
@@ -100,7 +104,6 @@ function set_copy_text_trans_ru_ua(id, name) {
             .replace(/-+/g, '-') // Убираем лишние дефисы
             .replace(/^-+|-+$/g, '') // Убираем дефисы в начале и конце строки
         );
-
         // Заменяем каждую букву согласно карте для украинского
         $('#' + id + '_ua').val(ua_url.split('').map(function (char) {
             return lang_map[char] || char;
@@ -118,6 +121,9 @@ function set_lenght_limit(id, max) {
         var value = this.value;
         if (value.length > max) {
             this.value = value.slice(0, max);
+        }
+        if (value === '') {
+            value = 0;
         }
     });
 
