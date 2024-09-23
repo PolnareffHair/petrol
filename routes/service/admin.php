@@ -19,7 +19,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 
     Route::get('/admin', [AdminOpertaionController::class, "index"]);
 
-    Route::get('/admin', [AdminOpertaionController::class, "index"]);
+
 
     Route::get('/admin/product_edit/tags/{id}', [TagProductAdminController::class, "get"]);
 
@@ -45,12 +45,12 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     //attributes +
 
     //imgaes + 
-
+    
     //basic data +
 
     Route::POST('/admin/duplicate_product', [AdminOpertaionController::class, "duplicate_product"]);
 
-    Route::get('/admin/product_edit/img/get/{id}', [ImgProductAdminController::class, "get"]);
+    Route::post('/admin/product_edit/img/get', [ImgProductAdminController::class, "get"]);
 
     Route::POST('/admin/product_edit/img/uppdate', [ImgProductAdminController::class, "update"]);
 

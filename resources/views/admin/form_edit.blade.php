@@ -55,10 +55,22 @@ echo " <script>
         </div>
         <h1>Товар</h1>
         <div class="product_operation" id ="product_operation">
-            <h1>tags</h1>
-            <h1>cats 2 lvls</h1>
+            <h1>Категорії</h1>
+
+            <h1>Атрибути</h1>
+
+            @foreach([] as $is  )
+
+
+            @endforeach
+
             @include("admin.components.tags_editor",['id_item'=>$Pid])
+
+
+
             @include("admin.components.img_editor")
+
+
             {!!$form->get_html()!!}
         </div>
     </div>
@@ -85,7 +97,6 @@ echo " <script>
                     _token: csrf_token
                 },
                 success: function(response) {
-                    document.getElementById('refresh_sort_product').click();
                     showNotification("Продукт успішно оновлено", duration = 5000);
                 },
                 error: function(xhr, status, error) {
@@ -131,7 +142,8 @@ echo " <script>
     if (window.innerWidth < 740) {
         $("#main_menu").hide();
         $("#expand_menu").rotate(180);
-    } else $("#close_menu_button").hide();
+    }
+    else $("#close_menu_button").hide();
     $("#expand_menu").on("click", function() {
 
         let currentRotation = $(this).data('rotation') || 0;

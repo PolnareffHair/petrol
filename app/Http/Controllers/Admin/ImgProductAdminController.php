@@ -17,11 +17,18 @@ use Intervention\Image\Decoders\DataUriImageDecoder;
 class ImgProductAdminController extends Controller
 {
     
-    public function get($id)
+    public function get(Request  $Request)
     {
-        $img = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_img_urls")->first());
 
-        return view("admin.components.img_edit", ["id" => $id, "img" => $img]);
+        $id = $Request->product_id; 
+
+        $pstart = $Request->path_start; 
+        $pend = $Request->path_end; 
+
+        if($id) $img = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_img_urls")->first()); else return "Помилка идентифікатора";
+
+
+        return view("admin.components.img_edit", ["id" => $id, "img" => $img, "path" => [$pstart,$pend],]);
     }
 
     public function delete(Request $request)

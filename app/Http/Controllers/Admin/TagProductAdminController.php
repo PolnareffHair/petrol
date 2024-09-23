@@ -122,14 +122,12 @@ class TagProductAdminController extends Controller
 
             $selected_done[$attr_s['atribute_id']] = $selected[$attr_s['atribute_id']];
         }
-
         return view("admin.components.tags_edit_get",["selected"=>$selected_done, "attr_names"=> $attr_names,"avalible"=>$attr_ex,  "id_item"=>$id,"name" => $name  ] );
         
     }
 
     public function update(Request $request)
     {   
-   
         if (!isset($request->id)) return "Не встанвленний идентифікатор продукту";
         $id = $request->id;
 

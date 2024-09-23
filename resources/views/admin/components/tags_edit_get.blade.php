@@ -3,7 +3,7 @@
             @foreach($avalible as $key=>$attr)
             <div class="tags_block_container">
                 <div  class="tags_block_top">
-                    <span>Додати {{$attr_names[$key]}} </span>
+                    <span>Додати: {{$attr_names[$key]}} </span>
                 </div>  
 
                 <select  data-id="{{$key}}" class="{{$name}}avsel" style="padding: 5px;">

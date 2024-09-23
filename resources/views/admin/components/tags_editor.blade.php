@@ -1,11 +1,6 @@
 @php
+
 $name = "tagger";
-
-$save_id = "refresh_sort_product";
-
-$add_id = "add_img_product";
-
-$sorter_name = "sortable-list";
 
 $get_link = '/admin/product_edit/tags/content';
 
@@ -15,16 +10,11 @@ $uppdate_link = '/admin/product_edit/tags_edit/uppdate';
 
 $add_link = '/admin/product_edit/tags_edit/add';
 
-$path_base = "" . "_";
-
-$end_prefix = "_small.webp";
-
 @endphp
+
 <script>
     id_item = '{{$id_item}}'
 </script>
-
-
 
 <div class="tag_selector" id="item{{$id_item}}">
 

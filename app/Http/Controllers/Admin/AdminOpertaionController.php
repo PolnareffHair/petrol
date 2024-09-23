@@ -16,11 +16,14 @@ class AdminOpertaionController extends Controller
     public function index()
     {
 
+
+
         $page_text_ua = json_decode(DB::table("page_options")->where("Name", "Main_page_text_ua")->first()->Settings);
         $page_text_ru = json_decode(DB::table("page_options")->where("Name", "Main_page_text_ru")->first()->Settings);
 
-        return view("admin.index", ["page_text_ua" => $page_text_ua, "page_text_ru" => $page_text_ru]);
 
+
+        return view("admin.index", ["page_text_ua" => $page_text_ua, "page_text_ru" => $page_text_ru]);
     }
     public function uppdate_main_page_text(Request $request)
     {
@@ -151,36 +154,4 @@ class AdminOpertaionController extends Controller
 
     }
 
-
-    
-    /** 
-     * getAttrVals
-     *
-     * @return array $atrributes [$id] [ atribute_name_ua, atribute_name_ru, options[val_id, val_name_ru,val_name_ua] ]
-     */
-    private function getAttrVals():array
-    {
-        $attributes =  DB::table('attributes')->get( ["atribute_ID", "atribute_name_ua","atribute_name_ru"])->mapWithKeys(function ($item) {
-            return [$item->atribute_ID => [
-                'atribute_name_ua' => $item->atribute_name_ua,
-                'atribute_name_ru' => $item->atribute_name_ru
-            ]];
-        })->toArray();
-         
-        $attributes_values =  (array)DB::table('attributes_values_exist')->get()->map(function($item) {
-            return (array) $item;
-        })->toArray();
-
-        $atrributes_names_values = $attributes;
-        
-        foreach($attributes_values as $key=> $value)
-        {
-           $temp = $value;
-           unset($temp ["attr_id"]);
-            $atrributes_names_values[$value["attr_id"]] ["options"] [] = $temp; 
-        }
-        return  $atrributes_names_values ;
-
-
-    }
 }
