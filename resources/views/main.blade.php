@@ -151,9 +151,9 @@
 
         <section>
             <h2 style="color:#4e72ce; text-decoration: underline;">Найкращі пропозиції</h2>
-            <div id="products">
+       
              @include("common.product_plates")
-            </div>
+
 
         </section>
 

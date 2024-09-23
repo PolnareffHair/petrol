@@ -36,7 +36,6 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
         if ($validator->fails()) {
             // Валидация не прошла
             $errors = $validator->errors(); // Получаем ошибки

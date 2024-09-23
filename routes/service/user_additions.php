@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BasketOperationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductsDataController;
+use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\Call_Me_Controller;
 use App\Http\Controllers\CompareOperationController;
@@ -11,7 +13,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 Route::post('/call_me', [Call_Me_Controller::class, 'create']);
+Route::post('/order_product', [OrderProductController::class, 'create']);
 
+Route::post('/get_product_order', [ProductsDataController::class, 'getProductOrder']);
 
 
 Route::post('/guest_basket_add', [BasketOperationController::class, 'GuestAddProduct']);

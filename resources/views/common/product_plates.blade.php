@@ -1,15 +1,16 @@
-   @foreach($page_options["products"] as $value)
+<div class="products">
+  @foreach($page_options["products"] as $value)
                 <div class="product_item">
                     <div class="product_item_inside_block">
                         <div class="product_item_butons_discount">
                             @if($value["product_best_seller"] == 1)
                             <div class="product_item_high_sales_label">
-                                Хіт продажів!
+                               {{__("header.bestseller")}}
                             </div>
                             @endif
                             @if($value["product_price_discount"]!= 0)
                             <div class="product_item_discount_label">
-                                Знижка!
+                            {{__("header.discount")}}
                                 <!-- {{$value["discount_uah"]}} ₴ -->
                             </div>
                             @endif
@@ -113,7 +114,7 @@
                         @if($value["product_avalible_state"]==1)
                         <div title="Буде відправленно найближчим часом" class="product_delivery_status_ready">
                             <img src="img/icon/novapost.png" alt="">
-                            Готовий до відправки
+                            {{__("header.ready_to_delivery")}}
                         </div>
                         @elseif($value["product_avalible_state"]==2)
                         <div class="product_delivery_status_ready">
@@ -122,7 +123,7 @@
                         </div>
                         @elseif($value["product_avalible_state"]==0)
                         <div class="product_delivery_status_ready">
-                            Товар відсутній
+                        {{__("header.no_product")}}
                         </div>
                         @endif
 
@@ -240,19 +241,19 @@
                             @if(!isset($cart[$value["product_id"]]))
                             <button data-variable="{{$value["product_id"]}}" type="button"
                                 class="product_add_basket product_add">
-                                <span>Купити </span>
+                                <span>{{__("header.buy")}}</span>
                                 <img src="/img/svg/order_cart.svg" alt="">
                             </button>
                             @else
                             <button data-variable="{{$value["product_id"]}}" type="button"
-                                class="product_add_basket product_add product_add_basket_selected" style="opacity: 1;">У
-                                кошику</button>
+                                class="product_add_basket product_add product_add_basket_selected" style="opacity: 1;">
+                                {{__("header.in_basket")}}</button>
                             @endif
 
                         @elseif ($value["product_avalible_state"]==2)     
                             <button data-variable="{{$value["product_id"]}}" type="button"
                                 class="product_order" style="opacity: 1;">
-                                Замовити 
+                                {{__("header.order")}}
                             </button>
 
                         @endif
@@ -276,3 +277,4 @@
 
                 </div>
                 @endforeach
+</div>

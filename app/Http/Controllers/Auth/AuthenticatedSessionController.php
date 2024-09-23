@@ -22,13 +22,24 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)    
     {
-        $request->authenticate($request);
+
+        $check = $request->authenticate($request);
+
+        if($check == 1) return "pizdec";
+
+        $oldSessionData = $request->session()->all();
 
         $request->session()->regenerate();
 
-        return  redirect()->intended(route('dashboard', absolute: false));
+        foreach ($oldSessionData as $key => $value) {
+            $request->session()->put($key, $value);
+        }
+        
+        return   (bool) ! Auth::check();
+
+        // redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
@@ -38,9 +49,15 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+        $oldSessionData = $request->session()->all();
 
+        $request->session()->invalidate();
+        
         $request->session()->regenerateToken();
+
+        foreach ($oldSessionData as $key => $value) {
+            $request->session()->put($key, $value);
+        }
 
         return redirect('/');
     }

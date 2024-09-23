@@ -26,11 +26,12 @@ class ProductsDataController extends Controller
     {
         $lang = app()->getLocale();
         
-    
-        //if($discount == 1)  $products->where("product_price_discount", "!=", 1 );
+        $products = DB::table('products');
+
+        if($discount == 1)   $products  = $products->where("product_price_discount", "!=", 0  );
 
 
-        $products = DB::table('products')->whereIn("product_avalible_state", $states)->take($quantity)->get()->map(function ($item) {
+        $products =  $products->whereIn("product_avalible_state", $states)->take($quantity)->get()->map(function ($item) {
             return (array) $item;
         });
 
@@ -326,10 +327,16 @@ class ProductsDataController extends Controller
         return $compare;
     }
 
-    static public function getProductOrder( ){
+    static public function getProductOrder(Request $request){
 
+        if(! $request->lang) return "getProductOrder lang error";
+        $lang = $request->lang;
 
+        $name = "product_name_$lang";
+        
+        $products = DB::table('products')->where(["product_id"=> $request->id])->select(["product_name_$lang","product_price"])->first();
 
+        return view("callable.order_product",["id"=>$request->id,"price"=>  $products->product_price,"name"=>  $products->$name,'lang'=>$lang ]);
     }
 
 

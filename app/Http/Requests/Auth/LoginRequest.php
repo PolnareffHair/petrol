@@ -47,33 +47,16 @@ class LoginRequest extends FormRequest
 
         $this->ensureIsNotRateLimited();
 
-
-
-
-        // $request->validate([
-        //     'phone_number' => ['required', 'string'],
-        //     'password' => ['required', 'string'],
-        // ]);
-
-        // if (! Auth::attempt([
-        //     'phone_number' => $request->input('phone_number'),
-        //     'password' => $request->input('password'),
-        // ], $request->boolean('remember'))) {
-        //     // return back()->withErrors([
-        //     //     'phone_number' => __('auth.failed'),
-        //     // ]);
-        // }
-
-
         if (! Auth::attempt($this->only('phone_number', 'password'), $this->boolean('remember'))) {
 
             RateLimiter::hit($this->throttleKey());
 
-            Log::info('error');
+           return "1";
 
             throw ValidationException::withMessages([
                 'phone_number' => trans('auth.failed'),
             ]);
+       
         }
 
 

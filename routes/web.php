@@ -8,7 +8,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductsDataController;
 use App\Http\Controllers\ShopPagesController;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\img;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +17,7 @@ $some_function = function () {
     return $lang = app()->getLocale();
 };
 // Основні шляхи
-
+Route::get('/cas', [RegisteredUserController::class, "store"]);
 
 
 Route::get('/set_all', [ProductsDataController::class, "set_images"]);

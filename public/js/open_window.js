@@ -15,13 +15,14 @@ function set_window(fade_id, window_id, open_button_id, close_button_id, close_b
         var btn_second = document.getElementById(close_button_id_second)
         btn_second.onclick = function () {
             document.body.style.overflowY = "scroll";
+            document.body.style.overflowX = "hidden";
             fade.style.display = "none";
             modal.style.display = "none";
         }
     }
     btn.onclick = function () {
         document.body.style.overflowY = "hidden";
-
+        document.body.style.overflowX = "hidden";
         if (current_window != undefined) {
             current_window.style.display = "none";
         }
@@ -33,6 +34,7 @@ function set_window(fade_id, window_id, open_button_id, close_button_id, close_b
     close.onclick = function () {
         // console.log("cls.click");
         document.body.style.overflowY = "scroll";
+        document.body.style.overflowX = "hidden";
 
         fade.style.display = "none";
         modal.style.display = "none";
@@ -45,6 +47,7 @@ function set_window(fade_id, window_id, open_button_id, close_button_id, close_b
         if (event.target == fade) {
             if (current_window.style.display == "block") {
                 document.body.style.overflowY = "scroll";
+                document.body.style.overflowX = "hidden";
             }
             fade.style.display = "none";
             if (current_window !== undefined) {

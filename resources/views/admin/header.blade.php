@@ -11,7 +11,7 @@
     <link rel="icon" href="/admin_svg/logo.svg" sizes="any" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+    <script src="/js/loading_animation.js"></script>
     <script defer src="/admin_js/colapse.js"></script>
     <script defer src="/admin_js/alpine.js"></script>
     <script src="/js/jquery-3.6.min.js"></script>
@@ -20,8 +20,6 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/summernote-bs4.min.js"></script>
     <script src="/js/Sortable.min.js"></script>
-
-
 
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -36,11 +34,7 @@
 
     <link rel="stylesheet" href="/admin_css/style.css">
 
-
-
-    <title>Панель адміністратора</title>
-    
-    
+    <title>Панель адміністратора</title>   
     
     <script  src="/admin_js/formbuilder.js"></script>
 </head>
