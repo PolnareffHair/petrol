@@ -1,3 +1,7 @@
+
+const lang = $('html').attr('lang');
+const csrf_token = $('meta[name="csrf-token"]').attr('content');
+
 previousValues = {};
 //remove add product listener from product buttons that bought
 const selectedProductButtons = document.querySelectorAll('.product_add_basket_selected');
@@ -20,7 +24,6 @@ function sendAjaxBasketAdd(event) {
 
     element.disabled = true; // Отключаем только текущую кнопку
 
-    const csrf_token = $('meta[name="csrf-token"]').attr('content');
     $(element).css("opacity", 0);
     clearTimeout(debounceTimer);
 
@@ -34,8 +37,6 @@ function sendAjaxBasketAdd(event) {
                 productId: productId
             },
             success: function (response) { 
-
-
                 document.querySelector("#basket_counter").textContent = response.product_count;
 
                 /*Имитирует клик на корзину после добавления товара */
@@ -89,7 +90,7 @@ function checkValueChange(input) {
                 lang:lang,
                 productId: id,
                 productChange: currentValue,
-                _token: $('meta[name="csrf-token"]').attr('content'),
+                _token:  csrf_token,
 
             },
             success: function (response) {
@@ -99,7 +100,7 @@ function checkValueChange(input) {
                     type: 'POST',
                     data: {
                         lang:lang,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                        _token:  csrf_token
                     },
                     success: function (response) {
                         $('#basket_list').html(response);
@@ -115,6 +116,7 @@ function checkValueChange(input) {
                     },
                     error: function (xhr, status, error) {
                         console.log(error);
+                        window.location.reload();
                     },
                     complete: function () {
                         // Восстанавливаем прозрачность родительского элемента после получения ответа
@@ -166,8 +168,7 @@ $('#user_basket').on('click', function () {
         url: '/guest_basket_get', // Укажите URL для обработки запроса на сервере
         type: 'POST', // Метод запроса (POST, GET и т.д.)
         data: {
-            _token: $('meta[name="csrf-token"]').attr(
-                'content'), // Добавлен CSRF-токен
+            _token: csrf_token,
             lang:  lang
         },
         success: function (response) {
@@ -187,6 +188,7 @@ $('#user_basket').on('click', function () {
         },
         error: function (xhr, status, error) {
             console.log(error);
+            window.location.reload();
         }
     });
 });
@@ -212,7 +214,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
             type: 'POST',
             data: {
                 lang:lang,
-                _token: $('meta[name="csrf-token"]').attr('content'),
+                _token:  csrf_token,
                 productId: ids
             },
             success: function (response) {
@@ -239,7 +241,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
                     type: 'POST',
                     data: {
                         lang:lang,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                        _token:  csrf_token
                     },
                     success: function (response) {
 
@@ -260,6 +262,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
                     },
                     error: function (xhr, status, error) {
                         console.log(error);
+                        window.location.reload();
                     },
                     complete: function () {
                         StopLoading(parentElement);
@@ -304,7 +307,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
                 lang:lang,
                 productId: ids,
                 productChange: change,
-                _token: $('meta[name="csrf-token"]').attr('content'),
+                _token: csrf_token
 
             },
             success: function (response) {
@@ -332,7 +335,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
                     type: 'POST',
                     data: {
                         lang:lang,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                        _token: csrf_token
                     },
                     success: function (response) {
 
@@ -355,6 +358,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
                     },
                     error: function (xhr, status, error) {
                         console.log(error);
+                        window.location.reload();
                     },
                     complete: function () {
                         StopLoading(parentElement);
@@ -366,6 +370,7 @@ document.getElementById('basket_list').addEventListener('click', function (event
             error: function (xhr, status, error) {
                 console.log('Произошла ошибка:', error);
                 StopLoading(parentElement);
+                window.location.reload();
         
                 // Восстанавливаем прозрачность родительского элемента в случае ошибки
                 parentElement.style.opacity = '1';
@@ -376,7 +381,6 @@ document.getElementById('basket_list').addEventListener('click', function (event
 
 
 function set_counter_basket() {
-    csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     $.ajax({
         url: '/guest_basket_counter',

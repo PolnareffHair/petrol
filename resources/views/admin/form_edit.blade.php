@@ -1,26 +1,9 @@
-@php
 
 
-
-@endphp
-
-@php
-
-$Pid = $product["product_id"];
-echo " <script>
-    const product_id = $Pid;
-</script>";
-@endphp
     @include("admin.header")
-
 <body>
-
     @include("admin.menu")
-
     <div id="notification-container"></div>
-
-
-
     <div id="product_edit_field" class="main_plate">
         <div class="fixed_buttons" x-data="{open_img_edit:false,open_cat_edit:false,open_attr_edit:false}">
             <div id="expand_menu">
@@ -28,7 +11,14 @@ echo " <script>
                     <path fill="white" d="M452.864 149.312a29.12 29.12 0 0 1 41.728.064L826.24 489.664a32 32 0 0 1 0 44.672L494.592 874.624a29.12 29.12 0 0 1-41.728 0 30.592 30.592 0 0 1 0-42.752L764.736 512 452.864 192a30.592 30.592 0 0 1 0-42.688zm-256 0a29.12 29.12 0 0 1 41.728.064L570.24 489.664a32 32 0 0 1 0 44.672L238.592 874.624a29.12 29.12 0 0 1-41.728 0 30.592 30.592 0 0 1 0-42.752L508.736 512 196.864 192a30.592 30.592 0 0 1 0-42.688z" />
                 </svg>
             </div>
-
+            <a href="{{$back_path}}">
+                <button class="neutral_button"  >
+                <svg width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" transform="scale(-1, 1)">
+                    <path fill="white" d="M452.864 149.312a29.12 29.12 0 0 1 41.728.064L826.24 489.664a32 32 0 0 1 0 44.672L494.592 874.624a29.12 29.12 0 0 1-41.728 0 30.592 30.592 0 0 1 0-42.752L764.736 512 452.864 192a30.592 30.592 0 0 1 0-42.688zm-256 0a29.12 29.12 0 0 1 41.728.064L570.24 489.664a32 32 0 0 1 0 44.672L238.592 874.624a29.12 29.12 0 0 1-41.728 0 30.592 30.592 0 0 1 0-42.752L508.736 512 196.864 192a30.592 30.592 0 0 1 0-42.688z"></path>
+                </svg>
+                Повернутись
+                </button>
+            </a>    
             <button class="save_button" onclick="" id="save_item"> <svg viewBox="0 0 20 21" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -51,35 +41,60 @@ echo " <script>
                     <path d="M14 9H6V11H14V9Z" fill="white" />
                 </svg>
                 Видалити</button>
-
         </div>
-        <h1>Товар</h1>
-        <div class="product_operation" id ="product_operation">
-            <h1>Категорії</h1>
+        <h1>{{$item_name}}</h1>
 
-            <h1>Атрибути</h1>
-
-            @foreach([] as $is  )
-
-
-            @endforeach
-
-            @include("admin.components.tags_editor",['id_item'=>$Pid])
-
-
-
-            @include("admin.components.img_editor")
-
-
+        <div class="product_operation" >
+            <div id="edit_selector"> 
+                <button   type="button" data-sel="100">Текст</button>
+                @foreach($editors as $key=>$editor) 
+                    <button   type="button" data-sel="{{$key}}">{{$editor[1]}}</button>     
+                @endforeach            
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $(".selects").hide();
+                $('#sel_100').show();
+                $('[data-sel="100"]').toggleClass("active_sel");
+                $("#edit_selector").on("click", "button", function(event) {
+                    $(".selects").hide();
+                    $(".active_sel").toggleClass("active_sel");
+                    $(this).toggleClass("active_sel");
+                    $(this).toggleClass("");
+                    $("#sel_"+$(this).data("sel")).show();
+                });
+            });
+        </script>
+        @foreach($editors as $key=>$editor)
+            <div class="product_operation selects"  id = "sel_{{$key}}">
+                @include("$editor[0]",['id_item'=>$item_id])
+            </div>
+        @endforeach
+        <div class="product_operation selects"  id = "sel_100">
             {!!$form->get_html()!!}
         </div>
     </div>
     {!!$form->get_scrits()!!}
 </body>
-
 </html>
-
 <script>
+
+            $(document).ready(function () {
+                $(".input_change").on('input', function (event) {
+
+                    $(this).prev('label').css("color", 'var(--button-color-neutral)');
+                    $(this).css("border", '2px solid var(--button-color-neutral)');
+                });
+          
+      
+            });
+            function reset_inputs () {
+
+                $(".input_change").prev('label').css("color", '');
+                 $(".input_change").css("border", '');
+            }
+
             //save product info
             document.getElementById("save_item").addEventListener("click", function() {
             let result = {};
@@ -90,28 +105,30 @@ echo " <script>
             }
             // console.log(result);
             $.ajax({
-                url: '/admin/uppdate_product',
+                url: '{{$update_path}}',
                 type: 'POST',
                 data: {
                     productchange: result,
                     _token: csrf_token
                 },
                 success: function(response) {
-                    showNotification("Продукт успішно оновлено", duration = 5000);
+                    showNotification(response, duration = 5000);
+                    reset_inputs();
                 },
                 error: function(xhr, status, error) {
+
                     showNotification("Помилка " + error, duration = 5000, 0);
                 }
             });
         });
         //delete product 
         function delete_item($id) {
-            if (window.confirm("Ви впевнені що хочете видалити продукт?")) {
+            if (window.confirm("Ви впевнені що хочете видалити {{$item_name}}?")) {
                 $.ajax({
-                    url: '/admin/delete_product',
+                    url: '{{$delete_path}}',
                     type: 'POST',
                     data: {
-                        product_id: "{{ $product['product_id']}}",
+                        product_id: "{{ $item_id}}",
                         _token: csrf_token
                     },
                     success: function(response) {
@@ -127,10 +144,10 @@ echo " <script>
 </script>
 
 <script>
+    
+    //here nothing to do with logics only design
     //scroll to top
     $("#product_edit_field").scrollTop(0);
-
-
     //some ajustment for menu
     jQuery.fn.rotate = function(degrees) {
         $(this).css({

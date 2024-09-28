@@ -113,8 +113,13 @@ body header #login_window {
       width: 100%;
       display: flex;
       justify-content: space-between;
-
+      div{
+        &:hover{
+          text-decoration: underline;
+        }
+      }
       a {
+     
         color: #000000;
         display: block;
       }

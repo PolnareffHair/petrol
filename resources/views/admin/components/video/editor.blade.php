@@ -1,32 +1,31 @@
+
 @php
 
 
-$add_id = "add_img_product";
+$add_id = "add_video_product";
 
-$sorter_name = "sortable-list";
+$sorter_name = "sortable-list-video";
 
-$get_link = '/admin/product_edit/img/get';
+$get_link = '/admin/product_edit/Video/get';
 
-$delete_link = '/admin/product_edit/img/delete';
+$delete_link = '/admin/product_edit/Video/delete';
 
-$uppdate_link = '/admin/product_edit/img/uppdate';
+$uppdate_link = '/admin/product_edit/Video/uppdate';
 
-$add_link = '/admin/product_edit/img/add';
+$add_link = '/admin/product_edit/Video/add';
 
-
-
-$path_base = "/images/product/{$product['product_id']}" . "_";
+$path_base = "/images/product/$id_item" . "_";
 
 $end_prefix = "_small.webp";
 
 @endphp
 <div class="sort_editor">
-    <h2>Зображення \/</h2>
-    <p>Перше зліва зображення відображатиметься як головне. Зображення зберігаються в розмірі 700x700 пікселів.</p>
+    <p>Посилання на відео (youtube -> Поділитись -> Код). Приклад посилання :www.youtube.com/embed/ri4SR2cZeIA</p>
     <div>
-        <div class="img_sorter" id="{{$sorter_name}}">
+        <div class="img_sorter" id="{{$sorter_name}}" >
         </div>
         <div class="top_buttons">
+            <input type="text" id="{{ $add_id}}_input" style="height: 3em; width :300px;">
             <button class="add_item" id="{{ $add_id }}">
                 <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -50,44 +49,28 @@ $end_prefix = "_small.webp";
                     </g>
                 </svg>
                 Додати
-                <form style="display:none;" enctype="multipart/form-data">
-                    <input type="file" id="{{$sorter_name}}FileInput" name="file" style="display:none;" />
-                </form>
             </button>
         </div>
     </div>
 
 </div>
-<script>
+<script>   
+
     $(document).ready(function() {
         //download //delete
         document.getElementById('{{$sorter_name}}').addEventListener('click', function(event) {
-            DownloadButton = event.target.closest('.download_img');
-            if (DownloadButton) {
-                var id = DownloadButton.getAttribute('data-id');
-                const fileUrl = '{{$path_base}}'  + id + '{{$end_prefix}}'; // Ссылка на файл
-                const fileName = product_id + '_' + id + '.webp'; // Имя файла, которое будет отображено
-                const a = document.createElement('a'); // Создаём ссылку
-                a.href = fileUrl; // Устанавливаем URL файла
-                a.download = fileName; // Устанавливаем имя файла для загрузки
-                document.body.appendChild(a); // Добавляем ссылку в DOM
-                a.click(); // Программно кликаем на ссылку для инициации загрузки
-                document.body.removeChild(a); // Удаляем ссылку после скачивания
-            }
             DeletedButton = event.target.closest('.delete_img');
             if (DeletedButton) {
-                id = DeletedButton.getAttribute('data-id');
+                id = DeletedButton.getAttribute('data-link');
                 // Второй AJAX-запрос для обновления корзины
-
-                StartLoading("#product_operation");
-
+                StartLoading("#product_edit_field");
                 $.ajax({
                     url: '{{$delete_link}}',
                     type: 'POST',
                     data: {
-                        img: id,
-                        id: product_id,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                        video: id,
+                        id: "{{$id_item}}",
+                        _token: csrf_token
                     },
                     success: function(response) {
 
@@ -102,7 +85,7 @@ $end_prefix = "_small.webp";
                         showNotification("Помилка " + error, duration = 5000, 0)
                     },
                     complete: function() {
-                        StopLoading('#product_operation');
+                        StopLoading('#product_edit_field');
                     }
                 });
             }
@@ -112,18 +95,21 @@ $end_prefix = "_small.webp";
         const sortable = new Sortable(document.getElementById('{{$sorter_name}}'), {
             animation: 100,
             onEnd: function (evt) {
-                StartLoading("#product_operation"); 
+                StartLoading("#product_edit_field"); 
 
+                items = document.querySelectorAll('#{{$sorter_name}} .sortable-item');
+                order = Array.from(items).map(item => item.getAttribute('data-id'));
+               
                 $.ajax({
                     url: '{{$uppdate_link}}',
                     type: 'POST',
                     data: {
-                        img: getOrder(),
-                        product_id: product_id,
-                        _token: $('meta[name="csrf-token"]').attr('content')
+                        img: order,
+                        product_id: "{{$id_item}}",
+                        _token: csrf_token
                     },
                     success: function(response) {
-                        console.log(response);
+                       
                         get_img_editor()
                         showNotification("Послідовність успішно збережено", duration = 5000)
 
@@ -136,91 +122,76 @@ $end_prefix = "_small.webp";
                     },
                     complete: function() {
       
-                        StopLoading("#product_operation");
+                        StopLoading("#product_edit_field");
                     }
                 });
-
-
-
-
-
             }
         });
 
-        //send img
-        fileInput = document.getElementById('{{$sorter_name}}FileInput');
         // Открыть окно выбора файла при нажатии кнопки
         document.getElementById('{{$add_id}}').addEventListener('click', function() {
-            fileInput.click(); // Имитируем клик по скрытому input
-        });
-        // Отправляем файл сразу после выбора
-        fileInput.addEventListener('change', function() {
-            if (fileInput.files.length > 0) {
-
-                formData = new FormData();
-
-                formData.append('file', fileInput.files[0]); // Добавляем файл в formData
-
-                formData.append('product_id', product_id); // Добавляем product_id
-
-                formData.append('_token', $('meta[name="csrf-token"]').attr(
-                    'content')); // Добавляем CSRF токен
-
-                StartLoading('#product_operation');
-
-                $.ajax({
+            links = $("#{{$add_id}}_input").val();
+            StartLoading("#product_edit_field"); 
+            $.ajax({
                     url: '{{$add_link}}',
                     type: 'POST',
-                    data: formData,
-                    processData: false, // Не обрабатывать данные
-                    contentType: false, // Не устанавливать заголовок contentType
+                    data: {
+                  
+                        product_id: "{{$id_item}}",
+                        link: links,
+                        _token: csrf_token
+                    },
                     success: function(response) {
-                        get_img_editor();
-                        showNotification("Файл успішно додано", duration = 5000);
+                       
+                        get_img_editor()
+                        showNotification(response, duration = 5000)
+
                     },
                     error: function(xhr, status, error) {
+                        console.log(error);
                         get_img_editor();
                         showNotification("Помилка " + error, duration = 5000, 0);
+
                     },
                     complete: function() {
-                        StopLoading('#product_operation');
+      
+                        StopLoading("#product_edit_field");
                     }
                 });
-            }
 
         });
+
         // Function to get the current order of items
-        function getOrder() {
-            const items = document.querySelectorAll('#{{$sorter_name}} .sortable-item');
-            const order = Array.from(items).map(item => item.getAttribute('data-id'));
-            return order;
-            //console.log('Current order:', order);
-        }
+
+
+
+        
  
 
     });
     //get img list for editor
     function get_img_editor() {
+        StartLoading("#product_edit_field");
         $.ajax({
             url: '{{$get_link}}',
             type: 'post',
             data: {
                 _token: csrf_token,
-                product_id : product_id,
-                path_start : "{{$path_base}}" ,
-                path_end : "{{$end_prefix}}",
+                product_id : "{{$id_item}}",
             },
             success: function(response) {
-                document.getElementById("{{$sorter_name}}").innerHTML = response;
+                StopLoading("#product_edit_field");
+                document.getElementById("{{$sorter_name}}").innerHTML = response;       
                 document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
                 document.getElementById('{{$sorter_name}}').classList.add('loaded');
             },
             error: function(xhr, status, error) {
+                StopLoading("#product_edit_field");
                 setTimeout(get_img_editor(), 200);
                 document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
                 document.getElementById('{{$sorter_name}}').classList.add('loaded');
             }
         });
     }
-    get_img_editor();
+  setTimeout(   get_img_editor(),200);
 </script>

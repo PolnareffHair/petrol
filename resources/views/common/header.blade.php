@@ -1,18 +1,21 @@
+
+<!DOCTYPE html>
+<html lang="{{$header_data['lang'] }}">
+
 @php
-$lang =$page_options["lang"] ;
+
+$lang = $header_data['lang']  ;
 echo ("<script>
     lang = '$lang';
 </script>");
-$lang = $page_options["lang"] == "ua" ? "/ua" : "";
+
+$lang =$header_data['lang'] == "ua" ? "/ua" : "";
 
 $token =csrf_token();
 echo " <script>
     csrf_token = '$token';
 </script>"
 @endphp
-
-<!DOCTYPE html>
-<html lang="{{ $page_options["lang"]}}">
 
 <head>
     <link rel="icon" href="/images/icon/ico.svg?v=1" type="image/svg+xml">
@@ -78,17 +81,15 @@ echo " <script>
                 <button id="search_button">{{__('header.find')}}</button>
             </div>
 
-            <button id="call"><span>{{__('header.call_me')}}</span></button>
-            @if( $page_options["isAuth"])
-            <script>
-                auth = 1;
-            </script>
+            <button id="call" ><span>{{__('header.call_me')}}</span></button>
+            @if(  $header_data["isAuth"])
+                <script>
+                    auth = 1;
+                </script>
 
-            <a href="{{$lang}}/dashboards">
-                <button id="user_log">
-                    <span>{{__('header.profile')}}</span>
-                </button>
-            </a>
+                <a  class="user_profile_log" href="{{$lang}}/dashboards">
+
+                </a>
 
             @else
             <button id="user_log">
@@ -109,7 +110,7 @@ echo " <script>
                     border-radius: 10px;
                     height: 22px;
                     width: 22px;
-                        ">{{$basket_counter ?? 0}}
+                        ">{{ $header_data['basket_counter']  ?? 0}}
                 </div>
             </button>
             <button id="user_compare">
@@ -122,7 +123,7 @@ echo " <script>
                     border-radius: 10px;
                     height: 22px;
                     width: 22px;
-                        ">{{$compare_counter ?? 0}}
+                        ">{{$header_data["compare_counter"] ?? 0}}
                 </div>
 
             </button>
@@ -144,7 +145,6 @@ echo " <script>
 
             <div id="menu_top">
 
-
                 <div id="mobile_logo"> </div>
 
                 <svg id="close_burger" class="close_window" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +154,24 @@ echo " <script>
             <div>
 
             </div>
+
             <div id="burger_links">
+            <a id="menu_profile"  class="menu_button  @if($header_data["isAuth"]) {{'user_profile_menu'}}  " href="/dashboards" @else " @endif >
+                    <svg width="22" height="25" viewBox="0 0 22 25" fill="balck" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_797_9461)">
+                        <path d="M3.74219 8.48208C3.74219 12.6101 7.11967 15.9876 11.2477 15.9876C15.3757 15.9876 18.7532 12.6101 18.7532 8.48208C18.7532 4.35405 15.3757 0.976562 11.2477 0.976562C7.11967 0.976562 3.74219 4.35405 3.74219 8.48208ZM16.9872 8.48208C16.9872 11.6388 14.4044 14.2216 11.2477 14.2216C8.09097 14.2216 5.50819 11.6388 5.50819 8.48208C5.50819 5.32535 8.09097 2.74257 11.2477 2.74257C14.4044 2.74257 16.9872 5.32535 16.9872 8.48208Z" fill="balck"/>
+                        <path d="M2.50827 24.023C4.84823 21.683 7.93874 20.4027 11.25 20.4027C14.5613 20.4027 17.6518 21.683 19.9918 24.023L21.25 22.7647C18.579 20.1157 15.0249 18.6367 11.25 18.6367C7.47516 18.6367 3.92108 20.1157 1.25 22.7647L2.50827 24.023Z" fill="balck"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_797_9461">
+                        <rect width="21" height="24" fill="balck" transform="translate(0.5 0.5)"/>
+                        </clipPath>
+                        </defs>
+                        </svg>
+                    <span>       
+                    @if($header_data["isAuth"])  <span> {{$header_data["currentUser"]["name"]}}  </span><span> {{$header_data["currentUser"]["phone_number"]}} </span>   @else {{__('header.profile_unlogged')}} @endif
+                    </span> </a>
+
                 <a id="menu_catalog" class="menu_button"><img src="/img/svg/catalog_button.svg" alt="catalog button"> <span>{{__('header.catalog')}}</span> </a>
 
                 <a id="menu_compare" class="menu_button "><img src="/img/svg/compare_ico.svg" alt="aompares button"> <span> {{__('header.compares')}}</span>
@@ -166,8 +183,7 @@ echo " <script>
                         class="counter_dup">0</div>
                 </a>
 
-                <a id="menu_profile" class="menu_button"><img src="/img/svg/log.svg" alt="profile button"> <span> {{__('header.profile')}}</span> </a>
-
+        
 
 
 
@@ -264,7 +280,7 @@ echo " <script>
 
 
                 <fieldset class="remover_call">
-                    <label for="    ">{{__('header.phone_number')}}
+                    <label for="call_light">{{__('header.phone_number')}}
                         <span id="call_light">({{__('header.required')}}) </span>
                     </label>
                     <input id="pnum_input" require type="tel" pattern="[0-9+\(\)\-,]{17}" value="+380">
@@ -371,44 +387,6 @@ echo " <script>
                 <button id="login_in_button">{{__("header.login")}}</button>
             </form>
 
-            <script>
-                $("#login_in_button").click(function (e) { 
-                    StartLoading("#login_window_f");
-
-                    console.log($("#password_input").val());
-                    console.log($("#pnum_input_login").val());                    
-                    console.log(csrf_token   );
-                    e.preventDefault();
-                    $.ajax({
-                    url: '/login',
-                    type: 'POST',
-                    data: {
-                        _token: csrf_token,
-                        password: $("#password_input").val(),
-                        phone_number: $("#pnum_input_login").val(),
-                    },
-                    success: function(response) {
-
-                       console.log(response);
-                       if(response == 0) location.reload();
-
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-
-                    }
-                    ,
-                    complete: function(){
-                        StopLoading("#login_window_f");
-
-                    }
-                });
-
-
-                    
-                });
-               
-            </script>
         </div>
         <div id="catalog_window">
             <div id="catalog_window_flex">

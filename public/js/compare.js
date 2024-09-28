@@ -5,7 +5,7 @@ $("#user_compare").on("click", function () {
         url: '/comp_show',
         type: 'POST',
         data: {
-            lang: lang,
+            lang: $('html').attr('lang'),
             _token: csrf_token,
         },
         success: function (response) {
@@ -51,6 +51,8 @@ $("main").on("click", ".remove_compare", function() {
                 img.attr('src', '/img/svg/compare.svg');
                 
                 item.css('opacity', '1');
+                
+                setTimeout(item.css('opacity', ''),200)
 
                 const msg = item.find('.remove');
                 msg.addClass('msg_on');
@@ -63,8 +65,10 @@ $("main").on("click", ".remove_compare", function() {
                 item.prop('disabled', false);
             },
             error: function (xhr, status, error) {
+                window.location.reload();
                 console.log('Произошла ошибка:', error);
                 item.css('opacity', '1');
+                setTimeout(item.css('opacity', ''),200)
                 item.prop('disabled', false); // Включаем кнопку в случае ошибки
             }
         });
@@ -113,11 +117,16 @@ $("main").on("click", ".add_compare", function () {
                 }, 1500);
 
                 item.css('opacity', '1');
+
+                setTimeout(item.css('opacity', ''),200)
+
                 item.prop('disabled', false);
             },
             error: function (xhr, status, error) {
+                window.location.reload();
                 console.log('Произошла ошибка:', error);
                 item.css('opacity', '1');
+                setTimeout(item.css('opacity', ''),200)
                 item.prop('disabled', false);
             }
         });
@@ -155,16 +164,12 @@ $("#compare_basis").on("click", ".delete", function () {
             img = remove.find('.p_ico');
             img.attr('src', '/img/svg/compare.svg');
 
-
-
-
-
-
             container.removeClass('load');
             $("#compare_counter").text(response.compare_counter);
             $("#user_compare").click();
         },
         error: function (xhr, status, error) {
+            window.location.reload();
             console.log(error);
             container.removeClass('load');
         }
@@ -192,6 +197,7 @@ $(document).on("click", "#clear_compare", function () {
 
                 // Добавляем класс add_compare
                 $(this).addClass('add_compare');
+                
                 img = $(this).find('.p_ico');
                 img.attr('src', '/img/svg/compare.svg');
 
@@ -201,6 +207,7 @@ $(document).on("click", "#clear_compare", function () {
             });
         },
         error: function (xhr, status, error) {
+            window.location.reload();
             console.log('Произошла ошибка:', error);
         }
     });

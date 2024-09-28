@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Log;
+    use Illuminate\Support\Facades\Log;
 
 
 class ShopPagesController extends Controller
@@ -18,29 +18,21 @@ class ShopPagesController extends Controller
   
     public function get_main_page( )
     {
-
-        $page_options["currentUser"] = Auth::user();
-        $page_options["isAuth"]= Auth::check();
-
-        $favorites  = ProductsDataController::getFavoriteProducts();
-        $compare  = ProductsDataController::getCompareProducts();
-
-        $cart  = session()->get('cart', []);
         $lang = app()->getLocale();
         $page_options["lang"] = $lang;
-
-        $main_text_ = "main_page_text_$lang";
-         
-        $main_title_ = "title_$lang";
-
-        $description_title_ = "meta_description_$lang";      
+    
 
         $main_page = DB::table("page_options")
         ->select("main_page_text_$lang","settings","title_$lang","meta_description_$lang")
         ->get()->first();
-        
-        $main_page_text =json_decode(  $main_page->$main_text_,1)[0];
+
+        $main_text_ = "main_page_text_$lang";
+        $main_page_text = json_decode( $main_page->$main_text_,1)[0];
+
+        $description_title_ = "meta_description_$lang";  
         $description_title = $main_page->$description_title_;
+
+        $main_title_ = "title_$lang";
         $title =  $main_page->$main_title_;
 
         //category only for main page
@@ -69,25 +61,19 @@ class ShopPagesController extends Controller
                 }
                 // if ($count_cats >= 8) break; 
             }
-                $categories =  $categroies_done;
+            $categories =  $categroies_done;
         //category end
         //////////////////////////
 
-    
-        $page_options["products"] = ProductsDataController::getProducts();
+        $page_options["products"] = ProductsDataController::getProductsPlates();
 
         return view("main", [
-
-            "compare_counter"  => session()->get('compare_counter'),
-            'basket_counter' =>count(session()->get('cart') ?? []),
             "title" => $title, 
             'meta_description'=>$description_title,
             "page_options" => $page_options,
+
             "categories" => $categories,
             "lang_empty_when_ru" => ($lang == "ru" ? "" : "ua"),
-            "favorites" =>  $favorites ,
-            "compare" => $compare,
-            "cart" => $cart,
             "main_page_text" =>  $main_page_text
         ]);
 

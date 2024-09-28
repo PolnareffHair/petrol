@@ -23,10 +23,10 @@ body {
     overflow-x: hidden;
 }
 main {
-    margin-top: 123px;
+    padding-top: 123px;
 
     @media screen and (max-width: 850px) {
-        margin-top: 75px;
+        padding-top: 75px;
     }
 }
 #background_header_top {

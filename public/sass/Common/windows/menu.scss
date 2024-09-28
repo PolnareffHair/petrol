@@ -1,6 +1,6 @@
 
     #menu_burger{
-        overflow-y: scroll;
+        overflow-y: hidden;
         display: none;
         animation: slideDownmobileMenu 0.3s;
         position: absolute;
@@ -12,8 +12,13 @@
         width: 280px;
         z-index: 300;
         border: 1px solid gray;
-
-        
+    
+        @media screen and (max-width:400px) {
+            overflow-y: scroll;
+        }
+        border: none;
+    
+       
         
         #burger_links
         {  
@@ -24,6 +29,13 @@
             flex-direction: column;
             align-items: center;
        
+            .user_profile_menu span{
+                font-size: 0.9em !important;
+                text-align: start  !important;
+                display: flex;
+                flex-direction: column;
+
+            }
             #menu_catalog{
                 border: none;
                 color: white;
@@ -51,7 +63,7 @@
                 color: white;
                 text-decoration: none;
                 background-color: #424242;
-         
+                cursor: pointer;
    
                 display: flex;
                 justify-content: space-between;
@@ -65,7 +77,10 @@
                 padding: 0 1em;
                 height: 34px;
                 font-weight: 500;
-                
+                transition: opacity 0.15s ease;
+                &:hover{
+                    opacity: 0.8;
+                }
 
             }
             .user::before {
@@ -77,12 +92,17 @@
                 outline: solid 1px #e0e0e0;
                 color: rgb(0, 0, 0);
                 display: flex;
+                cursor: pointer;
                 justify-content: center;
                 padding: 0 1em;
                 text-align: center;
                 align-items: center;
                 height: 28px;
                 width: 11em;
+                transition: opacity 0.15s ease;
+                &:hover{
+                    opacity: 0.6;
+                }
             }
             a{
                 span{
@@ -94,6 +114,17 @@
                 img{
                     height:1.2em;
                     width: auto;
+                }
+            }
+            #menu_profile{
+                width: 176px;
+                justify-content: space-between;
+                background-color: white;
+                color: rgb(87, 87, 87);
+                border-bottom: 1px solid rgb(194, 194, 194);
+
+                span{
+                    text-align: center;
                 }
             }
         }
@@ -172,7 +203,7 @@
             background-color: #3d3d3d;
             border: 1px solid grey;
             position: fixed;
-            z-index: 100;
+            z-index: 10000;
             right:   calc(var(--sidde-padding)  + 40px);  
             
             bottom: 160px;

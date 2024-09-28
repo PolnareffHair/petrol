@@ -3,12 +3,16 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\AdminMiddleware;
 
-use App\Http\Controllers\AttributeController;
 
-use App\Http\Controllers\Admin\AdminOpertaionController;
+
+use App\Http\Controllers\Admin\AdminProductController;
 
 use App\Http\Controllers\Admin\ImgProductAdminController;
 use App\Http\Controllers\Admin\TagProductAdminController;
+
+use App\Http\Controllers\Admin\CatProductAdminController;
+
+use App\Http\Controllers\Admin\VideoProductController;
 
 use App\http\Controllers\CategoryController;
 
@@ -17,28 +21,46 @@ use App\http\Controllers\CategoryController;
 Route::middleware([AdminMiddleware::class])->group(function () {
 
 
-    Route::get('/admin', [AdminOpertaionController::class, "index"]);
 
-
-
-    Route::get('/admin/product_edit/tags/{id}', [TagProductAdminController::class, "get"]);
-
-    Route::post('/admin/product_edit/tags/content', [TagProductAdminController::class, "get_tags"]);
-
-    Route::post('/admin/product_edit/tags_edit/delete', [TagProductAdminController::class, "delete"]);
-    Route::post('/admin/product_edit/tags_edit/add', [TagProductAdminController::class, "add"]);
-    Route::post('/admin/product_edit/tags_edit/uppdate', [TagProductAdminController::class, "update"]);
-
-    Route::get('/admin/product_edit/tags_edit/add/{id}', [TagProductAdminController::class, "get"]);
+    
+    Route::post('/admin/product_edit/cats_edit/content', [CatProductAdminController::class, "get"]); /*** */
+    Route::post('/admin/product_edit/cats_edit/delete', [CatProductAdminController::class, "delete"]);  /*** */
+    Route::post('/admin/product_edit/cats_edit/add',    [CatProductAdminController::class, "add"]); /*** */
+    Route::post('/admin/product_edit/cats_edit/uppdate', [CatProductAdminController::class, "update"]); /*** */
 
 
 
 
-    Route::post('/uppdate_main_page_text', [AdminOpertaionController::class, "uppdate_main_page_text"]);
 
-    Route::POST('/admin/uppdate_product', [AdminOpertaionController::class, "uppdate_product"]);
+    Route::post('/admin/product_edit/Video/get', [VideoProductController::class, "get"]);
 
-    Route::POST('/admin/delete_product', [AdminOpertaionController::class, "delete_product"]);
+    Route::POST('/admin/product_edit/Video/uppdate', [VideoProductController::class, "update"]);
+
+    Route::post('/admin/product_edit/Video/add', [VideoProductController::class, "add"]);
+
+    Route::post('/admin/product_edit/Video/delete', [VideoProductController::class, "delete"]);
+   
+
+    Route::get('/admin/product/{id}', [AdminProductController::class, "product"]);
+
+
+
+    Route::post('/admin/product_edit/tags/content', [TagProductAdminController::class, "get_tags"]); /*** */
+    Route::post('/admin/product_edit/tags_edit/delete', [TagProductAdminController::class, "delete"]);  /*** */
+    Route::post('/admin/product_edit/tags_edit/add',    [TagProductAdminController::class, "add"]); /*** */
+    Route::post('/admin/product_edit/tags_edit/uppdate', [TagProductAdminController::class, "update"]); /*** */
+
+
+
+    
+    Route::get('/admin', [AdminProductController::class, "index"]);
+    
+
+
+    Route::post('/uppdate_main_page_text', [AdminProductController::class, "uppdate_main_page_text"]);
+    Route::POST('/admin/uppdate_product', [AdminProductController::class, "uppdate_product"]);
+    Route::POST('/admin/delete_product', [AdminProductController::class, "delete_product"]);
+
     
     //category + 
 
@@ -48,7 +70,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     
     //basic data +
 
-    Route::POST('/admin/duplicate_product', [AdminOpertaionController::class, "duplicate_product"]);
+    Route::POST('/admin/duplicate_product', [AdminProductController::class, "duplicate_product"]);
 
     Route::post('/admin/product_edit/img/get', [ImgProductAdminController::class, "get"]);
 
@@ -57,15 +79,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/admin/product_edit/img/add', [ImgProductAdminController::class, "add"]);
 
     Route::post('/admin/product_edit/img/delete', [ImgProductAdminController::class, "delete"]);
-
-
-
-    Route::get('/admin/product_edit/cat/get', [CategoryController::class, "get"]);
-    Route::get('/admin/product_edit/cat/get', [CategoryController::class, "update"]);
-
-    Route::get('/admin/product_edit/att/get', [AttributeController::class, "get"]);    
-    Route::get('/admin/product_edit/att/get', [AttributeController::class, "update"]);
+   
     
-    
-    Route::get('/admin/product/{id}', [AdminOpertaionController::class, "product"]);
+
 });

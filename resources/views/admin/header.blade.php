@@ -1,16 +1,17 @@
 <head>
+
     @php
+
     $token =csrf_token();
     echo " <script>
         csrf_token = '$token';
     </script>";
     @endphp
-
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/admin_svg/logo.svg" sizes="any" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script>    const csrf_token = '{{ csrf_token() }}';</script>
     <script src="/js/loading_animation.js"></script>
     <script defer src="/admin_js/colapse.js"></script>
     <script defer src="/admin_js/alpine.js"></script>

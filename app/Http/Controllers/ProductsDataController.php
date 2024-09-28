@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -22,16 +24,76 @@ class ProductsDataController extends Controller
      * @param  mixed $states
      * @return void
      */
-    static public function getProducts( $quantity = 10,  $discount = 0 , $states = [2], $skip  = 0)
+    static public function getProductsPlates(
+            int $quantity = 20, int  $discount = 1 
+            , array  $states = [1], $max_price = 0, $min_price = 0
+            ,array $filter_tag=[],array $filter_cat=[], int $skip  = 0
+        )
     {
         $lang = app()->getLocale();
-        
+
+        //discount - tested
+        //states - tested
+        //price - tested 
+        //skip - tested 
+
+        // if($filter != [])
+        // {      
+        // }
+
+
         $products = DB::table('products');
 
-        if($discount == 1)   $products  = $products->where("product_price_discount", "!=", 0  );
+        if($discount == 1)   $products  = $products->where("product_price_discount", "!=", 0);
+            
+        if( $states != [] ) $products =  $products->whereIn("product_avalible_state", $states);
 
 
-        $products =  $products->whereIn("product_avalible_state", $states)->take($quantity)->get()->map(function ($item) {
+        // product_price_discount
+        if($max_price != 0 ){
+            $products  =   
+            $products->where(function($products)  use ($max_price){
+                $products
+                ->where(function($products) use ($max_price) {
+                    $products->where('product_price', '<=', $max_price)
+                    ->where('product_price_discount', '=', 0);
+                })
+                ->orWhere('product_price_discount', '<=',$max_price);
+            });
+
+        }
+        if($min_price != 0 ){
+            if($min_price > $max_price)  abort(490, 'Max price smaller than min price');
+            $products  =   
+            $products->where(function($products) use($min_price) {
+                $products
+                ->where(function($products) use($min_price) {
+                    $products->where('product_price', '>=', $min_price)
+                    ->where('product_price_discount', '=', 0);
+                })
+                ->orWhere('product_price_discount', '>=', $min_price);
+            });
+        }
+
+        $products =  $products->skip($skip)->take($quantity)->get(
+            [
+                "product_id",
+                "product_show_country",
+                "product_order_priority",
+                "product_article",
+                "product_price",
+                "product_video_link",
+                "product_img_alt_$lang",
+                "product_best_seller",
+                "product_price_discount",
+                "product_avalible_state",
+                "product_rating",
+                "product_name_$lang",
+                "product_url_$lang",
+                "product_tags_$lang",
+                "product_img_urls",
+            ]
+            )->map(function ($item) {
             return (array) $item;
         });
 
@@ -261,7 +323,7 @@ class ProductsDataController extends Controller
         //if multiply tags 
 
         $products = DB::table('products')
-            ->where(["product_category_id" => $id])
+
             ->where(function ($query) use ($max_price) {
                 $query->where("product_price", "<=", $max_price)
                     ->orWhere("product_price_discount", "<=", $max_price);

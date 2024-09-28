@@ -1,5 +1,5 @@
-<div class="tags_avalible_container">
 
+    <div class="tags_avalible_container">
             @foreach($avalible as $key=>$attr)
             <div class="tags_block_container">
                 <div  class="tags_block_top">
@@ -7,9 +7,9 @@
                 </div>  
 
                 <select  data-id="{{$key}}" class="{{$name}}avsel" style="padding: 5px;">
-                    <option value="empty">***</option>
+                    <option class="tag_add" value="empty">***</option>
                     @foreach($attr as $attr_v)
-                    <option value="{{$attr_v}}">{{$attr_v}}</option>
+                    <option value="{{$attr_v}}">{{$attr_v}} +</option>
                     @endforeach
                 </select>
             </div>
@@ -28,13 +28,12 @@
                         </svg>
                     </button>
                 </div>
-
                 <select data-id="{{$key}}"  class="{{$name}}sel">
                     @foreach($attr as $attr_v)
                     <option value="{{  $attr_v}}">{{ $attr_v}}</option>
                     @endforeach
                 </select>
-
             </div>
             @endforeach
         </div>
+

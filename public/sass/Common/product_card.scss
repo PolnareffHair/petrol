@@ -50,7 +50,7 @@
             }
             .product_atributes {
                 display: none       ;
-                color: #6e6e6e;
+                color: #494949;
                 font-size: 14px;
             }
 
@@ -173,6 +173,16 @@
                 }
             }
         }
+        
+     
+        &:hover .product_item_user_buttons .add_favorite,
+        &:hover .product_item_user_buttons .add_compare{
+            opacity: 1;
+            transform: translateX(0px);
+
+        }
+
+
 
         .product_item_user_buttons {
             position: relative;
@@ -185,15 +195,18 @@
             // justify-content: center;
             flex-shrink: 0;
             flex-grow: 0;
+
+            
             .product_item_favorite_button, 
             .product_item_compare_button {
+          
                 transition: opacity 0.1s ease-in-out;
                 flex-shrink: 0;
                 flex-grow: 0;
-                height: 40px;
-                width: 40px;
+                height: 38px;
+                width: 38px;
                 border: 1px solid #a6a6a6;
-                border-radius: 10px;
+                border-radius: 5px;
                 margin-bottom: 5px;
                 margin-left: 30px;
                
@@ -203,8 +216,8 @@
                 background-color: white;
                 img {
                     margin-top: 3px;
-                    height: 26px;
-                    width: 26px;
+                    height: 28px;
+                    width: 28px;
                 }
                 @media screen and (max-width: 600px) {
                     height: 32px;
@@ -245,6 +258,34 @@
                     }
                 }
             }
+
+            @media screen and (min-width: 1000px) {
+                .add_favorite, 
+                .add_compare{
+                    opacity: 0;
+                    transform: translateX(3px);
+                    transition: opacity 0.15s ease-in-out ;
+                    transition:  transform 0.15s ease-in-out ;
+
+                    &:hover .toadd {
+                        opacity: 1;
+                    }
+                }
+                .remove_compare,
+                .remove_favorite{
+
+                    &:hover .toremove{
+                        opacity: 1;
+                    }
+                    
+                }
+            }
+        
+          .added,.remove {
+            z-index: 120;
+
+          }
+         
         }
         .hidden_params {
             display: none;
@@ -313,9 +354,14 @@
                     height: 100%;
                     width: auto;
                 }
+                 .review_container
+                    {
+                        color: #414141;
+                    }
                 @media screen and (max-width:500px) {
                     .review_container
                     {
+             
                         display: none;
                     }
                 }
@@ -332,6 +378,9 @@
                 font-size: 16px;
                 font-weight: 400;
                 color: #414141;
+
+                padding-top: 10px;
+                border-top: 1px dashed   #cdcdcd;
             }
         }
         @media screen AND (min-width:700px){

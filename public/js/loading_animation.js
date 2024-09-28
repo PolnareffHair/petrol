@@ -24,16 +24,16 @@ function StartLoading(id){
     
     // Добавляем оверлей в документ
     document.body.appendChild(overlay);
-    
-    
-
-
 
 }
-function StopLoading(id){
-    $(id).toggleClass("unloading");
-    setTimeout(function(){ $(id).toggleClass("loading"); $(id).toggleClass("unloading");},300)
 
+function StopLoading(id){
+
+    $(id).toggleClass("unloading");
+    
+    setTimeout(function(){ $(id).toggleClass("loading");
+
+    $(id).toggleClass("unloading");},300);
 
     // Ищем элемент оверлея по id и удаляем его
     const overlay = document.getElementById('pageOverlay');

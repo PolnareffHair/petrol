@@ -2,24 +2,6 @@
 
 namespace App\Services;
 
-use Dotenv\Util\Str;
-use Illuminate\Support\Arr;
-use Mockery\Undefined;
-
-/**
- * html_forms
- * 
- * Form types 
- * TYPE
- */
-enum Type: string
-{
-    case zero_checkbox = "zero_checkbox";
-    case html_editor = "html_editor";
-    case checkbox = "checkbox";
-    case options = "options";
-    case input_ = "input_";
-}
 
 class FormBuilder
 {
@@ -32,7 +14,7 @@ class FormBuilder
     public $html_forms = "";
     /**
      * forms_get_vals
-     * id of elements to get 
+     * id of elements to get values
      * @var mixed
      */
     public $forms_get_vals;
@@ -49,7 +31,46 @@ class FormBuilder
      */
     public $scripts_tag = "";
 
+        
+    /**
+     * editors
+     *
+     * @var array
+     */
+    public $editors =[];
+    
+    /**
+     * _path to edit item
+     *
+     * @var string
+     */
+    public $update_path= "";
+
+    public $delete_path= "";
+
+    public $back_path= "";
+    
+    /**
+     * editros
+     * Editors data
+     * @var array
+     */
+    public $editros = [];
+
+    
+    /**
+     * item
+     * maain array with info
+     * @var array
+     */
     public $item = [];
+    
+    /**
+     * name
+     * name of item
+     * @var string
+     */
+    public $name ="";
     
     /**
      * __construct
@@ -58,8 +79,9 @@ class FormBuilder
      * @param  mixed $id of element 
      * @return void
      */
-    public function __construct(array $item,$item_id)
+    public function __construct(array $item,$item_id,$name)
     {
+        $this->name = $name;
         $this->forms_get_vals["item_id"] =  $item_id;
         $this->item = $item;
         $this->scripts_tag .= $this->script_se[0];
@@ -106,11 +128,8 @@ class FormBuilder
                     </label>
                 </div>"
         );
+        $this->forms_get_vals["$name"] =  "$(\"#ID$name\").val();";
 
-
-
-
-        $this->forms_get_vals["$name"] =  "$(\"#ID$name\").is(':checked') ? 1 : 0;";
         return 0;
     }
     
@@ -133,7 +152,7 @@ class FormBuilder
                 $title .
                 "</label>";
 
-            $this->html_forms .=  "<input type='checkbox' id='ID$name'";
+            $this->html_forms .=  "<input class='input_change' type='checkbox' id='ID$name'";
             if ($this->item[$name] == 1) {
                 $this->html_forms .=  " checked ";
             }
@@ -159,13 +178,13 @@ class FormBuilder
      * @param  mixed $number_limit  [$min,$max]
      * @return bool
      */
-    public function AddInputText(string $name, string $title, bool $lang =false, int $lenght_limit =-1, string $copy_trans = "", string $copy = ""): bool
+    public function AddInputText(string $name, string $title, bool $lang =false, int $lenght_limit =-1, string $copy_trans = "", string $copy = "",$novoid = true): bool
     {    
             if ($lang == 0) {
                 $this->html_forms .= ("<div class='product_option'>");
                 $this->html_forms .=
                     " <label for='form_" . $name ."'>$title</label>";
-                $this->html_forms .=   "<input type='input' id='ID$name'";
+                $this->html_forms .=   "<input   class='input_change' type='input' id='ID$name'";
 
                 if ($lenght_limit != -1) {
                     if($lenght_limit < 0) die("lenght limit value error");
@@ -178,7 +197,7 @@ class FormBuilder
                     . " name='form_" . $name . "'"
                     . " </input>";
                 
-                
+                    if($novoid)        $this->scripts_tag .= $this->set_input_novoid("ID" . $name , $lenght_limit);
                 $this->html_forms .=  '</div>';
                 $this->forms_get_vals["$name"] =  "$(\"#ID$name\").val();";
             } 
@@ -200,10 +219,12 @@ class FormBuilder
                     $name .
                     " ru'>" .
                     $title .
-                    " ru" .
+                    ' ru <img src="\img\icon\ru.svg" alt="ru" sizes="21 14"> '
+
+              .
                     "</label>";
 
-                $this->html_forms .= "<input type='input' id='ID$name" . "_ru'";
+                $this->html_forms .= "<input  class='input_change' type='input' id='ID$name" . "_ru'";
 
                 if ($lenght_limit != -1) {
                     if($lenght_limit < 0) die("lenght limit value error");
@@ -221,13 +242,13 @@ class FormBuilder
                 $this->html_forms .=
                     " <label for='form_" .
                     $name .
-                    " ua" .
+                    ' ua'.
                     "'>" .
                     $title .
-                    " ua" .
+                    ' ua <img src="\img\icon\ua.svg" alt="ru" sizes="21 14"> ' .
                     "</label>";
 
-                $this->html_forms .="<input type='input' id='ID$name" . "_ua'";
+                $this->html_forms .="<input class='input_change' type='input' id='ID$name" . "_ua'";
 
                 if ($lenght_limit != -1) {
                     if($lenght_limit < 0 || !is_integer($lenght_limit ) ) die("lenght limit value error");
@@ -235,6 +256,13 @@ class FormBuilder
                         " maxlength='" . $lenght_limit . "'";
                     $this->scripts_tag .= $this->set_lenght_limit("ID" . $name . "_ua", $lenght_limit);
                 }
+
+                if($novoid)
+                {
+                    $this->scripts_tag .= $this->set_input_novoid("ID" . $name . "_ru");
+                    $this->scripts_tag .= $this->set_input_novoid("ID" . $name . "_ua");
+                }
+       
 
                 $this->html_forms .= " value='" . $this->item[$name. "_ua"] . "'"
                     . " name='form_" . $name . "_ua'>"
@@ -263,7 +291,7 @@ class FormBuilder
                 $this->html_forms .= ("<div class='product_option'>");
                 $this->html_forms .=
                     " <label for='form_" . $name ."'>$title</label>";
-                $this->html_forms .=   "<input type='number' id='ID$name'";
+                $this->html_forms .=   "<input class='input_change' type='number' id='ID$name'";
 
                 if ($limit[1] != "max" && $limit[0] != "min") {
                     $this->html_forms .= " max='" .$limit[1] . "'" . " min='" .$limit[0] . "'" ;
@@ -287,10 +315,12 @@ class FormBuilder
                     $name .
                     " ru'>" .
                     $title .
-                    " ru" .
+                    ' ru <img src="\img\icon\ru.svg" alt="ru" sizes="21 14"> '
+
+              .
                     "</label>";
 
-                $this->html_forms .= "<input type='number' id='ID$name" . "_ru'";
+                $this->html_forms .= "<input class='input_change' type='number' id='ID$name" . "_ru'";
 
 
                 if ($limit[1] != "max" && $limit[0] != "min") {
@@ -311,10 +341,10 @@ class FormBuilder
                     " ua" .
                     "'>" .
                     $title .
-                    " ua" .
+                    ' ua <img src="\img\icon\ua.svg" alt="ru" sizes="21 14"> ' .
                     "</label>";
 
-                $this->html_forms .="<input type='number' id='ID$name" . "_ua'";
+                $this->html_forms .="<input  class='input_change' type='number' id='ID$name" . "_ua'";
 
 
                 if ($limit[1] != "max" && $limit[0] != "min") {
@@ -372,8 +402,6 @@ class FormBuilder
     public function AddHtmlEdit(string $name, string $title): bool{
 
 
-
-
             $this->html_forms .= ("<div class='product_option'>");
             $this->html_forms .=
                 " <label for='form_" .
@@ -381,7 +409,9 @@ class FormBuilder
                 " ru" .
                 "'>" .
                 $title .
-                " ru" .
+                ' ru <img src="\img\icon\ru.svg" alt="ru" sizes="21 14"> '
+
+              .
                 "</label>";
             $this->html_forms .= '<div style="display:none;" id="DATA' . $name . '_ru" data-text="' . json_decode($this->item["product_description_ru"]) . '"></div>';
             $this->html_forms .= '<textarea class="product_editor_html" id="ID' . $name . '_ru" ></textarea>';
@@ -396,7 +426,7 @@ class FormBuilder
                 $name .
                 " ua'>" .
                 $title .
-                " ua" .
+                ' ua <img src="\img\icon\ua.svg" alt="ru" sizes="21 14"> ' .
                 "</label>";
             $this->html_forms .= '<div style="display:none;" id="DATA' . $name . '_ua" data-text="' . json_decode($this->item["product_description_ua"]) . '"></div>';
             $this->html_forms .= '<textarea class="product_editor_html" id="ID' . $name . '_ua" ></textarea>';
@@ -408,12 +438,30 @@ class FormBuilder
         return 0;
 
     }
+    public function AddEditor($path){
+        $this->editors [] = $path;
+    }
 
 
     public function finish()
     {
         $this->scripts_tag .=  "let form_options =" . json_encode($this->forms_get_vals) . ";";
         $this->scripts_tag .= $this->script_se[1];
+
+        return view("admin.form_edit", 
+        [
+            "form" => $this,
+            "item_name" => $this->name ,
+            "item_id" =>$this->forms_get_vals["item_id"],
+            "update_path" => $this->update_path,
+
+            "delete_path" =>$this->delete_path,
+        
+            "back_path" =>$this->back_path,
+            "editors" => $this->editors
+        ]
+        );
+
     }
 
     public function get_html()
@@ -428,6 +476,15 @@ class FormBuilder
     *   Sets js code
     *
     */
+    public function setLinks($update,$delete,$back){
+
+        $this->update_path = $update;
+
+        $this->delete_path = $delete;
+    
+        $this->back_path =   $back;
+    
+    }
 
 
     /**
@@ -485,5 +542,8 @@ class FormBuilder
     private function set_html_field(string $id): string
     {
         return "set_html_field('$id');";
+    }
+    private function set_input_novoid($id){
+        return "set_input_novoid('$id');";
     }
 }

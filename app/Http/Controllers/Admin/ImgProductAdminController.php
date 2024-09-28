@@ -28,7 +28,7 @@ class ImgProductAdminController extends Controller
         if($id) $img = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_img_urls")->first()); else return "Помилка идентифікатора";
 
 
-        return view("admin.components.img_edit", ["id" => $id, "img" => $img, "path" => [$pstart,$pend],]);
+        return view("admin.components.img.edit", ["id" => $id, "img" => $img, "path" => [$pstart,$pend],]);
     }
 
     public function delete(Request $request)
@@ -43,11 +43,14 @@ class ImgProductAdminController extends Controller
 
         if (($key = array_search($img, $imgArr)) !== false) {
             unset($imgArr[$key]);
+            DB::table("products")->where("product_id", $id)->update(["product_img_urls" => json_encode($imgArr)]);
         } else {
             return "Зображення не існує";
         }
+
         $dir = getcwd();
 
+     
         if (file_exists($dir  . "\\images\\product\\$id" . "_" . "$img" . "_small" . ".webp")) {
             unlink($dir  . "\\images\\product\\$id" . "_" . "$img" . "_small" . ".webp");
         } else return "файл $id" . "_" . "$img" . "_small" . ".webp не існує";
@@ -58,7 +61,7 @@ class ImgProductAdminController extends Controller
         if (file_exists($dir  . "\\images\\product\\$id" . "_" . "$img" . "_big" . ".webp")) {
             unlink($dir  . "\\images\\product\\$id" . "_" . "$img" . "_big" . ".webp");
         } else return "файл $id" . "_" . "$img" . "_big" . ".webp не існує";
-        DB::table("products")->where("product_id", $id)->update(["product_img_urls" => json_encode($imgArr)]);
+
         return "Зображення видалено";
     }
     /**
@@ -115,7 +118,7 @@ class ImgProductAdminController extends Controller
             $image2->toWebp(100)->save('images/product/' . $id . '_' . $imgName.'_big.webp');
             DB::table("products")->where("product_id", $id)->update(["product_img_urls" => json_encode($imgArr)]);
             // Вывод изображения (пример)
-            return 0;
+            return "Успішно додано";
         }
 
         return $request->product_id;

@@ -4,9 +4,16 @@
     font-family: "Fira Sans", sans-serif;
     font-style: normal;
 }
+.swiper{
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
 html,
 body {
+    background-color: rgb(243, 245, 248);
     height: 100%;
+  
     .load
     {
         opacity: 0.5;
@@ -24,7 +31,11 @@ body {
         color: rgb(81, 179, 97);
         border-color: rgb(81, 179, 97) !important;
     }
+    main{
+        background-color: white;
+        outline: 25px solid rgb(255, 255, 255);
 
+    }
 
 .loading{
 
@@ -160,9 +171,6 @@ b {
     font-style: medium;
 }
 
-#burger {
-    display: none;
-}
 
 html {
     --sidde-padding: calc(calc(100vw - 1646px) / 2);
@@ -322,6 +330,33 @@ header {
             margin-right: 10px;
         }
 
+        .user_profile_log
+        {
+            border: none;
+            padding: 0 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: white;
+
+            background-color: #ffffff00;
+            height: 32px;
+            border-bottom: #557ee3 solid 2px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &::after{
+                content: "";
+                // margin-right: 10px;
+                width: 18px;
+                /* Ширина изображения */
+                height: 21px;
+                /* Высота изображения */
+                background: url("/img/svg/log_white.svg") no-repeat center center;
+                background-size: contain;   
+            }
+        }
+    
         #user_log,
         #call,
         #user_basket,
@@ -346,7 +381,9 @@ header {
         #user_log:hover,
         #call:hover,
         #user_basket:hover,
-        #user_log:hover {
+        #user_log:hover ,
+        .user_profile_log:hover,
+        #user_compare:hover{
             animation: border_color 0.25s;
 
             border-width: 2px;
@@ -626,6 +663,7 @@ main {
                         width:33%;
                         font-size: 0.8em;
                     }
+                    
                     .main_c{
                         display: flex;
                         flex-direction: column;
@@ -663,8 +701,9 @@ main {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                        bottom: 0;
                         .child 
-                        {
+                        {   font-weight: 500;
                             font-size: 0.8em;
                             margin-bottom: 0.2em;
                             width: 18em;
@@ -709,6 +748,38 @@ main {
 
                         }
                       
+                    }
+        
+                    @media screen and (min-width: 800px) {
+                        .child_container{
+                            position: relative;
+                            overflow:visible;
+
+                            background-color: white;
+                            z-index: 1000;
+                            bottom: 0;
+                            overflow: hidden;
+                            max-height: 0;
+                            padding: 0;
+                            opacity: 0;
+
+                            transition: opacity 0.25s ease-in-out;
+                        }   
+                        &:hover {
+                            justify-content: space-around       ;
+                        }
+             
+                        &:hover .child_container{    
+                            padding: 1em;
+                            opacity: 1;        
+                            max-height:inherit;
+                            overflow-y: auto;             
+                        }
+                        
+                        &:hover .main_c .hide {    
+                            display: none;
+                        }
+
                     }
 
                 
@@ -906,34 +977,47 @@ main {
     }
 }
 
+
+
+
+
+
+#burger {
+    margin: 0 0.2em 0 0.9em;
+    display: block;
+    overflow: hidden;
+
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    background-color: #ffffff00;
+    height: 32px;
+
+    display: flex;
+    justify-content: center;
+    /* Центрирование по горизонтали */
+    align-items: center;
+    transition: opacity 0.15s ease;
+    &:hover{
+        opacity: 0.5;
+    }
+
+}
+
+#burger::before {
+    content: "";
+    // margin-right: 10px;
+    width: 22px;
+    /* Ширина изображения */
+    height: 28px;
+    /* Высота изображения */
+    background: url("/img/svg/burger.svg") no-repeat center center;
+    background-size: contain;
+}
+
+
 @media screen and (max-width: 850px) {
-    #burger {
-        display: block;
-        border: none;
-
-        font-size: 16px;
-        font-weight: 500;
-        color: white;
-
-        background-color: #ffffff00;
-        height: 32px;
-
-        display: flex;
-        justify-content: center;
-        /* Центрирование по горизонтали */
-        align-items: center;
-    }
-
-    #burger::before {
-        content: "";
-        // margin-right: 10px;
-        width: 22px;
-        /* Ширина изображения */
-        height: 28px;
-        /* Высота изображения */
-        background: url("/img/svg/burger.svg") no-repeat center center;
-        background-size: contain;
-    }
 
     #background_header_top,
     #background_header_bottom {

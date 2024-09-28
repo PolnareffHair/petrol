@@ -65,8 +65,23 @@
 
     
           
-    .tags_avalible_container .tags_block_top{ background-color: rgba(71, 253, 47, 0.3);}
-    .tags_selected_container .tags_block_top{background-color: rgba(69, 123, 157,0.3);}
+        .tags_avalible_container {
+            .tags_block_top {
+                border-left: 5px solid #61be55;
+            }
+    
+            .tags_block_container {
+                select {
+                    option {
+                        color: white;
+                        background-color: #61be55;
+                    }
+                }
+            }
+    
+        }
+    
+    .tags_selected_container .tags_block_top{border-left: 5px solid #457B9D;}
         
     .tags_avalible_container,
     .tags_selected_container {
@@ -97,7 +112,10 @@
                 border: 2px solid #868686;
                 margin-bottom: 1em;
                 height: 1.8em;
+           
+
             }
+            
     
         }
 
@@ -506,7 +524,7 @@ button {
 
     overflow-y: scroll;
     -webkit-box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px -1px 232px -119px  rgba(0, 0, 0, 0.75);
     box-shadow: 10px -1px 232px -119px rgba(0, 0, 0, 0.75);
 
     width: 100vw;
@@ -514,6 +532,13 @@ button {
 
     //padding: 1em;
     h1 {
+        padding-left: 0.2em;
+        text-align: start;
+@media screen and (min-width:500px) {
+    padding-left: 1em;
+}
+
+        
         margin-top: 2em;
         font-size: 2em;
     }
@@ -587,8 +612,11 @@ button {
     .auto_gen:hover {
         opacity: 0.8;
     }
-
+    .selects{
+        display: none   ;
+    }
     .product_operation {
+
         margin: 1em;
 
         .note-editor {
@@ -599,13 +627,24 @@ button {
                 font-size: 1em;
             }
         }
+        #edit_selector{
+            padding: 0.5em;
+            
+                display: flex;
+                flex-wrap: wrap;
+
+            button{
+             
+                padding: 0.5em 1em;
+                color: black;
+                
+            }
+            .active_sel{
+                border-bottom: #457B9D 3px solid;
+            }
+        }
 
         .sort_editor {
-
-
-
-
-
             margin: 1em;
             padding: 1em;
             border: 1px solid #a5a5a5;
@@ -775,6 +814,7 @@ button {
                 max-width: 100%;
                 width: 40em;
                 margin-bottom: 0.2em;
+                
             }
 
             input {

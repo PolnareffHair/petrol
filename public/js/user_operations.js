@@ -1,5 +1,5 @@
 let debounceTimer;
-
+const csrf_token_user  = $('meta[name="csrf-token"]').attr('content');
 //add to favorite
 function sendAjaxRequestFavorite(event) {
     const product_id = event.currentTarget.getAttribute('data-variable');
@@ -9,8 +9,9 @@ function sendAjaxRequestFavorite(event) {
         return;
     }
     element.disabled = true;
-    const csrf_token = $('meta[name="csrf-token"]').attr('content');
     element.style.opacity = '0';
+
+
 
     clearTimeout(debounceTimer);
 
@@ -19,7 +20,7 @@ function sendAjaxRequestFavorite(event) {
             url: '/fav_add',
             type: 'POST',
             data: {
-                _token: csrf_token,
+                _token: csrf_token_user ,
                 product_id: product_id
             },
             success: function (response) {
@@ -42,11 +43,14 @@ function sendAjaxRequestFavorite(event) {
                 element.addEventListener('click', sendAjaxRequestRemoveFavorite);
 
                 element.style.opacity = '1';
+                setTimeout( element.style.opacity = '',200);
                 element.disabled = false;
             },
             error: function (xhr, status, error) {
+                window.location.reload();
                 console.log('Произошла ошибка:', error);
                 element.style.opacity = '1';
+                setTimeout( element.style.opacity = '',200);    
                 element.disabled = false; // Включаем кнопку в случае ошибки
             }
         });
@@ -60,8 +64,8 @@ function sendAjaxRequestRemoveFavorite(event) {
         console.error('Ошибка: идентификатор продукта не найден или пустой.');
         return;
     }
+    
     element.disabled = true;
-    const csrf_token = $('meta[name="csrf-token"]').attr('content');
     element.style.opacity = '0';
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(function () {
@@ -69,7 +73,7 @@ function sendAjaxRequestRemoveFavorite(event) {
             url: '/fav_remove',
             type: 'POST',
             data: {
-                _token: csrf_token,
+                _token: csrf_token_user,
                 product_id: product_id
             },
             success: function (response) {
@@ -94,11 +98,14 @@ function sendAjaxRequestRemoveFavorite(event) {
                 element.addEventListener('click', sendAjaxRequestFavorite);
 
                 element.style.opacity = '1';
+                setTimeout( element.style.opacity = '',200);
                 element.disabled = false;
             },
             error: function (xhr, status, error) {
+                window.location.reload();
                 console.log('Произошла ошибка:', error);
                 element.style.opacity = '1';
+                setTimeout( element.style.opacity = '',200);
                 element.disabled = false; // Включаем кнопку в случае ошибки
             }
         });
@@ -165,8 +172,7 @@ $('#send_call_button').on('click', function(event) {
             phone_number: $('#pnum_input')
                 .val(), // Данные, отправляемые на сервер
             text: $('#call_question').val(),
-            _token: $('meta[name="csrf-token"]').attr(
-                'content') // Добавлен CSRF-токен
+            _token:  csrf_token_user
         },
         success: function(response) {
 
@@ -175,6 +181,7 @@ $('#send_call_button').on('click', function(event) {
             $('#call_window_main').css("height", "auto");
         },
         error: function(xhr, status, error) {
+            window.location.reload();
             $('#send_call_button').toggleClass("loading");
             // Обработка ошибок
             $('#call_report').css({
@@ -205,13 +212,15 @@ $(".product_order").click( function (e) {
     $('#pnum_input_order').removeClass( "input_sccsess");
     $('#pnum_input_order').val("+3(80_)___-__-___");
     id =  $(this).data("variable");
+
     StartLoading("#order_window");
     $.ajax({
         url: '/get_product_order',
         type: 'POST',
         data: {
-            lang:lang,
-            _token: csrf_token,
+            lang:$('html').attr('lang'),
+            _token:
+             csrf_token_user,
             id: id
         },
         success: function (response) { 
@@ -254,7 +263,7 @@ $('#send_order_button').on('click', function(  event) {
         url: '/order_product', // Укажите URL для обработки запроса на сервере
         type: 'POST', // Метод запроса (POST, GET и т.д.)
         data: {
-            _token: csrf_token,
+            _token: csrf_token_user ,
 
             pn: $('#pnum_input_order').val(), // Данные, отправляемые на сервер
 
@@ -267,7 +276,7 @@ $('#send_order_button').on('click', function(  event) {
             $("#order_window_response").css("display", "flex");
         },
         error: function(xhr, status, error) {
-  
+            window.location.reload();
             console.log(error)
         } ,
         complete: function(){       StopLoading('#order_window');
@@ -287,8 +296,43 @@ $(window).on("scroll", function() {
         $("#up_button").fadeOut(); // Hide the button
     }
 });
+$("#up_button").fadeIn();  // Show the button
 
-// Optional: Scroll to top when the button is clicked
-$("#up_button").on("click", function() {
-    $("html, body").animate({ scrollTop: 0 }, 300);
+
+
+$(document).ready(function() {
+    // Пример кнопки с ID "scrollTopButton"
+    $('#up_button').click(function() {
+        // Анимация прокрутки к верху страницы
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    });
+});
+
+$("#login_in_button").click(function (e) { 
+    StartLoading("#login_window_f");
+    e.preventDefault();
+    $.ajax({
+    url: '/login',
+    type: 'POST',
+    data: {
+        _token: csrf_token_user,
+        password: $("#password_input").val(),
+        phone_number: $("#pnum_input_login").val(),
+    },
+    success: function(response) {
+
+       console.log(response);
+       
+       if(response == 0) window.location.href = '/dashboards';
+
+    },
+    error: function(xhr, status, error) {
+        window.location.reload();
+        console.log(error);
+    }
+    ,
+    complete: function(){
+        StopLoading("#login_window_f");
+    }
+});
 });

@@ -22,7 +22,5 @@ class AppServiceProvider extends ServiceProvider
         //Якщо шлях починаеться з юа то встановлюеться мова юа якщо ні то ру
         $lang = request()->is('ua*') ? 'ua' : 'ru';
         app()->setLocale($lang);        
-
-
     }
 }

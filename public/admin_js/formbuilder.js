@@ -68,6 +68,8 @@ const lang_map = {
     'ъ': ''
 };
 
+
+
 function set_number_limit(id, min, max) {
 
     document.getElementById(id).addEventListener('input', function () {
@@ -81,19 +83,19 @@ function set_number_limit(id, min, max) {
     });
 }
 
-function set_copy_text_ru_ua(id,copy, name) {
+function set_copy_text_ru_ua(id, copy, name) {
     document.getElementById(name).addEventListener('click', function () {
 
-        $(('input[id=\"' + id + '_ru\"]')).val($('input[id=\"'+copy+'_ru\"]').val());
-        $(('input[id=\"' + id + '_ua\"]')).val($('input[id=\"'+copy+'_ua\"]').val());
+        $(('input[id=\"' + id + '_ru\"]')).val($('input[id=\"' + copy + '_ru\"]').val());
+        $(('input[id=\"' + id + '_ua\"]')).val($('input[id=\"' + copy + '_ua\"]').val());
     });
 }
 
-function set_copy_text_trans_ru_ua(id,copy, name) {
+function set_copy_text_trans_ru_ua(id, copy, name) {
     document.getElementById(name).addEventListener('click', function () {
         // Используем правильный селектор для jQuery
-        var ru_url = $(('#'+copy+'_ru')).val();
-        var ua_url = $(('#'+copy+'_ua')).val();
+        var ru_url = $(('#' + copy + '_ru')).val();
+        var ua_url = $(('#' + copy + '_ua')).val();
         // Заменяем каждую букву согласно карте для русского
         $('#' + id + '_ru').val(ru_url.split('').map(function (char) {
             return lang_map[char] || char; // Используем карту для замены символов
@@ -178,12 +180,12 @@ function set_html_field(id) {
 
 
 
-function showNotification(message, duration = 5000,state = 1,type = 1) {
+function showNotification(message, duration = 5000, state = 1, type = 1) {
     // Создаем контейнер для уведомления
     const container = document.getElementById('notification-container');
     const notification = document.createElement('div');
 
-    if(state ==1 )    notification.classList.add('notification_on');
+    if (state == 1) notification.classList.add('notification_on');
     else notification.classList.add('notification_off');
     notification.classList.add('notification');
     notification.innerText = message;
@@ -197,4 +199,22 @@ function showNotification(message, duration = 5000,state = 1,type = 1) {
             notification.remove();
         }, 500); // Убираем элемент после анимации
     }, duration);
+}
+
+function set_input_novoid(id) {
+
+    document.getElementById(id).addEventListener('input', function () {
+        var value = this.value;
+
+        if (value == '') {
+            this.style.borderColor = 'red'; // Изменение цвета границы на красный
+            $(this).prev('label').css("color", 'red');
+
+            $("#save_item").hide();
+        } else {
+            $(this).prev('label').css("color", '');
+            $("#save_item").show();
+            this.style.borderColor = ''; // Убираем цвет границы, если поле не пустое
+        }
+    });
 }

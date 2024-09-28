@@ -1,6 +1,7 @@
 @php
-
-$name = "tagger";
+//unique for each editror IMPORTANT
+    $name = "tagger";
+//
 
 $get_link = '/admin/product_edit/tags/content';
 
@@ -10,16 +11,17 @@ $uppdate_link = '/admin/product_edit/tags_edit/uppdate';
 
 $add_link = '/admin/product_edit/tags_edit/add';
 
+$id_name  = $name."item".$id_item;
 @endphp
-
 <script>
     id_item = '{{$id_item}}'
 </script>
 
-<div class="tag_selector" id="item{{$id_item}}">
-
+<div class="tag_selector" id="{{$id_name}}">
+  
 </div>
 <script>
+    
   $( document ).ready(
     function(){
         $(document).on('change', '.{{$name}}sel', function() {
@@ -28,7 +30,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
 
             if (selectedValue == "empty") return 0; // Выводим значение в консоль
 
-            StartLoading('#item{{$id_item}}');
+            StartLoading('#{{$id_name}}');
 
             id = $(this).data("id");
             $.ajax({
@@ -41,16 +43,18 @@ $add_link = '/admin/product_edit/tags_edit/add';
                     id: id_item,
                 },
                 success: function(response) {
-                    console.log(response);
+      
+                    showNotification("Успішно змінено")
                     refresh()
              
                 },
                 error: function(xhr, status, error) {
                     console.log(error);
 
+
                 },
                 complete: function() {
-                    StopLoading('#item{{$id_item}}');
+                    StopLoading('#{{$id_name}}');
                 }
             });
             });
@@ -62,7 +66,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
 
         if (selectedValue == "empty") return 0; // Выводим значение в консоль
 
-        StartLoading('#item{{$id_item}}');
+        StartLoading('#{{$id_name}}');
 
 
         id = $(this).data("id");
@@ -78,7 +82,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
             success: function(response) {
                 console.log(response);
                 refresh()
-                StartLoading('#item{{$id_item}}');
+                StartLoading('#{{$id_name}}');
                 $.ajax({
                     url: '{{$get_link}}',
                     type: 'POST',
@@ -89,7 +93,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
                     },
                     success: function(response) {
 
-                        $("#item{{$id_item}}").html(response);
+                        $("#{{$id_name}}").html(response);
 
                         showNotification("Успішно додано")
                     },
@@ -98,7 +102,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
                         showNotification("Помилка " + error, duration = 5000, 0)
                     },
                     complete: function() {
-                        StopLoading('#item{{$id_item}}');
+                        StopLoading('#{{$id_name}}');
                     }
                 });
 
@@ -108,16 +112,16 @@ $add_link = '/admin/product_edit/tags_edit/add';
 
             },
             complete: function() {
-                StopLoading('#item{{$id_item}}');
+                StopLoading('#{{$id_name}}');
             }
         });
     });
-    $(document).on('click', ".delete_item{{$id_item}}", function() {
+    $(document).on('click', ".delete_{{$id_name}}", function() {
 
         // Получаем выбранное значение
         var id = $(this).data("id");
 
-        StartLoading('#item{{$id_item}}');
+        StartLoading('#{{$id_name}}');
 
         $.ajax({
             url: '{{$delete_link}}',
@@ -133,7 +137,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
                 refresh()
 
 
-                StartLoading('#item{{$id_item}}');
+                StartLoading('#{{$id_name}}');
 
                 $.ajax({
                     url: '{{$get_link}}',
@@ -145,7 +149,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
                     },
                     success: function(response) {
 
-                        $("#item{{$id_item}}").html(response);
+                        $("#{{$id_name}}").html(response);
 
                         showNotification("Успішно видалено", duration = 5000)
                     },
@@ -154,7 +158,7 @@ $add_link = '/admin/product_edit/tags_edit/add';
                         showNotification("Помилка " + error, duration = 5000, 0)
                     },
                     complete: function() {
-                        StopLoading('#item{{$id_item}}');
+                        StopLoading('#{{$id_name}}');
                     }
                 });
             },
@@ -163,14 +167,13 @@ $add_link = '/admin/product_edit/tags_edit/add';
                 showNotification("Помилка " + error, duration = 5000, 0)
             },
             complete: function() {
-                StopLoading('#item{{$id_item}}');
+                StopLoading('#{{$id_name}}');
             }
         });
     });
 
-
     function refresh() {
-        StartLoading('#item{{$id_item}}');
+        StartLoading('#{{$id_name}}');
 
         if(  csrf_token == undefined    ) return setTimeout( refresh(), 300);
 
@@ -184,20 +187,18 @@ $add_link = '/admin/product_edit/tags_edit/add';
                 name: '{{$name}}',
             },
             success: function(response) {
-                $("#item{{$id_item}}").html(response);
+                $("#{{$id_name}}").html(response);
             },
             error: function(xhr, status, error) {
                 console.log(error);
-                setTimeout( refresh(),200);
+
             },
             complete: function() {
-                StopLoading('#item{{$id_item}}');
+                StopLoading('#{{$id_name}}');
             }
         });
-    }setTimeout( refresh(),200);
-    
-   
-
+    }
+    setTimeout( refresh(),300);
 
     });
 </script>

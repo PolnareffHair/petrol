@@ -28,6 +28,7 @@ body header #catalog_window {
         display: flex;
         height: calc(60px * 9 + 40px);
         #main_categories_main_contaner {
+            overflow-y: auto;
             border-right: 1px solid #acacac;
             margin: -10px;
             color: #414141;
@@ -87,7 +88,7 @@ body header #catalog_window {
                     margin-left: 1em;
                     color: #414141;
                     flex-grow: 10;
-                    font-weight: 400;
+                    font-weight: 500;
                 }
             }
 

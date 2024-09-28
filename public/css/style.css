@@ -150,7 +150,7 @@
 }
 .products .product_item .product_item_inside_block .product_atributes {
   display: none;
-  color: #6e6e6e;
+  color: #494949;
   font-size: 14px;
 }
 .products .product_item .product_item_inside_block .product_item_butons_discount {
@@ -288,6 +288,10 @@
     bottom: 20px;
   }
 }
+.products .product_item:hover .product_item_user_buttons .add_favorite, .products .product_item:hover .product_item_user_buttons .add_compare {
+  opacity: 1;
+  transform: translateX(0px);
+}
 .products .product_item .product_item_user_buttons {
   position: relative;
   width: 100%;
@@ -304,10 +308,10 @@
   transition: opacity 0.1s ease-in-out;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 40px;
-  width: 40px;
+  height: 38px;
+  width: 38px;
   border: 1px solid #a6a6a6;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 5px;
   margin-left: 30px;
   display: flex;
@@ -318,8 +322,8 @@
 .products .product_item .product_item_user_buttons .product_item_favorite_button img,
 .products .product_item .product_item_user_buttons .product_item_compare_button img {
   margin-top: 3px;
-  height: 26px;
-  width: 26px;
+  height: 28px;
+  width: 28px;
 }
 @media screen and (max-width: 600px) {
   .products .product_item .product_item_user_buttons .product_item_favorite_button,
@@ -363,6 +367,26 @@
     height: 21px;
     width: 21px;
   }
+}
+@media screen and (min-width: 1000px) {
+  .products .product_item .product_item_user_buttons .add_favorite,
+  .products .product_item .product_item_user_buttons .add_compare {
+    opacity: 0;
+    transform: translateX(3px);
+    transition: opacity 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out;
+  }
+  .products .product_item .product_item_user_buttons .add_favorite:hover .toadd,
+  .products .product_item .product_item_user_buttons .add_compare:hover .toadd {
+    opacity: 1;
+  }
+  .products .product_item .product_item_user_buttons .remove_compare:hover .toremove,
+  .products .product_item .product_item_user_buttons .remove_favorite:hover .toremove {
+    opacity: 1;
+  }
+}
+.products .product_item .product_item_user_buttons .added, .products .product_item .product_item_user_buttons .remove {
+  z-index: 120;
 }
 .products .product_item .hidden_params {
   display: none;
@@ -413,6 +437,9 @@
   height: 100%;
   width: auto;
 }
+.products .product_item .product_price_rating_container .product_rating .review_container {
+  color: #414141;
+}
 @media screen and (max-width: 500px) {
   .products .product_item .product_price_rating_container .product_rating .review_container {
     display: none;
@@ -430,6 +457,8 @@
   font-size: 16px;
   font-weight: 400;
   color: #414141;
+  padding-top: 10px;
+  border-top: 1px dashed #cdcdcd;
 }
 @media screen and (min-width: 700px) {
   .products .product_item .product_item_link:hover .product_item_name {
@@ -898,9 +927,22 @@
   font-size: 20px;
 }
 #compare_window #clear_compare {
+  border: none;
+  border-left: 4px solid #4e72ce;
   margin-top: 50px;
-  width: 100px;
+  width: 150px;
   background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#compare_window #clear_compare svg {
+  margin-right: 0.8em;
+  width: 5em;
+  height: 5em;
+}
+#compare_window #clear_compare:hover {
+  background-color: #eeeeee;
 }
 #compare_window .first_col {
   border-bottom: 1px solid #ffffff;
@@ -944,7 +986,7 @@
 }
 #compare_window #compare_basis .comp_tags #comp_img {
   height: 180px;
-  background-color: #272727;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -966,7 +1008,7 @@
   height: 70px;
 }
 #compare_window #compare_basis .comp_tags #comp_img p {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 13px;
   margin-bottom: 20px;
 }
@@ -1078,6 +1120,9 @@ body header #login_window form #login_links {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+body header #login_window form #login_links div:hover {
+  text-decoration: underline;
 }
 body header #login_window form #login_links a {
   color: #000000;
@@ -1236,6 +1281,7 @@ body header #catalog_window #catalog_window_flex {
   height: 580px;
 }
 body header #catalog_window #catalog_window_flex #main_categories_main_contaner {
+  overflow-y: auto;
   border-right: 1px solid #acacac;
   margin: -10px;
   color: #414141;
@@ -1289,7 +1335,7 @@ body header #catalog_window #catalog_window_flex #main_categories_main_contaner 
   margin-left: 1em;
   color: #414141;
   flex-grow: 10;
-  font-weight: 400;
+  font-weight: 500;
 }
 body header #catalog_window #catalog_window_flex #main_categories_main_contaner #main_categories_list .main_categories_item_hover {
   border-radius: 10 px;
@@ -1732,7 +1778,7 @@ header #order_window form #send_order_button {
 }
 
 #menu_burger {
-  overflow-y: scroll;
+  overflow-y: hidden;
   display: none;
   animation: slideDownmobileMenu 0.3s;
   position: absolute;
@@ -1743,6 +1789,12 @@ header #order_window form #send_order_button {
   width: 280px;
   z-index: 300;
   border: 1px solid gray;
+  border: none;
+}
+@media screen and (max-width: 400px) {
+  #menu_burger {
+    overflow-y: scroll;
+  }
 }
 #menu_burger #burger_links {
   margin: 0 20px;
@@ -1750,6 +1802,12 @@ header #order_window form #send_order_button {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#menu_burger #burger_links .user_profile_menu span {
+  font-size: 0.9em !important;
+  text-align: start !important;
+  display: flex;
+  flex-direction: column;
 }
 #menu_burger #burger_links #menu_catalog {
   border: none;
@@ -1776,6 +1834,7 @@ header #order_window form #send_order_button {
   color: white;
   text-decoration: none;
   background-color: #424242;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1786,6 +1845,10 @@ header #order_window form #send_order_button {
   padding: 0 1em;
   height: 34px;
   font-weight: 500;
+  transition: opacity 0.15s ease;
+}
+#menu_burger #burger_links .menu_button:hover {
+  opacity: 0.8;
 }
 #menu_burger #burger_links .user::before {
   width: 27px;
@@ -1796,12 +1859,17 @@ header #order_window form #send_order_button {
   outline: solid 1px #e0e0e0;
   color: rgb(0, 0, 0);
   display: flex;
+  cursor: pointer;
   justify-content: center;
   padding: 0 1em;
   text-align: center;
   align-items: center;
   height: 28px;
   width: 11em;
+  transition: opacity 0.15s ease;
+}
+#menu_burger #burger_links .menu_list:hover {
+  opacity: 0.6;
 }
 #menu_burger #burger_links a {
   text-align: center;
@@ -1814,6 +1882,16 @@ header #order_window form #send_order_button {
 #menu_burger #burger_links a img {
   height: 1.2em;
   width: auto;
+}
+#menu_burger #burger_links #menu_profile {
+  width: 176px;
+  justify-content: space-between;
+  background-color: white;
+  color: rgb(87, 87, 87);
+  border-bottom: 1px solid rgb(194, 194, 194);
+}
+#menu_burger #burger_links #menu_profile span {
+  text-align: center;
 }
 #menu_burger #close_burger {
   width: 25px;
@@ -1879,7 +1957,7 @@ header #order_window form #send_order_button {
   background-color: #3d3d3d;
   border: 1px solid grey;
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   right: calc(var(--sidde-padding) + 40px);
   bottom: 160px;
   border-radius: 10%;
@@ -1988,8 +2066,15 @@ header #order_window form #send_order_button {
   font-style: normal;
 }
 
+.swiper {
+  width: 100% !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
 html,
 body {
+  background-color: rgb(243, 245, 248);
   height: 100%;
   /* HTML: <div class="loader"></div> */
   /* HTML: <div class="loader"></div> */
@@ -2012,6 +2097,11 @@ html .input_sccsess,
 body .input_sccsess {
   color: rgb(81, 179, 97);
   border-color: rgb(81, 179, 97) !important;
+}
+html main,
+body main {
+  background-color: white;
+  outline: 25px solid rgb(255, 255, 255);
 }
 html .loading,
 body .loading {
@@ -2108,10 +2198,6 @@ header #Head_buttons #logo {
 
 b {
   font-style: medium;
-}
-
-#burger {
-  display: none;
 }
 
 html {
@@ -2258,6 +2344,28 @@ header #Head_buttons #search_button {
 header #Head_buttons #catalog_button img {
   margin-right: 10px;
 }
+header #Head_buttons .user_profile_log {
+  border: none;
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  background-color: rgba(255, 255, 255, 0);
+  height: 32px;
+  border-bottom: #557ee3 solid 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header #Head_buttons .user_profile_log::after {
+  content: "";
+  width: 18px;
+  /* Ширина изображения */
+  height: 21px;
+  /* Высота изображения */
+  background: url("/img/svg/log_white.svg") no-repeat center center;
+  background-size: contain;
+}
 header #Head_buttons #user_log,
 header #Head_buttons #call,
 header #Head_buttons #user_basket,
@@ -2279,7 +2387,9 @@ header #Head_buttons #user_compare {
   header #Head_buttons #user_log:hover,
   header #Head_buttons #call:hover,
   header #Head_buttons #user_basket:hover,
-  header #Head_buttons #user_log:hover {
+  header #Head_buttons #user_log:hover,
+  header #Head_buttons .user_profile_log:hover,
+  header #Head_buttons #user_compare:hover {
     animation: border_color 0.25s;
     border-width: 2px;
     border-color: transparent;
@@ -2566,6 +2676,7 @@ main section #cat_container .cat_item .child_container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  bottom: 0;
 }
 @media screen and (max-width: 1100px) {
   main section #cat_container .cat_item .child_container {
@@ -2573,6 +2684,7 @@ main section #cat_container .cat_item .child_container {
   }
 }
 main section #cat_container .cat_item .child_container .child {
+  font-weight: 500;
   font-size: 0.8em;
   margin-bottom: 0.2em;
   width: 18em;
@@ -2606,6 +2718,32 @@ main section #cat_container .cat_item .child_container .child::before {
 @media screen and (max-width: 800px) {
   main section #cat_container .cat_item img {
     margin-top: 10px;
+  }
+}
+@media screen and (min-width: 800px) {
+  main section #cat_container .cat_item .child_container {
+    position: relative;
+    overflow: visible;
+    background-color: white;
+    z-index: 1000;
+    bottom: 0;
+    overflow: hidden;
+    max-height: 0;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+  main section #cat_container .cat_item:hover {
+    justify-content: space-around;
+  }
+  main section #cat_container .cat_item:hover .child_container {
+    padding: 1em;
+    opacity: 1;
+    max-height: inherit;
+    overflow-y: auto;
+  }
+  main section #cat_container .cat_item:hover .main_c .hide {
+    display: none;
   }
 }
 
@@ -2756,29 +2894,37 @@ main section #cat_container .cat_item .child_container .child::before {
     height: 60px;
   }
 }
+#burger {
+  margin: 0 0.2em 0 0.9em;
+  display: block;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  /* Центрирование по горизонтали */
+  align-items: center;
+  transition: opacity 0.15s ease;
+}
+#burger:hover {
+  opacity: 0.5;
+}
+
+#burger::before {
+  content: "";
+  width: 22px;
+  /* Ширина изображения */
+  height: 28px;
+  /* Высота изображения */
+  background: url("/img/svg/burger.svg") no-repeat center center;
+  background-size: contain;
+}
+
 @media screen and (max-width: 850px) {
-  #burger {
-    display: block;
-    border: none;
-    font-size: 16px;
-    font-weight: 500;
-    color: white;
-    background-color: rgba(255, 255, 255, 0);
-    height: 32px;
-    display: flex;
-    justify-content: center;
-    /* Центрирование по горизонтали */
-    align-items: center;
-  }
-  #burger::before {
-    content: "";
-    width: 22px;
-    /* Ширина изображения */
-    height: 28px;
-    /* Высота изображения */
-    background: url("/img/svg/burger.svg") no-repeat center center;
-    background-size: contain;
-  }
   #background_header_top,
   #background_header_bottom {
     margin-left: -15px;
@@ -3721,11 +3867,11 @@ body {
 }
 
 main {
-  margin-top: 123px;
+  padding-top: 123px;
 }
 @media screen and (max-width: 850px) {
   main {
-    margin-top: 75px;
+    padding-top: 75px;
   }
 }
 
