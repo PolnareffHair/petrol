@@ -22,15 +22,15 @@ $id_name  = $name."item".$id_item;
 </div>
 <script>
     
-  $( document ).ready(
-    function(){
+
+  
         $(document).on('change', '.{{$name}}sel', function() {
             // Получаем выбранное значение
             var selectedValue = $(this).val();
 
             if (selectedValue == "empty") return 0; // Выводим значение в консоль
 
-            StartLoading('#{{$id_name}}');
+            StartLoading('#product_edit_field');
 
             id = $(this).data("id");
             $.ajax({
@@ -45,7 +45,7 @@ $id_name  = $name."item".$id_item;
                 success: function(response) {
       
                     showNotification("Успішно змінено")
-                    refresh()
+                    refresh_tags()
              
                 },
                 error: function(xhr, status, error) {
@@ -54,7 +54,7 @@ $id_name  = $name."item".$id_item;
 
                 },
                 complete: function() {
-                    StopLoading('#{{$id_name}}');
+                    StopLoading('#product_edit_field');
                 }
             });
             });
@@ -66,7 +66,7 @@ $id_name  = $name."item".$id_item;
 
         if (selectedValue == "empty") return 0; // Выводим значение в консоль
 
-        StartLoading('#{{$id_name}}');
+        StartLoading('#product_edit_field');
 
 
         id = $(this).data("id");
@@ -81,8 +81,8 @@ $id_name  = $name."item".$id_item;
             },
             success: function(response) {
                 console.log(response);
-                refresh()
-                StartLoading('#{{$id_name}}');
+                refresh_tags()
+                StartLoading('#product_edit_field');
                 $.ajax({
                     url: '{{$get_link}}',
                     type: 'POST',
@@ -102,7 +102,7 @@ $id_name  = $name."item".$id_item;
                         showNotification("Помилка " + error, duration = 5000, 0)
                     },
                     complete: function() {
-                        StopLoading('#{{$id_name}}');
+                        StopLoading('#product_edit_field');
                     }
                 });
 
@@ -112,7 +112,7 @@ $id_name  = $name."item".$id_item;
 
             },
             complete: function() {
-                StopLoading('#{{$id_name}}');
+                StopLoading('#product_edit_field');
             }
         });
     });
@@ -120,9 +120,7 @@ $id_name  = $name."item".$id_item;
 
         // Получаем выбранное значение
         var id = $(this).data("id");
-
-        StartLoading('#{{$id_name}}');
-
+        StartLoading('#product_edit_field');
         $.ajax({
             url: '{{$delete_link}}',
             type: 'POST',
@@ -130,52 +128,26 @@ $id_name  = $name."item".$id_item;
                 _token: csrf_token,
                 attr: id,
                 id: id_item,
-
             },
             success: function(response) {
                 console.log(response);
-                refresh()
 
-
-                StartLoading('#{{$id_name}}');
-
-                $.ajax({
-                    url: '{{$get_link}}',
-                    type: 'POST',
-                    data: {
-                        _token: csrf_token,
-                        id: id_item,
-                        name: '{{$name}}',
-                    },
-                    success: function(response) {
-
-                        $("#{{$id_name}}").html(response);
-
-                        showNotification("Успішно видалено", duration = 5000)
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-                        showNotification("Помилка " + error, duration = 5000, 0)
-                    },
-                    complete: function() {
-                        StopLoading('#{{$id_name}}');
-                    }
-                });
+                refresh_tags()
             },
             error: function(xhr, status, error) {
                 console.log(error);
                 showNotification("Помилка " + error, duration = 5000, 0)
             },
             complete: function() {
-                StopLoading('#{{$id_name}}');
+                StopLoading('#product_edit_field');
             }
         });
     });
 
-    function refresh() {
-        StartLoading('#{{$id_name}}');
+    function refresh_tags() {
+        StartLoading('#product_edit_field');
 
-        if(  csrf_token == undefined    ) return setTimeout( refresh(), 300);
+        if(  csrf_token == undefined    ) return setTimeout( refresh_tags(), 300);
 
 
         $.ajax({
@@ -194,11 +166,11 @@ $id_name  = $name."item".$id_item;
 
             },
             complete: function() {
-                StopLoading('#{{$id_name}}');
+                StopLoading('#product_edit_field');
             }
         });
     }
-    setTimeout( refresh(),300);
 
-    });
+
 </script>
+<button class="up" style="display:none;" onclick="refresh_tags()">⟳</button>

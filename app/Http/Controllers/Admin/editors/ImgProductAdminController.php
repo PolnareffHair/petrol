@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\editors;
 
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +28,7 @@ class ImgProductAdminController extends Controller
         if($id) $img = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_img_urls")->first()); else return "Помилка идентифікатора";
 
 
-        return view("admin.components.img.edit", ["id" => $id, "img" => $img, "path" => [$pstart,$pend],]);
+        return view("admin.product_edit.img.edit", ["id" => $id, "img" => $img, "path" => [$pstart,$pend],]);
     }
 
     public function delete(Request $request)

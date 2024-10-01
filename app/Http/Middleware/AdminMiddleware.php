@@ -22,7 +22,11 @@ class AdminMiddleware
             // Если пользователь администратор, продолжаем выполнение запроса
             return $next($request);
         }
+        // Если запрос AJAX
+        if ($request->ajax()) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
         // Если не администратор, перенаправляем на главную страницу
-        return redirect('/');
+        return redirect("/");
     }
 }

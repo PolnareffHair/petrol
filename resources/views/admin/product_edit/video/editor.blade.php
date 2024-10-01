@@ -19,7 +19,8 @@ $path_base = "/images/product/$id_item" . "_";
 $end_prefix = "_small.webp";
 
 @endphp
-<div class="sort_editor">
+
+<div class="sort_editor" >
     <p>Посилання на відео (youtube -> Поділитись -> Код). Приклад посилання :www.youtube.com/embed/ri4SR2cZeIA</p>
     <div>
         <div class="img_sorter" id="{{$sorter_name}}" >
@@ -55,15 +56,13 @@ $end_prefix = "_small.webp";
 
 </div>
 <script>   
-
-    $(document).ready(function() {
         //download //delete
         document.getElementById('{{$sorter_name}}').addEventListener('click', function(event) {
             DeletedButton = event.target.closest('.delete_img');
             if (DeletedButton) {
                 id = DeletedButton.getAttribute('data-link');
                 // Второй AJAX-запрос для обновления корзины
-                StartLoading("#product_edit_field");
+    
                 $.ajax({
                     url: '{{$delete_link}}',
                     type: 'POST',
@@ -74,19 +73,17 @@ $end_prefix = "_small.webp";
                     },
                     success: function(response) {
 
-                        get_img_editor()
+                        get_video_editor()
 
-                        showNotification("Успішно видалено", duration = 5000)
+                        showNotification(response, duration = 5000)
                     },
                     error: function(xhr, status, error) {
 
-                        get_img_editor()
+                        get_video_editor()
 
                         showNotification("Помилка " + error, duration = 5000, 0)
                     },
-                    complete: function() {
-                        StopLoading('#product_edit_field');
-                    }
+                  
                 });
             }
         });
@@ -110,13 +107,13 @@ $end_prefix = "_small.webp";
                     },
                     success: function(response) {
                        
-                        get_img_editor()
+                        get_video_editor()
                         showNotification("Послідовність успішно збережено", duration = 5000)
 
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
-                        get_img_editor();
+                        get_video_editor();
                         showNotification("Помилка " + error, duration = 5000, 0);
 
                     },
@@ -143,13 +140,13 @@ $end_prefix = "_small.webp";
                     },
                     success: function(response) {
                        
-                        get_img_editor()
+                        get_video_editor()
                         showNotification(response, duration = 5000)
 
                     },
                     error: function(xhr, status, error) {
                         console.log(error);
-                        get_img_editor();
+                        get_video_editor();
                         showNotification("Помилка " + error, duration = 5000, 0);
 
                     },
@@ -162,15 +159,8 @@ $end_prefix = "_small.webp";
         });
 
         // Function to get the current order of items
-
-
-
-        
- 
-
-    });
     //get img list for editor
-    function get_img_editor() {
+    function get_video_editor() {
         StartLoading("#product_edit_field");
         $.ajax({
             url: '{{$get_link}}',
@@ -180,18 +170,24 @@ $end_prefix = "_small.webp";
                 product_id : "{{$id_item}}",
             },
             success: function(response) {
-                StopLoading("#product_edit_field");
+                StopLoading("#product_edit_field"); 
                 document.getElementById("{{$sorter_name}}").innerHTML = response;       
                 document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
                 document.getElementById('{{$sorter_name}}').classList.add('loaded');
             },
-            error: function(xhr, status, error) {
+            error: function(xhr, status, error) {   
                 StopLoading("#product_edit_field");
-                setTimeout(get_img_editor(), 200);
                 document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
                 document.getElementById('{{$sorter_name}}').classList.add('loaded');
             }
         });
     }
-  setTimeout(   get_img_editor(),200);
+
+
+        
+ 
+
+
+ 
 </script>
+<button class="up" style="display:none;" onclick="get_video_editor()">⟳</button>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\editors;
 
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +25,9 @@ class VideoProductController extends Controller
 
         if($id) $video = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_video_link")->first()); else return "Помилка идентифікатора";
 
-        return view("admin.components.video.edit", ["id" => $id, "id_item" => $id,"video"=>$video ]);
+        $video  = array_filter( $video );
+        
+        return view("admin.product_edit.video.edit", ["id" => $id, "id_item" => $id,"video"=>$video ]);
     }
 
     public function delete(Request $request)
@@ -33,16 +35,21 @@ class VideoProductController extends Controller
 
         if (!isset($request->id)) return "Не встанвленний идентифікатор продукту";
         $id = $request->id;
-        if (!isset($request->video)) return "Не встанвленний идентифікатор Відео";
+
+
+   
         $video = $request->video;
 
         $videoArr = json_decode((string)DB::table("products")->where("product_id", $id)->pluck("product_video_link")->first(), true);
 
-        if (($key = array_search($video, $videoArr)) !== false) {
+        if (($key = array_search($video, $videoArr)) !== false || ($key = array_search($video, $videoArr)) == null) {
             unset($videoArr[$key]);
         } else {
             return "Відео не існує";
         }
+
+        
+     
 
         DB::table("products")->where("product_id", $id)->update(["product_video_link" => json_encode($videoArr)]);
         return "Відео видалено";

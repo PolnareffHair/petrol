@@ -5,8 +5,10 @@
     <div class="basket_product_content">
         <img src="{{$product->product_img_urls}}" alt="">
         <div class="basket_text_buttos">
+            <a href="{{ isset( $product->product_name_ru) ? "" : "/ua" }}/product/{{isset( $product->product_url_ru)? $product->product_url_ru: $product->product_url_ua }}">     
             <span
                 class="basket_text">{{isset( $product->product_name_ru)? $product->product_name_ru: $product->product_name_ua }}</span>
+                </a>
             <div class="basket_button_price">
                 <button data-id="{{$id}}" class="basket_remove_button" type="button"><svg width="18" height="18"
                         viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,15 +35,15 @@
 
 
                 @if($product->product_price_discount != 0)
-                <span>
+                <span class="basket_price">
                     <span class="basket_product_price"
-                        style="text-decoration: line-through;color:rgb(255, 94, 94);">{{$product->product_price }}
+                        style="text-decoration: line-through;color:rgb(255, 94, 94);">{{$product->product_price * $product->quantity     }}
                         ₴</span>
-                    <span class="basket_product_price">{{$product->product_price_discount }}
+                    <span class="basket_product_price">{{$product->product_price_discount * $product->quantity }}
                         ₴</span></span>
 
                 @else
-                <span class="basket_product_price">{{$product->product_price }}
+                <span class="basket_product_price">{{$product->product_price * $product->quantity }}
                     ₴</span>
                 @endif
 
@@ -71,7 +73,7 @@
 @endforeach
 <script>
     //here all right
-fullprice = @JSON($fullprice);
+fullprice ='{{$fullprice}}';
 document.querySelectorAll('.tracked-input').forEach(function(input) {
     input.addEventListener('input', function() {
         const min = parseInt(this.min);

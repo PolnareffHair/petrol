@@ -240,9 +240,10 @@ echo " <script>
             <div class="basket_order_buttons">
                 <div id="basket_prcie" class="basket_summ_price"></div>
                 <div id="basket_button_bottom">
-                    <button class="basket_send" id="basket_back"> {{__("header.basket_return")}}</button>
+               
                     <a href="{{$lang}}/order">
                         <button class="basket_send">{{__("header.make_order")}}</button></a>
+                        <button class="basket_send" id="basket_back"> {{__("header.basket_return")}}</button>   
 
                 </div>
 
@@ -364,6 +365,10 @@ echo " <script>
                                 fill="#b4b4b4" />
                         </svg>
                 </div>
+          
+                <div id ="wrong_login" style=" display:none;">
+                    {{__("header.wrong_login")}}
+                </div>
                 <fieldset>
                     <label for="pnum_input_login">{{__("header.phone_number")}}
                     </label>
@@ -384,7 +389,7 @@ echo " <script>
                     <div> <a href="#">{{__("header.register")}}</a> </div>
                 </div>
 
-                <button id="login_in_button">{{__("header.login")}}</button>
+                <button type="button" id="login_in_button">{{__("header.login")}}</button>
             </form>
 
         </div>

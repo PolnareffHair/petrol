@@ -2,10 +2,11 @@
 <?php
 return [
 
-    "added_favorive" => "Додано до обраного",
-    "remove_favorive" => "Видалено з обраного",
+    "added_favorite" => "Додано до обраного",
+    "remove_favorite" => "Видалено з обраного",
 
-    "unloged_favorive" => "Увійдіть зоб скористатись ",
+
+    "unloged_favorive" => "Увійдіть щоб скористатись ",
 
     "added_compare" => "Додано до порівняння",
     "remove_compare" => "Видалено з порівняння",

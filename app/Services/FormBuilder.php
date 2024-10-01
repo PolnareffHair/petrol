@@ -438,8 +438,8 @@ class FormBuilder
         return 0;
 
     }
-    public function AddEditor($path){
-        $this->editors [] = $path;
+    public function AddEditor( array $path_name):void{
+        $this->editors [] = $path_name;
     }
 
 
@@ -464,7 +464,7 @@ class FormBuilder
 
     }
 
-    public function get_html()
+    public   function get_html()
     {
         return $this->html_forms;
     }

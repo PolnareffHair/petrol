@@ -43,7 +43,6 @@ function set_window(fade_id, window_id, open_button_id, close_button_id, close_b
     window.onclick = function (event) {
 
         // console.log("win.click");
-
         if (event.target == fade) {
             if (current_window.style.display == "block") {
                 document.body.style.overflowY = "scroll";
@@ -90,7 +89,7 @@ set_window("fade", "order_window", "order_product_open", "close_order_button");
 //Получение счетчиков корзины и сравнения, при открытии мобильного меню
 $('#burger').on("click",function(){  
     $("#basket_counter_dup").html( $("#basket_counter").html());
- $("#compare_counter_dup").html( $("#compare_counter").html());
+    $("#compare_counter_dup").html( $("#compare_counter").html());
 })
 
 // Дубль нажатия кнопки в меню бургера и хидера 
@@ -106,3 +105,4 @@ relaph('#menu_call','#call');
 relaph('#menu_basket','#user_basket');
 relaph('#menu_compare','#user_compare');
 relaph('#call_button','#call');
+relaph('.unauth','#user_log');

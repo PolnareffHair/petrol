@@ -54,7 +54,11 @@ body header #catalog_window {
 
             .main_categories_item {
                 cursor: pointer;
-
+              
+                // @media screen and (min-width:1000px) {
+                //     transition: background-color 0.1s ease-in, color 0.1s ease-in  ;
+                    
+                // }
                 font-size: 16px;
                 padding: 10px 0;
                 padding-left: 10px;
@@ -99,9 +103,12 @@ body header #catalog_window {
                 //     rgb(0 0 0 / 0%) 0%,
                 //     rgb(141, 141, 141) 100%
                 // );
+                background-color: #557ee3   ;
 
                 outline: 1px solid #acacac;
-
+                h4{
+                    color: white;
+                }
                 .arrow_cat {
                     display: block;
 

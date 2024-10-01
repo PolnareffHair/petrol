@@ -2,7 +2,7 @@
 
         <div class="tags_block_container">
        
-            @foreach($avalible as  $children)
+            @foreach($avalible as $cat_id_p=> $children)
             <div class="tags_block_top">
                 <span>Додати:  {{$children[array_key_first($children)]["category_name_ua"]}} </span>
             </div>

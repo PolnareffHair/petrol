@@ -48,38 +48,43 @@
                 </style>
 
                 @if( $header_data["isAuth"])
-                @if(!in_array( $value["product_id"],$header_data['favorites']))
+                    @if(!in_array( $value["product_id"],$header_data['favorites']))
 
-                <button title="Додати до бажаного" type="button" data-variable="{{$value["product_id"]}}"
-                    class="product_item_favorite_button add_favorite">
-                    <img class="p_ico" src="/img/svg/favorite.svg" alt="">
+                    <button title="{{__('product.added_favorite')}}" type="button" data-variable="{{$value["product_id"]}}"
+                        class="product_item_favorite_button add_favorite">
+                        <img class="p_ico" src="/img/svg/favorite.svg" alt="">
 
-                    <div class="added msg_pbtn">{{__('product.added_compare')}}</div>
+                        <div class="added msg_pbtn">{{__('product.added_favorite')}}</div>
 
-                    <div class="remove msg_pbtn">{{__('product.remove_compare')}}</div>
+                        <div class="remove msg_pbtn">{{__('product.remove_favorite')}}</div>
 
-                    <div class="toadd msg_pbtn">{{__('product.add_compare_msg')}}</div>
+                        <div class="toadd msg_pbtn">{{__('product.add_favorite_msg')}}</div>
 
-                    <div class="toremove msg_pbtn">{{__('product.remove_compare_msg')}}</div>
-                </button>
+                        <div class="toremove msg_pbtn">{{__('product.remove_favorite_msg')}}</div>
+                    </button>
+                    @else
+                    <button title="{{__('product.remove_favorite')}}" type="button" data-variable="{{$value["product_id"]}}"
+                        class="product_item_favorite_button remove_favorite" style="opacity: 1;">
+                        <img class="p_ico" src="/img/svg/favorite_sel.svg" alt="">
+
+
+                        <div class="added msg_pbtn">{{__('product.added_favorite')}}</div>
+
+                        <div class="remove msg_pbtn">{{__('product.remove_favorite')}}</div>
+
+                        <div class="toadd msg_pbtn">{{__('product.add_favorite_msg')}}</div>
+
+                        <div class="toremove msg_pbtn">{{__('product.remove_favorite_msg')}}</div>
+
+                    </button>
+                    @endif
                 @else
-                <button title="Додати до бажаного" type="button" data-variable="{{$value["product_id"]}}"
-                    class="product_item_favorite_button remove_favorite" style="opacity: 1;">
-                    <img class="p_ico" src="/img/svg/favorite_sel.svg" alt="">
+                <button title="{{__('product.add_favorite')}}" type="button"  data-variable="unauth"
+                        class="product_item_favorite_button add_favorite unauth">
+                        <img class="p_ico" src="/img/svg/favorite.svg" alt="">                
+                        <div class="toadd msg_pbtn">{{__('product.unloged_favorite')}}</div>
 
-
-                    <div class="added msg_pbtn">{{__('product.added_compare')}}</div>
-
-                    <div class="remove msg_pbtn">{{__('product.remove_compare')}}</div>
-
-                    <div class="toadd msg_pbtn">{{__('product.add_compare_msg')}}</div>
-
-                    <div class="toremove msg_pbtn">{{__('product.remove_compare_msg')}}</div>
-
-                </button>
-                @endif
-
-
+                    </button>        
                 @endif
 
                 @if(!in_array( $value["product_id"], $header_data['compares']))
@@ -132,12 +137,12 @@
             </a>
             @if($value["product_avalible_state"]==1)
             <div title="Буде відправленно найближчим часом" class="product_delivery_status_ready">
-                <img src="img/icon/novapost.png" alt="">
+                <img src="/img/icon/novapost.png" alt="">
                 {{__("header.ready_to_delivery")}}
             </div>
             @elseif($value["product_avalible_state"]==2)
             <div class="product_delivery_status_ready">
-                <img src="img/icon/order.png" alt="">
+                <img src="/img/icon/order.png" alt="">
                 {{__('header.on_order')}}
             </div>
             @elseif($value["product_avalible_state"]==0)
@@ -272,7 +277,7 @@
             @elseif ($value["product_avalible_state"]==2)
             <button data-variable="{{$value["product_id"]}}" type="button"
                 class="product_order" style="opacity: 1;">
-                <img src="img/icon/orderwhite.png" style="margin-right: 1em;" alt="">{{__("header.order")}}
+                <img src="/img/icon/orderwhite.png" style="margin-right: 1em;" alt="">{{__("header.order")}}
             </button>
 
             @endif

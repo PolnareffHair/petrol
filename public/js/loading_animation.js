@@ -28,17 +28,23 @@ function StartLoading(id){
 }
 
 function StopLoading(id){
-
-    $(id).toggleClass("unloading");
     
-    setTimeout(function(){ $(id).toggleClass("loading");
-
-    $(id).toggleClass("unloading");},300);
-
-    // Ищем элемент оверлея по id и удаляем его
     const overlay = document.getElementById('pageOverlay');
     if (overlay) {
         overlay.remove();
     }
+    if (id)
+        {
+
+            $(id).toggleClass("unloading");
+    
+            setTimeout(function(){ $(id).toggleClass("loading");
+        
+            $(id).toggleClass("unloading");},300);
+
+        }   
+
+    // Ищем элемент оверлея по id и удаляем его
+  
 
 }

@@ -14,6 +14,8 @@ $some_function = function () {
     return $lang = app()->getLocale();
 };
 
+Route::get('/send',function(){ return view("sender");});
+
 //Надає базову інформацію про кошик порівнння юзера і т д
 Route::middleware([BaseDateMiddleware::class])->group(function() use ($some_function) {
 

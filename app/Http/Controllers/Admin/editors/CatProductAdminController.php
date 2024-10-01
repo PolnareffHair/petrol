@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\editors;
 
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +32,7 @@ class CatProductAdminController extends Controller
             return $item->category_id;
         })->toArray();
 
-    
+ 
         $t = function($value) use ($cat_exist) {
             $ar = $cat_exist[$value] ; // Возвращаем null, если ключ не найден
             $ar["id"] = $value ;
@@ -41,7 +41,7 @@ class CatProductAdminController extends Controller
 
         // categrory_name_ua, category_id, category_parent
         $cat_in_product = array_map($t, $cat_in_product); 
-
+      
         $off_parents = [];        
         
         foreach($cat_in_product as $key=>$cat){  
@@ -75,57 +75,60 @@ class CatProductAdminController extends Controller
             }            
         }
 
-       // return var_dump($cat_in_product);
+       $cat_0_parent = [];
 
-       $cat_exist_proceed =  $cat_exist;
-
-       $avalible = [];
-
-        foreach (  $cat_exist_proceed as $id_C => $value) {
+        foreach (  $cat_exist as $id_C => $value) {
             if( $value["category_parent"] == 0 )
             {
-                $avalible [$id_C][$id_C] = $value;
+                $cat_0_parent [$id_C][$id_C] = $value;
+
             }
         }
-        $avalible_chng = $avalible ;
-
-
+        $cat_full_list = $cat_0_parent;
+        
+        $cat_exist_2level  = $cat_exist;
         // Тут додаються "--" та сортуються катгорії батьківська->дочірня
-        foreach (   $avalible as $value) {
-
-            foreach (   $value as $id_C => $category) {
-
-                if( $category["category_parent"] != 0 )
-                {
-                    //add a -- to 3level deep
-                    if( isset ( $cat_exist_proceed[$value["category_parent"]] ["category_parent"]) && $cat_exist_proceed[$value["category_parent"]] ["category_parent"]   != 0) 
-                    {
-                        $value["category_name_ua"] =   "--". $value["category_name_ua"]; 
-                        
-                        // // Получаем первую часть массива
-                        // $firstPart[] = array_slice($avalible[$cat_exist_proceed[$value["category_parent"]] ["category_parent"]]  ,  0, $cat_exist_proceed[$value["category_parent"]] ["category_parent"]+1); 
-
-                        // // Получаем вторую часть массива
-                        // $firstPart[] = array_slice($avalible[$cat_exist_proceed[$value["category_parent"]] ["category_parent"]] , $cat_exist_proceed[$value["category_parent"]] ["category_parent"]+1);
-
-                        // $firstPart =  array_merge( $firstPart[0], [$value],$firstPart[1]);
-
-                        $avalible[$cat_exist_proceed[$value["category_parent"]] ["category_parent"]][$id_C] = $value;
-
-                    }   
-                    //add a -- to 2level deep
-                    else
-                    {
-                        $value["category_name_ua"] =   "-". $value["category_name_ua"]; 
-                        $avalible[$value["category_parent"]][$id_C] = $value;
-                    }
+        foreach (   $cat_exist  as $key =>  $cat_exist_item) {
+            if($cat_exist_item["category_parent"] != 0 )
+            {
+                if(isset($cat_full_list[ $cat_exist_item["category_parent"]] ) ){
+                    $cat_full_list[$cat_exist_item["category_parent"]] [] = $cat_exist_item;
+                    unset(  $cat_exist_2level [$key]); 
                 }
             }
-
-
+            else   unset(  $cat_exist_2level [$key]); 
         }
 
-        return view("admin.components.cat.edit_get",["selected"=>$cat_in_product,"avalible"=>  $avalible ,  "id_item"=>$id,"name" => $name  ] );
+        $cat_full_list_2lv_added = $cat_full_list;
+
+
+
+
+        foreach ($cat_exist_2level as  $value) {
+            
+            $parent1lvl = $cat_exist[$value["category_parent"]]["category_parent"] ;
+            unset( $cat_full_list_2lv_added[$parent1lvl] );
+        }
+
+
+   
+
+            foreach ( $cat_full_list[$parent1lvl] as $key => $cat) {
+
+                $cat_full_list_2lv_added[$parent1lvl] [] =  $cat;
+
+                foreach ($cat_exist_2level as  $value) {
+                    if($cat["id"] == $value["category_parent"]){
+                        $value["category_name_ua"] = "-"  . $value["category_name_ua"] ;
+                        $cat_full_list_2lv_added[$parent1lvl] [] =  $value;
+
+                    }
+                }
+
+            }
+
+   
+        return view("admin.product_edit.cat.edit_get",["selected"=>$cat_in_product,"avalible"=> $cat_full_list_2lv_added,  "id_item"=>$id,"name" => $name  ] );
         
     }
     public function update(Request $request)

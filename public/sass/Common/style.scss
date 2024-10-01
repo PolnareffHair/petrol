@@ -983,10 +983,11 @@ main {
 
 
 #burger {
-    margin: 0 0.2em 0 0.9em;
+    margin: 0 5px 0 5px;
     display: block;
     overflow: hidden;
-
+    width: 23px;
+    min-width: 23px;
     font-size: 16px;
     font-weight: 500;
     color: white;
@@ -1002,19 +1003,20 @@ main {
     &:hover{
         opacity: 0.5;
     }
+    &::before {
+        content: "";
+        // margin-right: 10px;
+        width: 23px;
+        /* Ширина изображения */
+        height: 20px;
+        /* Высота изображения */
+        background: url("/img/svg/burger.svg") no-repeat center center;
+        background-size: cover;
+    }
 
 }
 
-#burger::before {
-    content: "";
-    // margin-right: 10px;
-    width: 22px;
-    /* Ширина изображения */
-    height: 28px;
-    /* Высота изображения */
-    background: url("/img/svg/burger.svg") no-repeat center center;
-    background-size: contain;
-}
+
 
 
 @media screen and (max-width: 850px) {

@@ -68,8 +68,6 @@ const lang_map = {
     'ъ': ''
 };
 
-
-
 function set_number_limit(id, min, max) {
 
     document.getElementById(id).addEventListener('input', function () {
@@ -178,8 +176,6 @@ function set_html_field(id) {
     $('#ID' + id + "_ru").summernote('code', text);
 }
 
-
-
 function showNotification(message, duration = 5000, state = 1, type = 1) {
     // Создаем контейнер для уведомления
     const container = document.getElementById('notification-container');
@@ -215,6 +211,51 @@ function set_input_novoid(id) {
             $(this).prev('label').css("color", '');
             $("#save_item").show();
             this.style.borderColor = ''; // Убираем цвет границы, если поле не пустое
+        }
+    });
+}
+
+
+function ajax_item_get(link,data_json,on_end){
+    $.ajax({
+        url: link,
+        type: 'POST',
+        data: data_json,
+        beforeSend: function() {
+            StartLoading("#product_edit_field"); 
+        },
+        success: function(response) {
+            on_end(response);
+        },
+        error: function(xhr, status, error) {
+            ////
+            console.log(error);
+            showNotification("Помилка " + error, duration = 5000, 0);
+        },
+        complete: function() {
+            StopLoading("#product_edit_field");
+        }
+    });
+}
+function ajax_item_action(link,data_json,on_end){
+    $.ajax({
+        url: link,
+        type: 'POST',
+        data:data_json,
+        beforeSend: function() {
+            StartLoading("#product_edit_field"); 
+        },
+        success: function(response) {
+            on_end();
+            showNotification(response, duration = 5000)
+        },
+        error: function(xhr, status, error) {
+            on_end();
+            console.log(error);
+            showNotification("Помилка " + error, duration = 5000, 0);
+        },
+        complete: function() {
+            StopLoading("#product_edit_field");
         }
     });
 }

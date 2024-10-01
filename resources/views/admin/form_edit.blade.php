@@ -58,11 +58,21 @@
                 $('#sel_100').show();
                 $('[data-sel="100"]').toggleClass("active_sel");
                 $("#edit_selector").on("click", "button", function(event) {
+                    
                     $(".selects").hide();
+
                     $(".active_sel").toggleClass("active_sel");
+
                     $(this).toggleClass("active_sel");
+
                     $(this).toggleClass("");
+
                     $("#sel_"+$(this).data("sel")).show();
+
+                    $(".selects").filter(function() {
+                    return $(this).css("display") === "block";
+                }).find(".up").click();
+                    
                 });
             });
         </script>

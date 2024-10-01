@@ -29,7 +29,7 @@ class ProductsDataController extends Controller
             , array  $states = [1], $max_price = 0, $min_price = 0
             ,array $filter_tag=[],array $filter_cat=[], int $skip  = 0
         )
-    {
+        {
         $lang = app()->getLocale();
 
         //discount - tested
@@ -182,8 +182,6 @@ class ProductsDataController extends Controller
 
     }
 
-
-
     public function get_product($url)
     {
         $value_aut["isAuth"] = Auth::check();
@@ -196,7 +194,6 @@ class ProductsDataController extends Controller
 
         $value_aut["lang"] = $lang;
         
-
 
         $values = [];
 
@@ -401,6 +398,8 @@ class ProductsDataController extends Controller
         return view("callable.order_product",["id"=>$request->id,"price"=>  $products->product_price,"name"=>  $products->$name,'lang'=>$lang ]);
     }
 
+
+    
 
 
 

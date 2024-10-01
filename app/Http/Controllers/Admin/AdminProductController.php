@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 
 class AdminProductController extends Controller
 {
+    public function searchProducts(Request $request){
+
+        $search = $request->search ??  "_";
+        $full_info =  $request->info ?? false;
+
+        $products = DB::table('products')->where("product_name_ua" , 'like', "%$search%")->orWhere("product_name_ru", 'like', "%$search%")
+        ->take(20);
+
+        $products->select(["product_id","product_name_ua","product_img_urls"]);
+        
+        $products = $products->get()->toArray();
+        return view("admin.product_edit.product_search",["products"=> $products,"search"=> $search]);
+    }
+
+
     public function index()
     {
         $page_text_ua = json_decode(DB::table("page_options")->where("Name", "Main_page_text_ua")->first()->Settings);
@@ -48,6 +63,8 @@ class AdminProductController extends Controller
 
     
         $form->setLinks("/admin/uppdate_product","/admin/delete_product","/admin/products");
+
+
         $form->AddInputText(  "product_name","Назва товару h1 ",true,255,false,false);
 
         $form->AddInputText( "product_article","Код товару/артикль(необов'язково)",false,70, novoid:false);
@@ -77,13 +94,18 @@ class AdminProductController extends Controller
 
         $form->AddInputText( "product_url","url продукту тільки латиниця без пробілів(має бути унікальним для кожного продукту)",true,255,"product_name");
 
-        $form->addEditor(["admin.components.tags.editor","Атрибути"]);
+        $form->addEditor(["admin.product_edit.tags.editor","Атрибути"]);
 
-        $form->addEditor(["admin.components.img.editor","Зображення"]);
+        $form->addEditor(["admin.product_edit.img.editor","Зображення"]);
 
-        $form->addEditor(["admin.components.video.editor","Відео"]);
+        $form->addEditor(["admin.product_edit.video.editor","Відео"]);
 
-        $form->addEditor(["admin.components.cat.editor","Категорії"]);
+        $form->addEditor(["admin.product_edit.cat.editor","Категорії"]);
+
+        $form->addEditor(["admin.product_edit.related.editor","Рекомендовані товари"]);
+
+
+        
 
         return $form->finish( );
     }
@@ -113,6 +135,8 @@ class AdminProductController extends Controller
 
         return  "Успішно оновлено";
     }
+
+    //add delete related
     public function delete_product(Request $request)
     {       
         if ($request->has('product_id')) {
@@ -124,7 +148,7 @@ class AdminProductController extends Controller
             DB::table('category_to_product')->where( ["product_id"=>   $id])->delete();
 
             DB::table('products')->where('product_id', $id)->delete();
-            
+
             
             $dir = getcwd() . '/images/product';  // Исправляем 'ublic' на 'public'
             $files = glob("$dir/{$id}_*");
@@ -135,7 +159,7 @@ class AdminProductController extends Controller
             }
             foreach ($files as $file) {
                 if (!file_exists($file)) {
-                    echo "Файл не существует: $file\n";
+                    echo "Файл не існує: $file\n";
                 }
             }
             return 0;

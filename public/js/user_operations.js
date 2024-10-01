@@ -2,7 +2,8 @@ let debounceTimer;
 const csrf_token_user  = $('meta[name="csrf-token"]').attr('content');
 //add to favorite
 function sendAjaxRequestFavorite(event) {
-    const product_id = event.currentTarget.getAttribute('data-variable');
+    product_id = event.currentTarget.getAttribute('data-variable');
+    if (product_id == "unauth") return 0;
     let element = event.currentTarget;
     if (!product_id) {
         console.error('Ошибка: идентификатор продукта не найден или пустой.');
@@ -121,18 +122,6 @@ const removeFavorite = document.querySelectorAll('.remove_favorite');
 removeFavorite.forEach(function (button) {
         button.addEventListener('click', sendAjaxRequestRemoveFavorite);
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -308,31 +297,56 @@ $(document).ready(function() {
     });
 });
 
-$("#login_in_button").click(function (e) { 
-    StartLoading("#login_window_f");
-    e.preventDefault();
-    $.ajax({
-    url: '/login',
-    type: 'POST',
-    data: {
-        _token: csrf_token_user,
-        password: $("#password_input").val(),
-        phone_number: $("#pnum_input_login").val(),
-    },
-    success: function(response) {
+    $("#login_in_button").click(function (e) { 
+        error_clear("pnum_input_login");  
+            // Проверка на неполный номер телефона
+            if ($('#pnum_input_login').val().includes('_') ) {  
+                error_input("pnum_input_login");          
+                return; 
+            }
+            error_clear("password_input");    
+            if ($('#password_input').val().length < 7 ) {  
+                error_input("password_input");          
+                return; 
+            }
 
-       console.log(response);
-       
-       if(response == 0) window.location.href = '/dashboards';
+            StartLoading("#login_window_f"); 
 
-    },
-    error: function(xhr, status, error) {
-        window.location.reload();
-        console.log(error);
+        $.ajax({
+        url: '/login',
+        type: 'POST',
+        data: {
+            _token: csrf_token_user,
+            password: $("#password_input").val(),
+            phone_number: $("#pnum_input_login").val(),
+        },
+        success: function(response) {     
+            StopLoading("#login_window_f");
+            if(response == 0) window.location.href = '/dashboards';
+            else {$("#wrong_login").show();}
+
+        },
+        error: function(xhr, status, error) {
+        
+            $("#wrong_login").show() 
+            StopLoading("#login_window_f");
+        }
+        });
+
+
+    });
+
+    function error_input(id) {  
+        $('#'+id).show("wrong_login");
+
+        if($('#'+id).hasClass("input_error")){
+            $('#'+id).removeClass( "input_error");
+
+            setTimeout(function(){  $('#'+id).addClass( "input_error");},200)
+        }
+        else $('#'+id).addClass( "input_error");
     }
-    ,
-    complete: function(){
-        StopLoading("#login_window_f");
+    function error_clear(id) {  
+        $('#'+id).removeClass( "input_error");
+
     }
-});
-});

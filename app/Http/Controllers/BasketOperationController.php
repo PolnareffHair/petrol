@@ -44,7 +44,7 @@ class BasketOperationController extends Controller
         if (!isset($cart)) return "0";
         $full_price = 0;
         foreach ($cart as $key => $values) {
-            $cart_res[$key] = DB::table('products')->where(["product_id" => $key])->get(["product_name_" . $lang, "product_price_discount", "product_price"])->first();
+            $cart_res[$key] = DB::table('products')->where(["product_id" => $key])->get(["product_name_" . $lang, "product_price_discount", "product_price","product_url_$lang"])->first();
             $cart_res[$key]->product_img_urls = "images/product/$key" . "_0_small.webp";
             $cart_res[$key]->quantity =  $values["quantity"];
 

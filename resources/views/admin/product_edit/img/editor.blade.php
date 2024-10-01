@@ -18,6 +18,7 @@ $path_base = "/images/product/$id_item" . "_";
 $end_prefix = "_small.webp";
 
 @endphp
+
 <div class="sort_editor">
     <p>Перше зліва зображення відображатиметься як головне. Зображення зберігаються в розмірі 700x700 пікселів.</p>
     <div>
@@ -57,7 +58,7 @@ $end_prefix = "_small.webp";
 </div>
 <script>    
 
-    $(document).ready(function() {
+
      
         //download //delete
         document.getElementById('{{$sorter_name}}').addEventListener('click', function(event) {
@@ -109,33 +110,34 @@ $end_prefix = "_small.webp";
         });
         
         // Инициализация SortableJS
-        const sortable = new Sortable(document.getElementById('{{$sorter_name}}'), {
+        const sortable_img = new Sortable(document.getElementById('{{$sorter_name}}'), {
             animation: 100,
-            onEnd: function (evt) {
-                StartLoading("#product_edit_field"); 
-
+            onEnd: function () {
                 $.ajax({
                     url: '{{$uppdate_link}}',
                     type: 'POST',
                     data: {
-                        img: getOrder(),
+                        img: getOrder_img(),
                         product_id: "{{$id_item}}",
                         _token: csrf_token
+                    },
+                    beforeSend: function() {
+                        StartLoading("#product_edit_field"); 
                     },
                     success: function(response) {
                         console.log(response);
                         get_img_editor()
-                        showNotification("Послідовність успішно збережено", duration = 5000)
-
+                        showNotification(response, duration = 5000)
                     },
                     error: function(xhr, status, error) {
-                        console.log(error);
-                        get_img_editor();
-                        showNotification("Помилка " + error, duration = 5000, 0);
 
+                        console.log(error);
+
+                        get_img_editor();
+
+                        showNotification("Помилка " + error, duration = 5000, 0);
                     },
                     complete: function() {
-      
                         StopLoading("#product_edit_field");
                     }
                 });
@@ -186,40 +188,42 @@ $end_prefix = "_small.webp";
 
         });
         // Function to get the current order of items
-        function getOrder() {
+        function getOrder_img() {
             const items = document.querySelectorAll('#{{$sorter_name}} .sortable-item');
             const order = Array.from(items).map(item => item.getAttribute('data-id'));
             return order;
             //console.log('Current order:', order);
         }
  
-        
- 
+        //get img list for editor
+        function get_img_editor() {
+            StartLoading("#product_edit_field");
+            $.ajax({
+     
+                url: '{{$get_link}}',
+                type: 'post',
+                data: {
+                    _token: csrf_token,
+                    product_id : "{{$id_item}}",
+                    path_start : "{{$path_base}}" ,
+                    path_end : "{{$end_prefix}}",
+                },
+                success: function(response) {
+                    StopLoading("#product_edit_field");
+                    document.getElementById("{{$sorter_name}}").innerHTML = response;
+                    document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
+                    document.getElementById('{{$sorter_name}}').classList.add('loaded');
+                },
+                error: function(xhr, status, error) {
+                    StopLoading("#product_edit_field");
 
-    //get img list for editor
-    function get_img_editor() {
-        $.ajax({
-            url: '{{$get_link}}',
-            type: 'post',
-            data: {
-                _token: csrf_token,
-                product_id : "{{$id_item}}",
-                path_start : "{{$path_base}}" ,
-                path_end : "{{$end_prefix}}",
-            },
-            success: function(response) {
-                document.getElementById("{{$sorter_name}}").innerHTML = response;
-                document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
-                document.getElementById('{{$sorter_name}}').classList.add('loaded');
-            },
-            error: function(xhr, status, error) {
-                setTimeout(get_img_editor(), 200);
-                document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
-                document.getElementById('{{$sorter_name}}').classList.add('loaded');
-            }
-        });
+                    document.getElementById('{{$sorter_name}}').classList.remove("on_loading");
+                    document.getElementById('{{$sorter_name}}').classList.add('loaded');
+                }
+            });
 
-    }
-  setTimeout(   get_img_editor(),200);
-});
+        }
+
+
 </script>
+<button class="up" style="display:none;" onclick="get_img_editor()">⟳</button>

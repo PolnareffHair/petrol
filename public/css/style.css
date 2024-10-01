@@ -662,16 +662,22 @@
   min-height: 300px;
   max-height: 70vh;
   overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+}
+@media screen and (max-width: 840px) {
+  #basket_window #basket_list {
+    padding: 0 5px;
+  }
 }
 #basket_window #basket_list .basket_product {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
-  padding-bottom: 15px;
+  margin: 5px 0;
   width: 100%;
   height: 110px;
-  border-bottom: solid 1px var(--border_gray);
+  border: solid 1px var(--border_gray);
   /* Chrome, Safari, Edge, Opera */
   /* Firefox */
 }
@@ -687,12 +693,18 @@
   flex-direction: column;
   justify-content: space-between;
 }
+@media screen and (max-width: 400px) {
+  #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos {
+    padding-top: 0em;
+  }
+}
 #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_text {
   max-width: 100%;
   font-size: 16px;
-  color: var(--limk_color);
+  color: #333333;
+  font-weight: 500;
   width: 100%;
-  height: 65px;
+  height: 45px;
   overflow: hidden;
   /* Скрывать переполняющий текст */
   text-overflow: ellipsis;
@@ -700,16 +712,28 @@
 }
 #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price {
   max-width: 100%;
-  height: 22px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 18px;
+  margin-top: 0.5em;
+}
+#basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_price {
+  border-radius: 2px;
+  color: rgb(0, 0, 0);
+  padding: 0.2em;
+  border: 1px solid var(--border_gray);
+}
+@media screen and (min-width: 600px) {
+  #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_price {
+    padding: 0.4em;
+  }
 }
 @media screen and (min-width: 700px) {
   #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button:hover {
     color: #ff7979;
+    border: 1px solid #ff7979;
   }
   #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button:hover svg g path {
     fill: #ff7979;
@@ -723,18 +747,26 @@
   color: var(--main_gray);
   font-weight: 400;
   color: #535353;
+  padding: 0.2em;
+  border-radius: 3px;
+  border: 1px solid var(--border_gray);
+}
+@media screen and (min-width: 700px) {
+  #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button {
+    padding: 0.4em;
+  }
 }
 #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button svg {
   transform: translateY(3px);
   height: 18;
   width: 18;
-  margin-right: 2px;
 }
 #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button svg g path {
   fill: #535353;
 }
 #basket_window #basket_list .basket_product .basket_product_content img {
-  margin-right: 35px;
+  margin-right: 17px;
+  margin-left: 17px;
   height: 90px;
   width: auto;
 }
@@ -753,6 +785,12 @@
     background-color: var(--border_gray);
   }
 }
+@media screen and (max-width: 700px) {
+  #basket_window #basket_list .basket_product .basket_plus,
+  #basket_window #basket_list .basket_product .basket_minus {
+    font-size: 20px;
+  }
+}
 #basket_window #basket_list .basket_product .basket_product_quantity {
   border: 1px solid var(--border_gray);
   display: flex;
@@ -760,9 +798,15 @@
   align-items: center;
   justify-content: center;
   width: 35px;
-  min-width: 35px;
   margin-right: 10px;
   height: 90px;
+}
+@media screen and (max-width: 800px) {
+  #basket_window #basket_list .basket_product .basket_product_quantity {
+    margin-right: 5px;
+    height: 90px;
+    width: 30px;
+  }
 }
 #basket_window #basket_list .basket_product .basket_product_number {
   border: none;
@@ -785,26 +829,33 @@
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 #basket_window .basket_order_buttons .basket_summ_price,
 #basket_window .basket_order_buttons .basket_send {
-  margin-right: 14px;
   font-size: 20px;
   height: 34px;
   width: 320px;
 }
 #basket_window .basket_order_buttons .basket_summ_price {
   margin-top: 0.1em;
-  margin-bottom: 0.1em;
-  font-weight: 500;
+  margin-bottom: 0;
+  font-weight: 400;
   display: flex;
   justify-content: end;
   align-items: center;
-  color: #557ee3;
+  background-color: #3b3b3b;
+  color: white;
+  justify-content: center;
 }
 @media screen and (max-width: 450px) {
   #basket_window .basket_order_buttons .basket_summ_price {
     font-size: 16px;
+  }
+}
+@media screen and (min-width: 800px) {
+  #basket_window .basket_order_buttons .basket_summ_price {
+    width: 100%;
   }
 }
 #basket_window .basket_order_buttons .basket_send {
@@ -812,7 +863,6 @@
   font-weight: 700;
   background-color: var(--main_blue);
   color: white;
-  margin-bottom: 20px;
 }
 #basket_window .basket_order_buttons .basket_send:hover {
   background-color: #4267c2;
@@ -822,8 +872,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
 }
 #basket_window .basket_order_buttons #basket_button_bottom #basket_back {
+  border: 1px solid #6d6d6d;
   font-size: 18px;
   font-weight: 400;
   background-color: transparent;
@@ -839,18 +891,15 @@
     top: 0;
     transform: translate(-50%, 0);
   }
-  #basket_window #basket_list .basket_product .basket_product_quantity {
-    margin-right: 0;
-  }
   #basket_window #basket_list .basket_product .basket_product_content {
-    margin: 9px 5px 9px 0;
+    align-items: center;
+    margin: 0px 5px 0px 0;
   }
   #basket_window #basket_list {
     height: calc(100vh - 197px);
   }
   #basket_window .basket_order_buttons .basket_send {
     max-width: 100%;
-    margin-bottom: 10px;
   }
   #basket_window .basket_order_buttons .basket_send {
     margin-right: 0;
@@ -863,19 +912,17 @@
     width: 300px;
   }
   #basket_window #basket_list {
-    padding: 0 18px;
+    padding: 0 10px;
   }
   #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_text {
+    margin-top: 0em;
+    height: 55px;
     font-size: 16px;
   }
   #basket_window #basket_list .basket_product .basket_product_content img {
     margin-right: 15px;
     height: 95px;
     width: auto;
-  }
-  #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_text {
-    height: 55px;
-    margin-bottom: 15px;
   }
   #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button svg {
     height: 20px;
@@ -891,14 +938,20 @@
 }
 
 @media screen and (max-width: 450px) {
+  body header #basket_window #basket_list .basket_product .basket_product_content img {
+    margin-right: 10px;
+    margin-left: 10px;
+    height: 65px;
+    width: auto;
+  }
   body header #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button span {
     display: none;
   }
   body header #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_text {
-    font-size: 13px;
+    font-size: 14px;
   }
   body header #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_remove_button {
-    font-size: 12px;
+    font-size: 14px;
   }
   body header #basket_window #basket_list .basket_product .basket_product_content .basket_text_buttos .basket_button_price .basket_product_price {
     font-size: 16px;
@@ -985,7 +1038,7 @@
   border: 1px solid #afafaf;
 }
 #compare_window #compare_basis .comp_tags #comp_img {
-  height: 180px;
+  height: 210px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -996,6 +1049,7 @@
 #compare_window #compare_basis .comp_tags #comp_img .delete {
   margin-bottom: -45px;
   height: 30px;
+  z-index: 1000;
   width: 30px;
   margin-top: 10px;
   margin-left: 100px;
@@ -1004,8 +1058,8 @@
 #compare_window #compare_basis .comp_tags #comp_img img {
   border-radius: 10px;
   margin-top: 20px;
-  width: 70px;
-  height: 70px;
+  width: 120px;
+  height: 120px;
 }
 #compare_window #compare_basis .comp_tags #comp_img p {
   color: rgb(0, 0, 0);
@@ -1339,7 +1393,11 @@ body header #catalog_window #catalog_window_flex #main_categories_main_contaner 
 }
 body header #catalog_window #catalog_window_flex #main_categories_main_contaner #main_categories_list .main_categories_item_hover {
   border-radius: 10 px;
+  background-color: #557ee3;
   outline: 1px solid #acacac;
+}
+body header #catalog_window #catalog_window_flex #main_categories_main_contaner #main_categories_list .main_categories_item_hover h4 {
+  color: white;
 }
 body header #catalog_window #catalog_window_flex #main_categories_main_contaner #main_categories_list .main_categories_item_hover .arrow_cat {
   display: block;
@@ -2895,9 +2953,11 @@ main section #cat_container .cat_item .child_container .child::before {
   }
 }
 #burger {
-  margin: 0 0.2em 0 0.9em;
+  margin: 0 5px 0 5px;
   display: block;
   overflow: hidden;
+  width: 23px;
+  min-width: 23px;
   font-size: 16px;
   font-weight: 500;
   color: white;
@@ -2913,15 +2973,14 @@ main section #cat_container .cat_item .child_container .child::before {
 #burger:hover {
   opacity: 0.5;
 }
-
 #burger::before {
   content: "";
-  width: 22px;
+  width: 23px;
   /* Ширина изображения */
-  height: 28px;
+  height: 20px;
   /* Высота изображения */
   background: url("/img/svg/burger.svg") no-repeat center center;
-  background-size: contain;
+  background-size: cover;
 }
 
 @media screen and (max-width: 850px) {
@@ -3849,6 +3908,19 @@ footer {
   }
 }
 
+.unauth div {
+  color: white;
+  font-weight: 500;
+  background-color: #4e72ce !important;
+  width: 100px;
+  margin-right: 14em;
+}
+
+@media screen and (max-width: 800px) {
+  .unauth {
+    display: none !important;
+  }
+}
 :root {
   --limk_color: #4296cd;
   --main_gray: #272727;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\editors;
 
 use Illuminate\Support\Facades\DB;
 
@@ -74,7 +74,7 @@ class TagProductAdminController extends Controller
             $selected_done[$attr_s['atribute_id']] = $selected[$attr_s['atribute_id']];
 
         }
-        return view("admin.components.tags.edit_get",["selected"=>$selected_done, "attr_names"=> $attr_names,"avalible"=>$attr_ex,  "id_item"=>$id,"name" => $name  ] );
+        return view("admin.product_edit.tags.edit_get",["selected"=>$selected_done, "attr_names"=> $attr_names,"avalible"=>$attr_ex,  "id_item"=>$id,"name" => $name  ] );
         
     }
     public function update(Request $request)
