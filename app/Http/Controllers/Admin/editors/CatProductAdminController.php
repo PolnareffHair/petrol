@@ -12,20 +12,21 @@ use Illuminate\Http\Request;
 class CatProductAdminController extends Controller
 {
     
-    public function get(Request $request){
+    public function read(Request $request){
 
         if(!$request->name ) return "Помилка назви форми";
         $name = $request->name;
 
-        if(!$request->id ) return "Помилка ідентифікатору продукту";
-        $id = $request->id;
+        if(!$request->pid ) return "Помилка ідентифікатору продукту";
+        $id = $request->pid;
+        
+
 
         $cat_exist =  db::table("categories")->select("category_name_ua","category_ID","category_parent")->get()
         ->mapWithKeys(function ($item) {
             return [$item->category_ID => ["category_parent"=>$item->category_parent,"category_name_ua"=>$item->category_name_ua,"id" =>$item->category_ID ]];
         })
         ->toArray();
-
         
         $cat_in_product =  db::table('category_to_product')->where(["product_id"=>$id])->get("category_id")
         ->map(function ($item) {
@@ -128,31 +129,10 @@ class CatProductAdminController extends Controller
             }
 
    
-        return view("admin.product_edit.cat.edit_get",["selected"=>$cat_in_product,"avalible"=> $cat_full_list_2lv_added,  "id_item"=>$id,"name" => $name  ] );
+        return view("admin.edit.cat.edit_get",["selected"=>$cat_in_product,"avalible"=> $cat_full_list_2lv_added,  "id_item"=>$id,"name" => $name  ] );
         
     }
-    public function update(Request $request)
-    {   
-        if (!isset($request->id)) return "Не встанвленний идентифікатор продукту";
-        $id = $request->id;
-
-        if (!isset($request->attr)) return "Не встанвленний идентифікатор категорії";
-        $attr = $request->attr;
-
-        if (!isset($request->attr_val)) return "Не встанвлене значення категорії";
-        $attr_val = $request->attr_val;
-
-   
-       $attr_name =(array) DB::table("attributes_values_exist")->where("val_name_ua" , $attr_val)->get()[0];
-
-        if (!isset( $attr_name)) return "Не існує значення категорії";
-
-        DB::table("attributes_values")->where("product_id", $id)
-        ->where("atribute_id" , $attr)
-        ->update([   "atribute_name_ua"=>$attr_name["val_name_ua"],"atribute_name_ru"=>$attr_name["val_name_ru"]]);
-
-        return "Тег успішно оновлено";
-    }
+ 
     public function delete(Request $request)
     {
         if (!isset($request->pid)) return "Не встановленний идентифікатор продукту";
@@ -161,8 +141,10 @@ class CatProductAdminController extends Controller
         if (!isset($request->id)) return "Не встановленний идентифікатор категорії";
         $id = $request->id;
 
-        DB::table("category_to_product")->where("category_id", $id)->where("product_id", $pid)->delete();
+        $here = DB::table('products')->where(["product_id"=>$pid])->pluck("product_main_category_id")->first(); 
 
+        if($here == $id) return "Категорія встановлена як головна, змініть головну категорію щоб видалити її";
+        DB::table("category_to_product")->where("category_id", $id)->where("product_id", $pid)->delete();
 
         return "Категорію успішно видалено";
     }
@@ -173,7 +155,7 @@ class CatProductAdminController extends Controller
      * @return Number 0 if opreation successefull  
      * Creates image in floader productid_imgid *_big *_middle  *_small and adds it to current product
      */
-    public function add(Request $request)
+    public function create(Request $request)
     {
      
         if (!isset($request->pid)) return "Не встановленний идентифікатор продукту";

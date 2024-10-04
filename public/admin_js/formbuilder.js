@@ -216,46 +216,56 @@ function set_input_novoid(id) {
 }
 
 
-function ajax_item_get(link,data_json,on_end){
+function ajax_item_get(link,data_json,container_id,loading = true,notification = true){
+
+    if(csrf_token.length == null) return setTimeout(function() { ajax_item_get(link,data_json,container_id,loading,notification);}, 1000); 
+
+    data_json ['_token'] = csrf_token;
     $.ajax({
         url: link,
         type: 'POST',
         data: data_json,
         beforeSend: function() {
-            StartLoading("#product_edit_field"); 
+            if (loading) StartLoading("#product_edit_field"); 
         },
         success: function(response) {
-            on_end(response);
+            console.log("#"+container_id);
+            console.log(response);
+            $("#"+container_id).html(response);
         },
         error: function(xhr, status, error) {
-            ////
+            ////      
+            if(!csrf_token) console.log("key_error");
             console.log(error);
-            showNotification("Помилка " + error, duration = 5000, 0);
+            if (notification) showNotification("Помилка " + error, duration = 5000, 0);
         },
         complete: function() {
-            StopLoading("#product_edit_field");
+            if (loading) StopLoading("#product_edit_field");
         }
     });
 }
-function ajax_item_action(link,data_json,on_end){
+function ajax_item_action(link,data_json,on_end ,loading = true,notification = true){
+    data_json ['_token'] = csrf_token;
+    console.log(data_json);
     $.ajax({
         url: link,
         type: 'POST',
         data:data_json,
         beforeSend: function() {
-            StartLoading("#product_edit_field"); 
+            if (loading) StartLoading("#product_edit_field"); 
         },
         success: function(response) {
             on_end();
-            showNotification(response, duration = 5000)
+            if (notification) showNotification(response, duration = 5000)
         },
         error: function(xhr, status, error) {
+            
             on_end();
             console.log(error);
-            showNotification("Помилка " + error, duration = 5000, 0);
+            if (notification) showNotification("Помилка " + error, duration = 5000, 0);
         },
         complete: function() {
-            StopLoading("#product_edit_field");
+            if (loading) StopLoading("#product_edit_field");
         }
     });
 }

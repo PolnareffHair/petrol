@@ -35,11 +35,9 @@ function StopLoading(id){
     }
     if (id)
         {
-
             $(id).toggleClass("unloading");
     
             setTimeout(function(){ $(id).toggleClass("loading");
-        
             $(id).toggleClass("unloading");},300);
 
         }   

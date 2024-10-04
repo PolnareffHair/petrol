@@ -1,17 +1,25 @@
 @php
+ ///  $id_n  - getting from outside 
+/// $path_link - getting from outside 
+    
 
 
-$add_id = "add_rel_product";
+$id_n = $id_n. "item".$id_item; //
 
-$sorter_name = "sortable-list-related";
+$add_id = "add_img_$id_n"; //add img button
 
-$get_link = '/admin/product_edit/rel_edit/content';
+$sorter_name = "$id_n-list-img";
 
-$delete_link = '/admin/product_edit/rel_edit/delete';
 
-$uppdate_link = '/admin/product_edit/rel_edit/uppdate';
+$id_btn = $id_n. "item".$id_item. "load"; // button for gettin editor
 
-$add_link = '/admin/product_edit/rel_edit/add';
+
+
+$link_searcher = $path_link.'/search';
+$read_link = $path_link.'/read';
+$delete_link = $path_link.'/delete';
+$update_link = $path_link.'/update';
+$create_link = $path_link.'/create';
 
 $end_prefix = "_small.webp";
 
@@ -30,66 +38,64 @@ $csrf = csrf_token();
     <div id="combine_rel_editor">
 
         <div class="img_sorter wider_sorter" id="{{$sorter_name}}">
-
         </div>
-
-
         <div id="add_related_input_div">
             <input placeholder="Пошук товарів" type="text" id="add_related_input" style="height: 3em; width :350px;">
             <div id="searcher{{$sorter_name}}" style="padding-top: 0;" class="product_searcher">
-
-
             </div>
         </div>
 
     </div>
 </div>
+<button class="up" id="{{$id_btn}}" style="display:none;">⟳</button>
 <script>
+    $('#{{$id_btn}}').on("click",  function() {
+        ajax_item_get(
+            "{{$read_link}}",
+            {
+                product_id: "{{$id_item}}"
+            },    
+            "{{$sorter_name}}"
+        );}
+    )
+    //get img list for editor
+
+    
+    
+    //serach
     $("#add_related_input").on("click", function() {
         setTimeout(function () {
-             ajax_item_get('http://localhost/admin/search_product',
+             ajax_item_get('{{$link_searcher}}',
              {
                 _token: "{{$csrf}}",
                 search: $("#add_related_input").val(),
+                except:  Array.from( document.querySelectorAll('#{{$sorter_name}} .sortable-item') ).map(item => item.getAttribute('data-id'))
             },
-            function(response) {
-               $("#searcher{{$sorter_name}}").html(response);
-            }
+            "searcher{{$sorter_name}}"
+            ,false,false
              );
         }, 100)
     });
 
+    let changebale_val_storage_related_input = 10;
     setInterval(
         function() {
             if ( changebale_val_storage_related_input != $("#add_related_input").val() ) {
-            $("#add_related_input").click();
-            changebale_val_storage_related_input = $("#add_related_input").val();
-            console.log("uppdate");
-        }
+                $("#add_related_input").click();
+                changebale_val_storage_related_input = $("#add_related_input").val();
+            }
     }, 250);
-
     $('#searcher{{$sorter_name}}').on('click', function(event) {
                 addButton = event.target.closest('.add');
-                addRlated(addButton.getAttribute('data-id'));
+                id = addButton.getAttribute('data-id');
+                ajax_item_action('{{$create_link }}',
+                    {
+                        related_id: id,
+                        product_id: "{{$id_item}}",
+                    },
+                     function(){ $('#{{$id_btn}}').click();}
+                );
     });
-
-    let changebale_val_storage_related_input = 10;
-
- 
-
-
-
-    function addRlated(id) {
-        ajax_item_action('{{$add_link }}',{
-             related_id: id,
-                    product_id: "{{$id_item}}",
-                    _token: "{{$csrf}}"
-                },
-                get_related_editor
-             );
-    }
-
-
 
     ///delete
     document.getElementById('{{$sorter_name}}').addEventListener('click', function(event) {
@@ -101,41 +107,24 @@ $csrf = csrf_token();
                     id: "{{$id_item}}",
                     _token: "{{$csrf}}"
                 },
-                get_related_editor
+                 function(){ $('#{{$id_btn}}').click();}
              );
         }
     });
-    // Function to get the current order of items
-    function getOrder_related() {
-        const items = document.querySelectorAll('#{{$sorter_name}} .sortable-item');
-        const order = Array.from(items).map(item => item.getAttribute('data-id'));
-        return order;
-        //console.log('Current order:', order);
-    }
-    // Инициализация SortableJS
+  
+    // Инициализация SortableJS + ajax для запроса
     const sortable_related = new Sortable(document.getElementById('{{$sorter_name}}'), {
         animation: 100,
         onEnd: function(evt) {
-            ajax_item_action('{{$uppdate_link}}',{
-                    img: getOrder_related(),
+            ajax_item_action('{{$update_link}}',{
+                    img: Array.from( document.querySelectorAll('#{{$sorter_name}} .sortable-item') ).map(item => item.getAttribute('data-id')),
                     product_id: "{{$id_item}}",
                     _token: "{{$csrf}}"
                 },
-                get_related_editor
+                 function(){ $('#{{$id_btn}}').click();  }
             );
         }
     });
 
-    //get img list for editor
-    function get_related_editor() {
-        ajax_item_get(
-            "{{$get_link}}",
-            {
-                _token: "{{$csrf}}",
-                product_id: "{{$id_item}}"
-            },    
-            function (response){$("#{{$sorter_name}}").html(response);}
-        );
-    }
 </script>
-<button class="up" style="display:none;" onclick=" get_related_editor()">⟳</button>
+

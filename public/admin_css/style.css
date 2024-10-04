@@ -1,3 +1,4 @@
+@charset "UTF-8";
 #notification-container {
   position: fixed;
   top: 20px;
@@ -41,7 +42,7 @@
   height: 518px;
   overflow-y: scroll;
   font-size: 1em;
-  max-width: 4 76px;
+  max-width: 476px;
   min-width: 350px;
 }
 .product_searcher .product_searcher_item {
@@ -81,6 +82,12 @@
 #add_related_input_div {
   width: 50%;
 }
+@media screen and (max-width: 1000px) {
+  #add_related_input_div {
+    max-width: 100%;
+    width: 100%;
+  }
+}
 
 .add_related_input {
   width: 100%;
@@ -94,12 +101,14 @@
 * {
   padding: 0;
   margin: 0;
+  --border-color: #a5a5a5;
   --main-color: #1D3557;
-  --green-color: #61be55;
+  --green-color: #378f2b;
   --green-color-hover: #a8dcc6;
   --button-color: #a8dcc6;
-  --button-color-neutral:#457B9D;
-  --red-color:#f87b7b;
+  --button-color-neutral:#324055;
+  --button-unsaved:#4a79c0;
+  --red-color:#f07070;
   color: #1f1f1f;
   font-weight: 500;
 }
@@ -111,6 +120,80 @@
   height: 2em;
   border: 1px solid #a5a5a5;
   padding-left: 0.5em;
+}
+
+#unsaved {
+  position: absolute;
+  top: 5em;
+  right: 2.5em;
+  z-index: 10000;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  padding: 0.5em;
+  color: var(--button-unsaved);
+  margin-left: 2em;
+  display: none;
+}
+@media screen and (max-width: 800px) {
+  #unsaved {
+    font-size: 14px;
+  }
+}
+
+.action_ {
+  opacity: 0.5;
+  animation: bloom 2s ease infinite;
+}
+
+@keyframes bloom {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+.svg_main {
+  padding-left: 1.2em;
+  background: url("/admin_svg/main.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.svg_video {
+  padding-left: 1.2em;
+  background: url("/admin_svg/video.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.svg_cats {
+  padding-left: 1.2em;
+  background: url("/admin_svg/cats.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.svg_rel {
+  padding-left: 1.2em;
+  background: url("/admin_svg/rel.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.svg_img {
+  padding-left: 1.2em;
+  background: url("/admin_svg/img.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.svg_attr {
+  padding-left: 1.2em;
+  background: url("/admin_svg/attr.svg") no-repeat;
+  background-size: 1em 1em; /* чтобы изображение масштабировалось, но сохраняло пропорции */
+}
+
+.neutral {
+  background-color: var(--button-color-neutral) !important;
 }
 
 /********/
@@ -210,12 +293,14 @@
 }
 
 .loading {
+  cursor: wait;
   transition: background-color 0.15s;
   animation: fzde_in_load 0.5s;
 }
 
 /* HTML: <div class="loader"></div> */
 .loading::before {
+  cursor: wait;
   z-index: 1500;
   position: absolute;
   inset: 0;
@@ -337,7 +422,7 @@ button:focus {
 }
 
 #main_menu {
-  background-color: var(--main-color);
+  background-color: #fff;
   width: 21em;
   padding-top: 1em;
   height: 100vh;
@@ -357,7 +442,7 @@ button:focus {
   height: inherit;
 }
 #main_menu h2 {
-  color: #ffffff;
+  color: #1D3557;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -374,19 +459,21 @@ button:focus {
   align-items: center;
   justify-content: flex-start;
   width: 15em;
-  padding: 0.4em;
+  padding: 0.1em;
   padding-left: 1em;
   margin: 0.3em 0;
   background-color: transparent;
   font-size: 1em;
   border: none;
+  background-color: #324055;
   border-left: solid 6px #565161;
   transition: border 0.2s ease-in-out;
-  font-weight: 600;
+  font-weight: 400;
 }
 #main_menu button span {
   color: #ececec;
   width: 80%;
+  font-size: 16px;
 }
 #main_menu button:hover {
   border: none;
@@ -426,7 +513,7 @@ button:focus {
   width: 3em;
   height: 100%;
   margin-left: -2em;
-  background-color: var(--main-color);
+  background-color: #9c9c9c;
 }
 #expand_menu svg {
   width: 2em;
@@ -529,7 +616,7 @@ button:focus {
   padding: 1em;
 }
 .main_plate .basik_uppdate_field .note-editor {
-  font-size: 1em;
+  font-size: 14px;
 }
 .main_plate .basik_uppdate_field .note-editor .note-editable {
   font-size: 0.6em;
@@ -580,7 +667,7 @@ button:focus {
   margin: 1em;
 }
 .main_plate .product_operation .note-editor {
-  font-size: 1em;
+  font-size: 14px;
 }
 .main_plate .product_operation .note-editor .note-editable {
   padding-left: 2em;
@@ -592,6 +679,8 @@ button:focus {
   flex-wrap: wrap;
 }
 .main_plate .product_operation #edit_selector button {
+  background-color: #fcfcfc;
+  border: #ebebeb 1px solid;
   padding: 0.5em 1em;
   color: black;
 }

@@ -17,8 +17,8 @@ class TagProductAdminController extends Controller
         if(!$request->name ) return "Помилка назви форми";
         $name = $request->name;
 
-        if(!$request->id ) return "Помилка ідентифікатору продукту";
-        $id = $request->id;
+        if(!$request->pid ) return "Помилка ідентифікатору продукту";
+        $id = $request->pid;
 
         $attr_names =  db::table("attributes")->pluck(   "atribute_name_ua","atribute_ID")
         ->map(function ($item) {
@@ -62,7 +62,7 @@ class TagProductAdminController extends Controller
     
             $key = array_search($attr_s['atribute_name_ua'],$attr_ex[$attr_s['atribute_id']]);
 
-            if($key === false) return "unfind";
+            //if($key === false) return "unfind";
 
             $sel_attr = $selected[$attr_s['atribute_id']][$key];
 
@@ -74,7 +74,7 @@ class TagProductAdminController extends Controller
             $selected_done[$attr_s['atribute_id']] = $selected[$attr_s['atribute_id']];
 
         }
-        return view("admin.product_edit.tags.edit_get",["selected"=>$selected_done, "attr_names"=> $attr_names,"avalible"=>$attr_ex,  "id_item"=>$id,"name" => $name  ] );
+        return view("admin.edit.attr.edit_get",["selected"=>$selected_done, "attr_names"=> $attr_names,"avalible"=>$attr_ex,  "id_item"=>$id,"name" => $name  ] );
         
     }
     public function update(Request $request)
@@ -126,17 +126,17 @@ class TagProductAdminController extends Controller
         $pid = $request->pid;
         if (!isset($request->id)) return "Не встанвленний идентифікатор R=";
         $id = $request->id;
-        if (!isset($request->name)) return "Не встанвленний назву занчення атрибуту";
-        $name_ua = $request->name;      
+        if (!isset($request->attr_val)) return "Не встанвленний назву занчення атрибуту";
+        $name_ua = $request->attr_val;      
 
-        $name_ru = DB::table("attributes_values_exist")->where("val_name_ua", $name_ua)->where("attr_id", $id)->get("val_name_ru");
+        $name_ru =DB::table("attributes_values_exist")->where("val_name_ua", $name_ua)->where("attr_id", $id)->pluck("val_name_ru")[0];
 
         if (!$name_ru) return "Не знайдено назву атрибуту в переліку";
 
         if(DB::table("attributes_values")->where(["atribute_name_ua"=>$name_ua,"product_id"=>$pid,"atribute_id"=>$id])->count()> 0) return "Значенння атрибуту вже існує";
 
         DB::table("attributes_values")->insert(["atribute_name_ua"=>$name_ua,"atribute_name_ru"=>$name_ru,"product_id"=>$pid,"atribute_id"=>$id]);
-    
+       
       
         return "Атрибут успішно додано";
     }

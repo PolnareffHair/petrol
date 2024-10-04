@@ -7,9 +7,9 @@
 <div class="product_searcher_item" >
 
         <img  src="/images/product/{{$product->product_id}}_{{ json_decode($product->product_img_urls)[0]}}_big.webp" alt="">
-        <span class="product_searcher_span">{{$product->product_name_ua}}</span>
+        <span class="product_searcher_span">№{{$product->product_id}} {{$product->product_name_ua}}</span>
 
-        <button class="add" type="button" data-id="{{$product->product_id}}" >
+        <button class="neutral add" type="button" data-id="{{$product->product_id}}" >
         <svg viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
                         <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)" fill=" white">

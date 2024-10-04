@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\editors;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
-
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Http\Request;
 
 use Intervention\Image\ImageManager;
@@ -21,13 +21,15 @@ class VideoProductController extends Controller
     {
 
         $id = $Request->product_id; 
+    
 
+        if($id) $video = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_video_link")->first(),true); else return "Помилка идентифікатора";
 
-        if($id) $video = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_video_link")->first()); else return "Помилка идентифікатора";
-
-        $video  = array_filter( $video );
         
-        return view("admin.product_edit.video.edit", ["id" => $id, "id_item" => $id,"video"=>$video ]);
+        is_array ($video) ? $video  = array_filter($video) : $video = [];
+        
+  
+        return view("admin.edit.video.edit", ["id" => $id, "id_item" => $id,"video"=>$video ]);
     }
 
     public function delete(Request $request)
@@ -66,10 +68,10 @@ class VideoProductController extends Controller
     
         $id = $request->product_id;
         $arr = json_decode(DB::table("products")->where("product_id", $id)->pluck("product_video_link")->first(),true);
-            filter_var("asdas");
+           
             if(!str_starts_with($request->link,"www.youtube.com/embed/")) return "Помилка в посиланні $request->link";
 
-            if(in_array( $request->link, $arr))  return "Посилання вже існує";
+            if(is_array( $arr)  && in_array( $request->link, $arr))  return "Посилання вже існує";
 
             if( isset($request->link)){ 
                     $arr[] = $request->link;

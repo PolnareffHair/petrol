@@ -27,7 +27,7 @@
                     <path d="M13 12.178H7V14.178H13V12.178Z" fill="white"></path>
                 </svg>Зберегти
             </button>
-            <button class="neutral_button" onclick="" id="duplicate_item">
+            <button class="neutral_button" onclick="dup_item()" id="duplicate_item">
                 <svg fill="white" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21,10V20a1,1,0,0,1-1,1H10a1,1,0,0,1-1-1V10a1,1,0,0,1,1-1H20A1,1,0,0,1,21,10ZM6,14H5V5h9V6a1,1,0,0,0,2,0V4a1,1,0,0,0-1-1H4A1,1,0,0,0,3,4V15a1,1,0,0,0,1,1H6a1,1,0,0,0,0-2Z" />
                 </svg>
@@ -46,19 +46,60 @@
 
         <div class="product_operation" >
             <div id="edit_selector"> 
-                <button   type="button" data-sel="100">Текст</button>
+            <a style="text-decoration: none; color:black;" href="">  <button   type="button" data-sel="100" > <span class="svg_main" ></span> Текст</button></a>
                 @foreach($editors as $key=>$editor) 
-                    <button   type="button" data-sel="{{$key}}">{{$editor[1]}}</button>     
+                    <button   type="button" data-sel="{{$key}}">{!!$editor["name"]!!}</button>     
                 @endforeach            
             </div>
         </div>
         <script>
+       
+        </script>
+        <h2 id = "unsaved">Присутні не збережені зміни</h2>
+        @foreach($editors as $key=>$editor)
+            <div class="product_operation selects"  id = "sel_{{$key}}">
+                @include($editor["view"],['id_item'=>$item_id,"path_link"=> $editor["path_link"],"name"=>$editor["name"],"id_n"=>$editor["id_n"]])
+            </div>
+        @endforeach
+        <div class="product_operation selects"  id = "sel_100">
+            {!!$form->get_html()!!}
+        </div>
+    </div>
+    {!!$form->get_scrits()!!}
+</body>
+</html>
+<script>
+
+            $(document).ready(function () {
+                $(".input_change").on('input', function (event) {
+                    $(this).prev('label').css("color", 'var(    --button-unsaved)');
+                    $(this).css("border", '2px solid var(    --button-unsaved)');
+                    $("#unsaved").show();
+                    $("#save_item").addClass("action_");
+                });
+
+          
+                
+      
+            });
+            function reset_inputs () {
+                $("#save_item").removeClass("action_");
+                $(".input_change").prev('label').css("color", '');
+                $(".input_change").css("border", '');
+                $("#unsaved").hide();
+            }
+
             $(document).ready(function () {
                 $(".selects").hide();
                 $('#sel_100').show();
                 $('[data-sel="100"]').toggleClass("active_sel");
+
                 $("#edit_selector").on("click", "button", function(event) {
-                    
+                    reset_inputs ();
+                    $(".fixed_buttons").children().hide();
+                    $("#expand_menu").show();
+                    $('[href="/admin/products"]').show();
+                    if($(this).data("sel") == 100)  $(".fixed_buttons").children().show();               
                     $(".selects").hide();
 
                     $(".active_sel").toggleClass("active_sel");
@@ -75,35 +116,8 @@
                     
                 });
             });
-        </script>
-        @foreach($editors as $key=>$editor)
-            <div class="product_operation selects"  id = "sel_{{$key}}">
-                @include("$editor[0]",['id_item'=>$item_id])
-            </div>
-        @endforeach
-        <div class="product_operation selects"  id = "sel_100">
-            {!!$form->get_html()!!}
-        </div>
-    </div>
-    {!!$form->get_scrits()!!}
-</body>
-</html>
-<script>
 
-            $(document).ready(function () {
-                $(".input_change").on('input', function (event) {
 
-                    $(this).prev('label').css("color", 'var(--button-color-neutral)');
-                    $(this).css("border", '2px solid var(--button-color-neutral)');
-                });
-          
-      
-            });
-            function reset_inputs () {
-
-                $(".input_change").prev('label').css("color", '');
-                 $(".input_change").css("border", '');
-            }
 
             //save product info
             document.getElementById("save_item").addEventListener("click", function() {
@@ -151,10 +165,29 @@
                 });
             }
         }
-</script>
-
-<script>
-    
+        /// dup delete redir
+        function dup_item($id) {
+            if (window.confirm("Ви впевнені що хочете видалити {{$item_name}}?")) {
+                $.ajax({
+                    url: '/admin/product_edit/duplicate',
+                    type: 'POST',
+                    data: {
+                        product_id: "{{ $item_id}}",
+                        _token: csrf_token
+                    },
+                    success: function(response) {
+                        document.open();
+                        document.write(response);
+                        alert("Дублікат створено")
+                        document.close();
+                      
+                    },
+                    error: function(xhr, status, error) {
+                        alert(response);
+                    }
+                });
+            }
+        }
     //here nothing to do with logics only design
     //scroll to top
     $("#product_edit_field").scrollTop(0);
@@ -171,16 +204,16 @@
         $("#expand_menu").rotate(180);
     }
     else $("#close_menu_button").hide();
-    $("#expand_menu").on("click", function() {
 
+    $("#expand_menu").on("click", function() {
         let currentRotation = $(this).data('rotation') || 0;
         let newRotation = currentRotation === 180 ? 0 : 180;
-        // Вращаем элемент
         $(this).rotate(newRotation);
         $(this).data('rotation', newRotation);
         $("#main_menu").toggle();
         $("#close_menu_button").show();
     });
+
     $("#close_menu_button").on("click", function() {
         let currentRotation = $(this).data('rotation') || 0;
         let newRotation = currentRotation === 180 ? 0 : 180;

@@ -50,13 +50,13 @@ class FormBuilder
 
     public $back_path= "";
     
+    
     /**
-     * editros
-     * Editors data
+     * editors_names
+     *
      * @var array
      */
-    public $editros = [];
-
+    public $editors_names = [];
     
     /**
      * item
@@ -105,29 +105,13 @@ class FormBuilder
             $limitStr = " max='" .$limit[1] . "'" . " min='" .$limit[0] . "'" ;
             $this->scripts_tag .= $this->set_number_limit("ID" . $name ,$limit[0],$limit[1] );
         }
-
-
-        $this->html_forms .= (
-            "<div class=\"product_option\" x-data=\"{ 
-                    CHC$name: " . ($this->item["product_price_discount"] == 0 ? "false" : "true") . ", 
-                    discountPrice: " .  $this->item["product_price_discount"] . ",
-                    originalPrice: " .  $this->item["product_price_discount"] . "
-                }\">
-                    <label>$title
-                        <input  x-model=\"CHC$name\" type=\"checkbox\" name=\"discount_avalible\"  $limitStr id=\"CHC$name\"
-                            @change=\"if (!CHC$name) { discountPrice = 0 } else { discountPrice = originalPrice }\">
-                    </label>
-                    <label>$input_title
-                        <input 
-                                type=\"number\" 
-                               :disabled=\"!CHC$name\"
-                               name=\"discount_price\"
-                               id=\"ID$name\"
-                               x-model.number=\"discountPrice\"
-                               @input=\"if (!CHC$name) { discountPrice = 0 }\">
-                    </label>
-                </div>"
-        );
+        $this->html_forms .= view("admin.elements.zero_check_box",
+            ["name"=> $name, 
+            "discount" =>$this->item["product_price_discount"],
+            "limitStr"=> $limitStr ,
+            "input_title"=>$input_title,
+            "title"=>$title,
+            ]);
         $this->forms_get_vals["$name"] =  "$(\"#ID$name\").val();";
 
         return 0;
@@ -142,30 +126,8 @@ class FormBuilder
      */
     public function addCheckbox(string $name, string $title): bool
     {
-            $this->html_forms .= ("<div class='product_option'>");
-
-            $this->html_forms .=
-                " <label for='form_" .
-
-                $name .
-                "'>" .
-                $title .
-                "</label>";
-
-            $this->html_forms .=  "<input class='input_change' type='checkbox' id='ID$name'";
-            if ($this->item[$name] == 1) {
-                $this->html_forms .=  " checked ";
-            }
-
-            $this->html_forms .=
-                " name='form_" . $name . "'"
-                . "> </input>";
-
-
-            $this->html_forms .=  '</div>';
-
-            $this->forms_get_vals["$name"] =  "$(\"#ID$name\").is(':checked') ? 1 : 0;";
-        
+        $this->html_forms .= view("admin.elements.check_box",["name"=>$name,"val"=>$this->item[$name] ,"title"=>$title]);
+        $this->forms_get_vals["$name"] =  "$(\"#ID$name\").is(':checked') ? 1 : 0;";
         return 0;
     }
         
@@ -197,7 +159,8 @@ class FormBuilder
                     . " name='form_" . $name . "'"
                     . " </input>";
                 
-                    if($novoid)        $this->scripts_tag .= $this->set_input_novoid("ID" . $name , $lenght_limit);
+                    
+                if($novoid)        $this->scripts_tag .= $this->set_input_novoid("ID" . $name , $lenght_limit);
                 $this->html_forms .=  '</div>';
                 $this->forms_get_vals["$name"] =  "$(\"#ID$name\").val();";
             } 
@@ -316,8 +279,7 @@ class FormBuilder
                     " ru'>" .
                     $title .
                     ' ru <img src="\img\icon\ru.svg" alt="ru" sizes="21 14"> '
-
-              .
+                    .
                     "</label>";
 
                 $this->html_forms .= "<input class='input_change' type='number' id='ID$name" . "_ru'";
@@ -334,7 +296,7 @@ class FormBuilder
 
                 ///ua 
                 $this->html_forms .=  '</div>';
-                $this->html_forms .= ("<div class='product_option'>");
+                $this->html_forms .= "<div class='product_option'>";
                 $this->html_forms .=
                     " <label for='form_" .
                     $name .
@@ -380,9 +342,9 @@ class FormBuilder
 
             $this->html_forms .= " <label for='form_" . $name . "'>" . $title ."</label>";
 
-            $this->html_forms .=   "<select id='ID$name' name='form_" . $name . "'>";
+            $this->html_forms .=   "<select class='input_change'  id='ID$name' name='form_" . $name . "'>";
 
-            $this->html_forms .= "<option value='" .$this->item[$name]. "'>" . $options[$this->item[$name]] . '</option>';
+            if(isset($options[$this->item[$name]]))   $this->html_forms .= "<option value='" .$this->item[$name]. "'>" . $options[$this->item[$name]] . '</option>';
 
             unset( $options[$this->item[$name]]);
 
@@ -390,9 +352,7 @@ class FormBuilder
                 $this->html_forms .= "<option value='$key'>$value</option>";
             }
 
-            $this->html_forms .=  "</select>";
-
-            $this->html_forms .=  '</div>';
+            $this->html_forms .=  "</select></div>";
 
             $this->forms_get_vals["$name"] =  "$(\"#ID$name\").val();";
         
@@ -438,8 +398,10 @@ class FormBuilder
         return 0;
 
     }
-    public function AddEditor( array $path_name):void{
-        $this->editors [] = $path_name;
+    public function AddEditor( array $info):void{
+        if( in_array( $info['id_n'], $this->editors_names))   throw new \Exception("Editor with ID name {$info['id_n']} already exists.");
+        $this->editors_names [] = $info['id_n'];
+        $this->editors [] = $info;
     }
 
 
@@ -454,9 +416,7 @@ class FormBuilder
             "item_name" => $this->name ,
             "item_id" =>$this->forms_get_vals["item_id"],
             "update_path" => $this->update_path,
-
             "delete_path" =>$this->delete_path,
-        
             "back_path" =>$this->back_path,
             "editors" => $this->editors
         ]

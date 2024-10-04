@@ -24,7 +24,7 @@
 
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/summernote-bs4.min.css" rel="stylesheet">
+
 
     <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,8 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/admin_css/style.css">
-
+    <!-- must be last css with font for proper work-->
+    <link href="/css/summernote-bs4.min.css" rel="stylesheet"> 
     <title>Панель адміністратора</title>   
     
     <script  src="/admin_js/formbuilder.js"></script>
